@@ -1,12 +1,23 @@
+import { Link } from "react-router-dom";
+import "./Header.css";
+
 export const Header = () => {
   return (
-    <div>
-      <div>logo que es un boton</div>
+    <nav className="navBar">
+      {/* Logo */}
 
-      <div>
-        <button>Crear cuenta</button>
-        <button>Iniciar sesion</button>
+      <Link to="/">
+        <img src={"/img/Logo.png"} alt="Impulse Logo" height={50} width={120} />
+      </Link>
+
+      <div className="buttons">
+        <Link to="/crearCuenta" className="button">
+          Crear Cuenta
+        </Link>
+        <Link to="/login" className="button login">
+          Iniciar sesión
+        </Link>
       </div>
-    </div>
+    </nav>
   );
 };
