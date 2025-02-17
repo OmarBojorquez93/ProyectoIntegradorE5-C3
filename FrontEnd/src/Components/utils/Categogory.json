@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "category": "Kajak",
+    "img": "/Escalada.jpg"
+  },
+  {
+    "id": 2,
+    "category": "Camping",
+    "img": "/kayak.jpg"
+  },
+  {
+    "id": 3,
+    "category": "Ciclismo",
+    "img": "/Kayak2.jpg"
+  },
+  {
+    "id": 4,
+    "category": "Deporte de Contacto",
+    "img": "/Surfin.jpg"
+  },
+  {
+    "id": 1,
+    "category": "Kajak2",
+    "img": "/Escalada.jpg"
+  },
+  {
+    "id": 2,
+    "category": "Camping2",
+    "img": "/kayak.jpg"
+  },
+  {
+    "id": 3,
+    "category": "Ciclismo2",
+    "img": "/Kayak2.jpg"
+  },
+  {
+    "id": 4,
+    "category": "Deporte de Contacto2",
+    "img": "/Surfin.jpg"
+  }
+]
