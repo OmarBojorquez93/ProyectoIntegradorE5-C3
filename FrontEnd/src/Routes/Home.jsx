@@ -4,10 +4,10 @@ import { Search } from "../Components/Body/Search";
 
 export const Home = () => {
   return (
-    <div>
+    <>
       <Search />
       <Category />
       <Recomendation />
-    </div>
+    </>
   );
 };

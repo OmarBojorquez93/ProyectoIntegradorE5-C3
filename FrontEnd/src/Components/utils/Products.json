@@ -3,56 +3,56 @@
     "id": 1,
     "title": "Producto 1",
     "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi ea, sapiente dolorem vero eum expedita aliquam quam quas voluptate magni doloremque, quidem odit? Dolorum officia consequatur sed iste magni.",
-    "img": "/Escalada.jpg",
+    "img": "/bicicleta.jpeg",
     "disponible": true
   },
   {
     "id": 2,
     "title": "Producto 2",
     "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi ea, sapiente dolorem vero eum expedita aliquam quam quas voluptate magni doloremque, quidem odit? Dolorum officia consequatur sed iste magni.",
-    "img": "/Escalada.jpg",
+    "img": "/camping.jpeg",
     "disponible": false
   },
   {
     "id": 3,
     "title": "Producto 3",
     "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi ea, sapiente dolorem vero eum expedita aliquam quam quas voluptate magni doloremque, quidem odit? Dolorum officia consequatur sed iste magni.",
-    "img": "/Escalada.jpg",
+    "img": "/escalar.jpeg",
     "disponible": true
   },
   {
     "id": 4,
     "title": "Producto 4",
     "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi ea, sapiente dolorem vero eum expedita aliquam quam quas voluptate magni doloremque, quidem odit? Dolorum officia consequatur sed iste magni.",
-    "img": "/Escalada.jpg",
+    "img": "/escalar2.jpeg",
     "disponible": false
   },
   {
     "id": 5,
     "title": "Producto 5",
     "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi ea, sapiente dolorem vero eum expedita aliquam quam quas voluptate magni doloremque, quidem odit? Dolorum officia consequatur sed iste magni.",
-    "img": "/Escalada.jpg",
+    "img": "/fitness.jpeg",
     "disponible": true
   },
   {
     "id": 6,
     "title": "Producto 6",
     "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi ea, sapiente dolorem vero eum expedita aliquam quam quas voluptate magni doloremque, quidem odit? Dolorum officia consequatur sed iste magni.",
-    "img": "/Escalada.jpg",
+    "img": "/snowboarder-gafas-protectoras-sosteniendo-su-tabla-snowboard-sobre-su-espalda_181624-31898.jpg",
     "disponible": true
   },
   {
     "id": 7,
     "title": "Producto 7",
     "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi ea, sapiente dolorem vero eum expedita aliquam quam quas voluptate magni doloremque, quidem odit? Dolorum officia consequatur sed iste magni.",
-    "img": "/Escalada.jpg",
+    "img": "/surf.jpeg",
     "disponible": false
   },
   {
     "id": 8,
     "title": "Producto 8",
     "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi ea, sapiente dolorem vero eum expedita aliquam quam quas voluptate magni doloremque, quidem odit? Dolorum officia consequatur sed iste magni.",
-    "img": "/Escalada.jpg",
+    "img": "/traveler.jpg",
     "disponible": true
   }
 ]
