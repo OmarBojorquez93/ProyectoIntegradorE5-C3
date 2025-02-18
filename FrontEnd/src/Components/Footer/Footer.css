@@ -1,0 +1,45 @@
+.footer {
+  width: 100vw;
+  background-color: black;
+  color: white;
+  padding: 16px 0;
+  display: flex;
+  justify-content: flex-start;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 40px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: left;
+  }
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  gap: 1px; 
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+  margin-bottom: 2px; 
+}
+
+.copyright {
+  font-size: 14px;
+}
