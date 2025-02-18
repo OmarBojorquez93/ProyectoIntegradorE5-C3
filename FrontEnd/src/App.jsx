@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Home } from "./Routes/Home";
 import { Detail } from "./Routes/Detail";
 import { Header } from "./Components/Header/Header";
-import { Footer } from "./Components/Footer/Footer";
+import Footer from "./Components/Footer/Footer";
 import "./App.css";
 import { Login } from "./Routes/Login";
 import { CrearCuenta } from "./Routes/CrearCuenta";
