@@ -40,3 +40,9 @@ header {
   background-color: #13b2b2;
   border-radius: 15px;
 }
+
+@media (max-width: 768px) {
+  .button {
+    text-align: center;
+  }
+}

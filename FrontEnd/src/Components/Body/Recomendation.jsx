@@ -4,13 +4,13 @@ import "./Recomendation.css";
 
 export const Recomendation = () => {
   return (
-    <div>
-      <h2>Recomendation</h2>
+    <>
+      <h2 className="recomendation">Recomendaciones</h2>
       <div className="card-container">
         {Productos.map((item) => (
           <Card product={item} key={item.id} />
         ))}
       </div>
-    </div>
+    </>
   );
 };

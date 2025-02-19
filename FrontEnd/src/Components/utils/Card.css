@@ -2,14 +2,15 @@
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  width: 250px;
-  max-height: 300px;
+  width: 100%;
+  max-width: 250px;
   border-radius: 20px;
   overflow: hidden;
   background-color: #f0eeee;
 }
 
 .category-card {
+  width: 200px;
   background-color: #f0eeee;
   color: #03adad;
 }
@@ -30,7 +31,7 @@ h2 {
 
 .card-image {
   width: 100%;
-  height: 250px;
+  height: 200px;
   object-fit: cover;
 }
 

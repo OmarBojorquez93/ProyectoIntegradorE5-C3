@@ -35,7 +35,11 @@ export const Card = (product) => {
           {product.product?.descripcion && (
             <p className="card-description">{product.product?.descripcion}</p>
           )}
-          {product.product?.disponible ? <p>Disponible</p> : <p>Agotado</p>}
+          {product.product?.disponible ? (
+            <p style={{ color: "#03adad" }}>Disponible</p>
+          ) : (
+            <p style={{ color: "red" }}>Agotado</p>
+          )}
         </div>
       )}
     </Link>

@@ -12,3 +12,9 @@
   margin: 40px auto 0; /* Agregar margen superior igual a la altura del header */
   padding: 2rem;
 }
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: auto;
+  }
+}
