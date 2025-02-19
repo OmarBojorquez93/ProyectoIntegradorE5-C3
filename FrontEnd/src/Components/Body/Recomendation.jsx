@@ -7,7 +7,7 @@ export const Recomendation = () => {
     <>
       <h2 className="recomendation">Recomendaciones</h2>
       <div className="card-container">
-        {Productos.map((item) => (
+        {Productos.sort(() => Math.random() - 0.5).map((item) => (
           <Card product={item} key={item.id} />
         ))}
       </div>
