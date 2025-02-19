@@ -1,42 +1,42 @@
 [
   {
     "id": 1,
-    "category": "Kajak",
-    "img": "/Escalada.jpg"
+    "category": "Turismo Aventura",
+    "img": "/escalar.jpeg"
   },
   {
     "id": 2,
-    "category": "Camping",
-    "img": "/kayak.jpg"
+    "category": "Deporte acuatico",
+    "img": "/Kajak-grup.jpg"
   },
   {
     "id": 3,
+    "category": "Deporte de nieve",
+    "img": "/snowboarder.jpg"
+  },
+  {
+    "id": 4,
+    "category": "Deporte Acuatico",
+    "img": "/kajak.jpeg"
+  },
+  {
+    "id": 5,
     "category": "Ciclismo",
-    "img": "/Kayak2.jpg"
+    "img": "/bicicleta.jpeg"
   },
   {
-    "id": 4,
-    "category": "Deporte de Contacto",
-    "img": "/Surfin.jpg"
+    "id": 6,
+    "category": "Fitnes",
+    "img": "/fitness.jpeg"
   },
   {
-    "id": 1,
-    "category": "Kajak2",
-    "img": "/Escalada.jpg"
+    "id": 7,
+    "category": "Patinaje",
+    "img": "/traveler.jpg"
   },
   {
-    "id": 2,
-    "category": "Camping2",
-    "img": "/kayak.jpg"
-  },
-  {
-    "id": 3,
-    "category": "Ciclismo2",
-    "img": "/Kayak2.jpg"
-  },
-  {
-    "id": 4,
-    "category": "Deporte de Contacto2",
+    "id": 8,
+    "category": "Deporte al aire libre",
     "img": "/Surfin.jpg"
   }
 ]

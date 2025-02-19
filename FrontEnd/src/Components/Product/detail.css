@@ -1,0 +1,48 @@
+.contenedorEncabezado{
+    display: flex;
+    justify-content: space-between;
+}
+.containerDetail{
+    display: flex;
+    gap: 30px;
+   
+}
+.imgDetalle{
+   max-width: 300px;
+}
+.tituloDetalle{
+    text-align: left;
+}
+.alquilar{
+    background-color: #03adad;
+    color: white;
+    font-weight: bold ;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 50px;
+   
+}
+.iconoFlecha{
+    align-self: center;
+    padding-right: 20px;
+}
+
+.containerText p {
+    padding-bottom: 50px;
+}
+  .button {
+    display: flex;
+    justify-content: flex-end; 
+   
+  }
+
+
+@media(max-width: 480px){
+    .containerDetail{
+        flex-direction: column;
+    }
+    .button{
+        justify-content: center;
+    }
+
+}
