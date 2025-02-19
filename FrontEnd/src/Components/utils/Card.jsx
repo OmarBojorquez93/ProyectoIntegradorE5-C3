@@ -11,7 +11,7 @@ export const Card = (product) => {
       to={
         hasCategory
           ? `/${product.products?.category}`
-          : `/${product.product?.id}`
+          : `/detail/${product.product?.id}`
       }
       className={`card ${hasCategory ? "category-card" : "default-card"}`}
     >
