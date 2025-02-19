@@ -1,18 +1,19 @@
 .footer {
-  background-color: black;
-  color: white;
+  background-color: #242424;
+  color: #fff;
   padding: 16px 0;
+  width: 100%; /* Que ocupe todo el ancho */
   margin-top: 30px;
 }
 
 .container {
   width: 90%;
   max-width: 1200px;
+  margin: 0 auto; /* Centrar el contenedor */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  padding-left: 40px;
 }
 
 @media (min-width: 768px) {

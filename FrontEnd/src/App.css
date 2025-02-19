@@ -1,10 +1,14 @@
-#root {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
+/* Espaciado para que el footer se mantenga al fondo */
 .main-content {
-  margin-top: 60px;
+  flex-grow: 1;
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto 0; /* Agregar margen superior igual a la altura del header */
+  padding: 2rem;
 }
