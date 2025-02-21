@@ -1,3 +1,5 @@
+import { RegistrarUsuario } from '../Components/Header/RegistrarUsuario';
 export const CrearCuenta = () => {
-  return <div>CrearCuenta</div>;
+   return <div><RegistrarUsuario/></div>;
+  
 };
