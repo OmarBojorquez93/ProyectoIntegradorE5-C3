@@ -1,3 +1,5 @@
+import LoginFormulario from "../Components/Login/LoginFormulario";
+
 export const Login = () => {
-  return <div>Login</div>;
+  return <LoginFormulario />;
 };

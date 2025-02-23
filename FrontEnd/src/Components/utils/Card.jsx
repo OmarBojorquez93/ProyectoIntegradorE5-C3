@@ -3,9 +3,7 @@ import "./Card.css";
 
 export const Card = (product) => {
   const hasCategory = !!product.products?.category;
-  const hasProduct = product.product?.disponible;
 
-  console.log(hasProduct);
   return (
     <Link
       to={

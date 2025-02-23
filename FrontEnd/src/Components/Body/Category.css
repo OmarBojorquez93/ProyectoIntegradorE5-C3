@@ -1,3 +1,19 @@
-.swiper-pagination {
-  position: initial;
+.card-container-category {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .card-container-category {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .card-container-category {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

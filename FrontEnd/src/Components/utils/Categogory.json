@@ -28,15 +28,5 @@
     "id": 6,
     "category": "Fitnes",
     "img": "/fitness.jpeg"
-  },
-  {
-    "id": 7,
-    "category": "Patinaje",
-    "img": "/traveler.jpg"
-  },
-  {
-    "id": 8,
-    "category": "Deporte al aire libre",
-    "img": "/surf.jpeg"
   }
 ]
