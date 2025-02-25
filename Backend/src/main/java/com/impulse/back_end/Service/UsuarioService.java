@@ -42,18 +42,13 @@ public class UsuarioService implements UserDetailsService {
             throw new UsuarioException(HttpStatus.CONFLICT, "usuario_invalido", "El usuario con email " + usuarioPeticionDTO.getEmail() +" ya existe");
         }
 
-        UsuarioRole role = UsuarioRole.ROLE_USER;
-        if (usuarioPeticionDTO.getAdmin()) {
-            role = UsuarioRole.ROLE_ADMIN;
-        }
-
         UsuarioEntity usuarioEntity = usuarioRepository.save(
                 new UsuarioEntity(
                         usuarioPeticionDTO.getNombre(),
                         usuarioPeticionDTO.getApellido(),
                         usuarioPeticionDTO.getEmail(),
                         bCryptPasswordEncoder.encode(usuarioPeticionDTO.getPassword()),
-                        role
+                        UsuarioRole.valueOf(usuarioPeticionDTO.getRole())
                 )
         );
 
@@ -62,7 +57,7 @@ public class UsuarioService implements UserDetailsService {
                 usuarioEntity.getNombre(),
                 usuarioEntity.getApellido(),
                 usuarioEntity.getEmail(),
-                usuarioEntity.isAdmin()
+                usuarioEntity.getUsuarioRole().name()
         );
     }
 
@@ -77,7 +72,7 @@ public class UsuarioService implements UserDetailsService {
                 usuarioEntity.get().getNombre(),
                 usuarioEntity.get().getApellido(),
                 usuarioEntity.get().getEmail(),
-                usuarioEntity.get().isAdmin()
+                usuarioEntity.get().getUsuarioRole().name()
         );
     }
 
@@ -88,7 +83,7 @@ public class UsuarioService implements UserDetailsService {
                     u.getNombre(),
                     u.getApellido(),
                     u.getEmail(),
-                    u.isAdmin()
+                    u.getUsuarioRole().name()
             );
         }).collect(Collectors.toList());
     }

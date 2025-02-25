@@ -21,14 +21,16 @@ public class UsuarioPeticionDTO {
     @Size(min = 6, message = "El password debe tener como minimo 6 caracteres")
     private String password;
 
-    private Boolean admin = false;
+    @NotNull(message = "Los roles permitidos son ROLE_USER, ROLE_ADMIN")
+    @Pattern(regexp = "ROLE_USER|ROLE_ADMIN")
+    private String role;
 
-    public Boolean getAdmin() {
-        return admin;
+    public String getRole() {
+        return role;
     }
 
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getNombre() {

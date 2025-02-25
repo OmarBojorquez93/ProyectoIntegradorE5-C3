@@ -10,22 +10,22 @@ public class UsuarioRespuestaDTO {
 
     private String email;
 
-    private Boolean admin;
+    private String role;
 
-    public UsuarioRespuestaDTO(Long id, String nombre, String apellido, String email, Boolean admin) {
+    public UsuarioRespuestaDTO(Long id, String nombre, String apellido, String email, String role) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.admin = admin;
+        this.role = role;
     }
 
-    public Boolean getAdmin() {
-        return admin;
+    public String getRole() {
+        return role;
     }
 
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public UsuarioRespuestaDTO() {
