@@ -96,4 +96,8 @@ public class UsuarioEntity implements UserDetails {
     public UsuarioRole getUsuarioRole() {
         return usuarioRole;
     }
+
+    public Boolean isAdmin() {
+        return getUsuarioRole().name().equals(UsuarioRole.ROLE_ADMIN.name());
+    }
 }
