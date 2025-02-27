@@ -13,12 +13,14 @@ export const authRegister = async (nombre, apellido, email, password) => {
 
     return data;
   } catch (error) {
-    console.log({ error });
+    console.log(error.response);
     // Error de respuesta de la API
+
     if (error.response) {
       const status = error.response.status;
       const message =
-        error.response.data?.message || "Error al autentificar el usuario";
+        error.response.data?.error?.message ||
+        "Error al autentificar el usuario";
       return { status, message };
     }
 

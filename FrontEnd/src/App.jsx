@@ -7,9 +7,12 @@ import "./App.css";
 import { Login } from "./Routes/Login";
 import { CrearCuenta } from "./Routes/CrearCuenta";
 import { Categoty } from "./Routes/Categoty";
+import { Toaster } from "react-hot-toast";
+
 function App() {
   return (
     <div className="app-container">
+      <Toaster position="top-right" />
       <Header />
       <div className="main-content">
         <Routes>

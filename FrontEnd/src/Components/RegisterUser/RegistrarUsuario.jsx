@@ -1,5 +1,8 @@
-import { authRegister } from "../../core/auth/auth-actions";
 import { useState } from "react";
+import FormInput from "../utils/FormInput";
+import { authRegister } from "../../core/auth/auth-actions";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import "./RegistrarUsuario.css";
 
 const RegistrarUsuario = () => {
@@ -11,8 +14,8 @@ const RegistrarUsuario = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [apiError, setApiError] = useState(""); // Guarda error de API
-  const [isPosting, setIsPosting] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const navigation = useNavigate();
 
   // Manejar cambios en los inputs
   const handleChange = (e) => {
@@ -31,7 +34,6 @@ const RegistrarUsuario = () => {
     }
   };
 
-  // Validar el formulario
   const validateForm = () => {
     const newErrors = {};
 
@@ -73,7 +75,6 @@ const RegistrarUsuario = () => {
 
     if (!validateForm()) return; // Si hay errores, no enviar
 
-    setIsPosting(true);
     try {
       const response = await authRegister(
         formData.nombre,
@@ -82,15 +83,24 @@ const RegistrarUsuario = () => {
         formData.password
       );
 
-      if (response.status === 500 || response.status === 0) {
+      if (
+        response.status === 500 ||
+        response.status === 0 ||
+        response.status === 409
+      ) {
         setApiError(response.message); // Mostrar error debajo del botón
       } else {
+        toast.success("Usuario creado con éxito!", {
+          duration: 4000, // Se muestra por 5 segundos
+          position: "top-right",
+        });
+        setTimeout(() => {
+          navigation("/login");
+        }, 2000);
         console.log("Registro exitoso:", response);
       }
     } catch (error) {
       setApiError("Ocurrió un error inesperado, intenta nuevamente.");
-    } finally {
-      setIsPosting(false);
     }
   };
 
@@ -98,46 +108,42 @@ const RegistrarUsuario = () => {
     <div className="registrar-usuario-container">
       <h2>Regístrate</h2>
       <form onSubmit={handlerRegister}>
-        <div className="form-group">
-          <label>Nombre:</label>
-          <input
-            type="text"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-          />
-          {errors.nombre && <span className="error">{errors.nombre}</span>}
-        </div>
-        <div className="form-group">
-          <label>Apellido:</label>
-          <input
-            type="text"
-            name="apellido"
-            value={formData.apellido}
-            onChange={handleChange}
-          />
-          {errors.apellido && <span className="error">{errors.apellido}</span>}
-        </div>
-        <div className="form-group">
-          <label>Correo electrónico:</label>
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-        <div className="form-group">
-          <label>Contraseña:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          {errors.password && <span className="error">{errors.password}</span>}
-        </div>
+        <FormInput
+          label={"Nombre"}
+          type={"text"}
+          name={"nombre"}
+          value={formData.nombre}
+          onChange={handleChange}
+          errors={errors?.nombre}
+        />
+
+        <FormInput
+          label={"Apellido"}
+          type={"text"}
+          name={"apellido"}
+          value={formData.apellido}
+          onChange={handleChange}
+          errors={errors?.apellido}
+        />
+
+        <FormInput
+          label={"Correo Electrónico"}
+          type={"text"}
+          name={"email"}
+          value={formData.email}
+          onChange={handleChange}
+          errors={errors?.email}
+        />
+
+        <FormInput
+          label={"Contraseña"}
+          type={"password"}
+          name={"password"}
+          value={formData.password}
+          onChange={handleChange}
+          errors={errors?.password}
+        />
+
         <button type="submit" className="submit-button">
           Registrarse
         </button>
