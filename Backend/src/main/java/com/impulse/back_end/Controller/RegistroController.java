@@ -1,33 +1,27 @@
 package com.impulse.back_end.Controller;
 
 import com.impulse.back_end.Constant.Constants;
+import com.impulse.back_end.Dto.UsuarioPeticionDTO;
 import com.impulse.back_end.Dto.UsuarioRespuestaDTO;
 import com.impulse.back_end.Service.UsuarioService;
 import com.impulse.back_end.exception.UsuarioException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping(path = Constants.AdminRoutes.USUARIO)
-public class UsuarioController {
+@RequestMapping(path = Constants.PublicRoutes.REGISTRO)
+public class RegistroController {
 
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public UsuarioRespuestaDTO consultarUsuarioPorId(
-            @PathVariable("id") Long id
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public UsuarioRespuestaDTO registrarUsuario(
+            @RequestBody @Valid UsuarioPeticionDTO usuarioPeticionDTO
     ) throws UsuarioException {
-        return usuarioService.consultarUsuarioPorId(id);
-    }
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<UsuarioRespuestaDTO> consultarUsuarios() {
-        return usuarioService.consultarUsuarios();
+        return usuarioService.registrarUsuario(usuarioPeticionDTO);
     }
 }

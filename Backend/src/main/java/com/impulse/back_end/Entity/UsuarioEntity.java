@@ -5,8 +5,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "usuarios")
@@ -99,5 +101,10 @@ public class UsuarioEntity implements UserDetails {
 
     public Boolean isAdmin() {
         return getUsuarioRole().name().equals(UsuarioRole.ROLE_ADMIN.name());
+    }
+
+    public String getAvatar() {
+        return Arrays.stream(getNombre().split(" ")).toList().stream().map(n -> n.charAt(0) + "").collect(Collectors.joining()) +
+                Arrays.stream(getApellido().split(" ")).toList().stream().map(n -> n.charAt(0) + "").collect(Collectors.joining());
     }
 }

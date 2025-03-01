@@ -1,5 +1,6 @@
 package com.impulse.back_end.Dto;
 
+import com.impulse.back_end.Entity.UsuarioRole;
 import jakarta.validation.constraints.*;
 
 public class UsuarioPeticionDTO {
@@ -61,5 +62,13 @@ public class UsuarioPeticionDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UsuarioRole getRole() {
+        if (getAdmin()) {
+            return UsuarioRole.ROLE_ADMIN;
+        }
+
+        return UsuarioRole.ROLE_USER;
     }
 }

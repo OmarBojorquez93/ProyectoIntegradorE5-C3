@@ -1,5 +1,6 @@
 package com.impulse.back_end.Security;
 
+import com.impulse.back_end.Constant.Constants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,13 +25,14 @@ public class WebSecurityConfig {
                        auth
                                .requestMatchers(
                                        antMatcher("/h2-console/**"),
-                                       antMatcher("/usuario/**"),
-                                       antMatcher("/error")
+                                       antMatcher("/error"),
+                                       antMatcher(Constants.PublicRoutes.REGISTRO + "/**"),
+                                       antMatcher(Constants.PublicRoutes.LOGIN + "/**"),
+                                       antMatcher(Constants.AdminRoutes.USUARIO + "/**")
                                ).permitAll()
                                .anyRequest().authenticated()
                 )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-                .formLogin(withDefaults())
                 .logout(withDefaults());
 
        return http.build();

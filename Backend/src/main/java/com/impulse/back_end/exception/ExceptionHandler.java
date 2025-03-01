@@ -32,4 +32,22 @@ public class ExceptionHandler {
 
         return ResponseEntity.status(exception.getStatus()).body(error);
     }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler({LoginException.class})
+    public ResponseEntity<ErrorDTO> handler(LoginException exception) {
+        ErrorDTO error = new ErrorDTO();
+
+        error.setError(new ErrorDTO.InternalErrorDTO(exception.getCode(), exception.getMessage()));
+
+        return ResponseEntity.status(exception.getStatus()).body(error);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler({SessionException.class})
+    public ResponseEntity<ErrorDTO> handler(SessionException exception) {
+        ErrorDTO error = new ErrorDTO();
+
+        error.setError(new ErrorDTO.InternalErrorDTO(exception.getCode(), exception.getMessage()));
+
+        return ResponseEntity.status(exception.getStatus()).body(error);
+    }
 }
