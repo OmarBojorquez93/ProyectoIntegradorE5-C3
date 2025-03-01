@@ -3,7 +3,6 @@ package com.impulse.back_end.Service;
 import com.impulse.back_end.Dto.UsuarioPeticionDTO;
 import com.impulse.back_end.Dto.UsuarioRespuestaDTO;
 import com.impulse.back_end.Entity.UsuarioEntity;
-import com.impulse.back_end.Entity.UsuarioRole;
 import com.impulse.back_end.Repository.UsuarioRepository;
 import com.impulse.back_end.exception.UsuarioException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +48,11 @@ public class UsuarioService implements UserDetailsService {
 
         UsuarioEntity usuarioEntity = usuarioRepository.save(
                 new UsuarioEntity(
-                        usuarioPeticionDTO.getNombre(),
-                        usuarioPeticionDTO.getApellido(),
-                        usuarioPeticionDTO.getEmail(),
-                        bCryptPasswordEncoder.encode(usuarioPeticionDTO.getPassword()),
-                        role
+                        usuarioPeticionDTO.getNombre().trim(),
+                        usuarioPeticionDTO.getApellido().trim(),
+                        usuarioPeticionDTO.getEmail().trim(),
+                        bCryptPasswordEncoder.encode(usuarioPeticionDTO.getPassword().trim()),
+                        usuarioPeticionDTO.getRole()
                 )
         );
 
