@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
-import { FaStar, FaRegStar } from "react-icons/fa"; // Importamos iconos de estrellas
+
 import "./Card.css";
 
 export const Card = (product) => {
   const hasCategory = !!product.products?.category;
-  const hasProduct = product.product?.disponible;
 
-  console.log(hasProduct);
   return (
     <Link
       to={

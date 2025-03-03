@@ -41,6 +41,12 @@ header {
   border-radius: 15px;
 }
 
+button {
+  color: #fff;
+  padding: 5px 20px;
+  text-decoration: none;
+}
+
 @media (max-width: 768px) {
   .button {
     text-align: center;

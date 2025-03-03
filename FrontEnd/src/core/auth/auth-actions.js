@@ -4,7 +4,7 @@ export const authRegister = async (nombre, apellido, email, password) => {
   email = email.toLocaleLowerCase();
 
   try {
-    const { data } = await baseUrlApi.post("/usuario", {
+    const { data } = await baseUrlApi.post("/registro", {
       nombre,
       apellido,
       email,
@@ -21,6 +21,49 @@ export const authRegister = async (nombre, apellido, email, password) => {
       const message =
         error.response.data?.error?.message ||
         "Error al autentificar el usuario";
+      return { status, message };
+    }
+
+    // Error de red
+    if (error.request) {
+      return {
+        status: 0,
+        message:
+          "No se puede conectar con el servidor. verifica tu conexión a internet",
+      };
+    }
+
+    // Error interno
+    return {
+      status: 500,
+      message: "Ocurrió un error inesperado. Por favor, inténtalo nuevamente",
+    };
+  }
+};
+
+const returnUser = (data) => {
+  const { nombre, apellido, email, admin, session } = data;
+
+  const user = { nombre, apellido, email, admin };
+
+  return {
+    user,
+    session,
+  };
+};
+
+export const authLogin = async (email, password) => {
+  email = email.toLocaleLowerCase();
+
+  try {
+    const { data } = await baseUrlApi.post("/login", { email, password });
+
+    return returnUser(data);
+  } catch (error) {
+    if (error.response) {
+      const status = error.response.status;
+      const message =
+        error.response.data?.error?.message || "Error al iniciar sesión";
       return { status, message };
     }
 

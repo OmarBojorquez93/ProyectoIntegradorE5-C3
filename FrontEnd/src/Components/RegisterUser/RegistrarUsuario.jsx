@@ -97,7 +97,6 @@ const RegistrarUsuario = () => {
         setTimeout(() => {
           navigation("/login");
         }, 2000);
-        console.log("Registro exitoso:", response);
       }
     } catch (error) {
       setApiError("Ocurrió un error inesperado, intenta nuevamente.");

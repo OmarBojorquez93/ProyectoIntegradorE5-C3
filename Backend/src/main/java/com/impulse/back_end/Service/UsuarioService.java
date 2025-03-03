@@ -3,6 +3,7 @@ package com.impulse.back_end.Service;
 import com.impulse.back_end.Dto.UsuarioPeticionDTO;
 import com.impulse.back_end.Dto.UsuarioRespuestaDTO;
 import com.impulse.back_end.Entity.UsuarioEntity;
+import com.impulse.back_end.Entity.UsuarioRole;
 import com.impulse.back_end.Repository.UsuarioRepository;
 import com.impulse.back_end.exception.UsuarioException;
 import org.springframework.beans.factory.annotation.Autowired;

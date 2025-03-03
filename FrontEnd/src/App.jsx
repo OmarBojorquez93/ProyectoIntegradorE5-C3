@@ -8,6 +8,7 @@ import { Login } from "./Routes/Login";
 import { CrearCuenta } from "./Routes/CrearCuenta";
 import { Categoty } from "./Routes/Categoty";
 import { Toaster } from "react-hot-toast";
+import PanelAdmin from "./Routes/PanelAdmin";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/crearCuenta" element={<CrearCuenta />} />
           <Route path="/category/:category" element={<Categoty />} />
+          <Route path="/panelAdmin" element={<PanelAdmin />} />
         </Routes>
       </div>
       <Footer />

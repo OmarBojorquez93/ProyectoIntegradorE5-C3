@@ -1,20 +1,25 @@
 import { useState } from "react";
+import FormInput from "../utils/FormInput";
+import { useNavigate } from "react-router-dom";
 import "./LoginFormaulario.css";
+import { useRecipeState } from "../../Context/global.context";
 
 const LoginFormulario = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
   const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState("");
+  const navigation = useNavigate();
+  const { login } = useRecipeState();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   const validateForm = () => {
@@ -25,21 +30,24 @@ const LoginFormulario = () => {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "El correo electrónico no es válido";
     }
-    if (!formData.password) {
-      newErrors.password = "La contraseña es requerida";
-    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("Formulario enviado:", formData);
-      // Aquí puedes enviar los datos a tu API o hacer lo que necesites
+    setApiError("");
+
+    if (!validateForm()) return;
+
+    const resp = await login(formData.email, formData.password);
+
+    if (!resp?.user) {
+      setApiError(resp.message);
+      return;
     } else {
-      console.log("Formulario con errores");
+      navigation("/");
     }
   };
 
@@ -47,29 +55,28 @@ const LoginFormulario = () => {
     <div className="registrar-usuario-container">
       <h2>Iniciar sesión</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Correo electrónico:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-        <div className="form-group">
-          <label>Contraseña:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          {errors.password && <span className="error">{errors.password}</span>}
-        </div>
+        <FormInput
+          label={"Correo electrónico"}
+          type={"text"}
+          name={"email"}
+          value={formData.email}
+          onChange={handleChange}
+          errors={errors?.email}
+        />
+
+        <FormInput
+          label={"Contraseña"}
+          type={"password"}
+          name={"password"}
+          value={formData.password}
+          onChange={handleChange}
+        />
+
         <button type="submit" className="submit-button">
-          Continuar
+          Iniciar sesión
         </button>
+
+        {apiError && <p className="error">{apiError}</p>}
       </form>
     </div>
   );

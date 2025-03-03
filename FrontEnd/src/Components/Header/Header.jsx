@@ -1,8 +1,16 @@
 import { Link } from "react-router-dom";
-import "./Header.css";
 import { Button } from "./Button";
+import { useRecipeState } from "../../Context/global.context";
+import "./Header.css";
 
 export const Header = () => {
+  const { state, logout } = useRecipeState();
+  const { status, user } = state;
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <header>
       <nav className="navBar">
@@ -15,18 +23,36 @@ export const Header = () => {
           />
         </Link>
 
-        <div className="buttons">
-          <Button
-            ruta={"/crearCuenta"}
-            className={"button"}
-            title={"Crear Cuenta"}
-          />
-          <Button
-            ruta={"/login"}
-            className={"button login"}
-            title={"Iniciar sesión"}
-          />
-        </div>
+        {status == "authenticated" ? (
+          <div className="buttons">
+            <Button
+              ruta={"/panelAdmin"}
+              className={"button login"}
+              title={"Panel de Administrador"}
+            />
+            <button onClick={handleLogout} className={"button login"}>
+              Cerrar session
+            </button>
+            <div>
+              <p>
+                {user.nombre} {user.apellido}
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="buttons">
+            <Button
+              ruta={"/crearCuenta"}
+              className={"button"}
+              title={"Crear Cuenta"}
+            />
+            <Button
+              ruta={"/login"}
+              className={"button login"}
+              title={"Iniciar sesión"}
+            />
+          </div>
+        )}
       </nav>
     </header>
   );
