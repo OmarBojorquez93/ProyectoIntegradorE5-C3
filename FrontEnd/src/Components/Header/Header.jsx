@@ -25,11 +25,13 @@ export const Header = () => {
 
         {status == "authenticated" ? (
           <div className="buttons">
-            <Button
-              ruta={"/panelAdmin"}
-              className={"button login"}
-              title={"Panel de Administrador"}
-            />
+            {user.admin ? (
+              <Button
+                ruta={"/panelAdmin"}
+                className={"button login"}
+                title={"Panel de Administrador"}
+              />
+            ) : null}
             <button onClick={handleLogout} className={"button login"}>
               Cerrar session
             </button>
