@@ -25,7 +25,7 @@ export const Header = () => {
 
         {status == "authenticated" ? (
           <div className="buttons">
-            {user.admin ? (
+            {user && user.admin ? (
               <Button
                 ruta={"/panelAdmin"}
                 className={"button login"}
@@ -35,11 +35,13 @@ export const Header = () => {
             <button onClick={handleLogout} className={"button login"}>
               Cerrar session
             </button>
-            <div>
-              <p>
-                {user.nombre} {user.apellido}
-              </p>
-            </div>
+            {user && (
+              <div>
+                <p>
+                  {user.nombre} {user.apellido}
+                </p>
+              </div>
+            )}
           </div>
         ) : (
           <div className="buttons">
