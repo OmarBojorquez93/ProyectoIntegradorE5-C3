@@ -31,4 +31,16 @@ public class UsuarioController {
     public List<UsuarioRespuestaDTO> consultarUsuarios() {
         return usuarioService.consultarUsuarios();
     }
+    @PutMapping("/{id}/asignar-admin")
+    @ResponseStatus(HttpStatus.OK)
+    public String asignarAdmin(@PathVariable("id") Long id) throws UsuarioException {
+        return usuarioService.asignarAdmin(id);
+    }
+
+    @PutMapping("/{id}/remover-admin")
+    @ResponseStatus(HttpStatus.OK)
+    public String removerAdmin(@PathVariable("id") Long id) throws UsuarioException {
+        return usuarioService.removerAdmin(id);
+    }
+
 }

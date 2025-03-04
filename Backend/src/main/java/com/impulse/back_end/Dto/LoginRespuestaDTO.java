@@ -3,18 +3,13 @@ package com.impulse.back_end.Dto;
 public class LoginRespuestaDTO {
 
     private String session;
-
     private Long id;
-
     private String nombre;
-
     private String apellido;
-
     private String email;
-
     private Boolean admin;
-
     private String avatar;
+    private boolean esAdmin; // Nuevo campo para indicar si el usuario es administrador
 
     public LoginRespuestaDTO(String sessionId, Long id, String nombre, String apellido, String email, Boolean admin, String avatar) {
         this.session = sessionId;
@@ -24,6 +19,7 @@ public class LoginRespuestaDTO {
         this.email = email;
         this.admin = admin;
         this.avatar = avatar;
+        this.esAdmin = admin; // Inicializa esAdmin con el valor de admin
     }
 
     public String getSession() {
@@ -72,6 +68,7 @@ public class LoginRespuestaDTO {
 
     public void setAdmin(Boolean admin) {
         this.admin = admin;
+        this.esAdmin = admin; // También actualiza esAdmin al modificar admin
     }
 
     public String getAvatar() {
@@ -80,5 +77,15 @@ public class LoginRespuestaDTO {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    // Nuevo Getter y Setter para esAdmin
+    public boolean isEsAdmin() {
+        return esAdmin;
+    }
+
+    public void setEsAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
+        this.admin = esAdmin; // También actualiza admin para mantener consistencia
     }
 }
