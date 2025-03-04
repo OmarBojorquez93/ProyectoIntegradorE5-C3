@@ -1,14 +1,7 @@
 import { baseUrlApi } from "../api/urlApi";
 
-const getCookie = (name) => {
-  return document.cookie
-    .split("; ")
-    .find((row) => row.startsWith(name + "="))
-    ?.split("=")[1];
-};
-const jsessionId = getCookie("JSESSIONID");
-
 export const getUsers = async (sessionId) => {
+  console.log({ sessionId });
   try {
     const { data } = await baseUrlApi.get("/usuario", {
       headers: {
