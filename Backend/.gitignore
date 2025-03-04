@@ -21,6 +21,7 @@ target/
 *.iml
 *.ipr
 *.class
+misc.xml
 
 ### NetBeans ###
 /nbproject/private/

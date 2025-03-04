@@ -20,7 +20,11 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("request.getServletPath()=" + request.getServletPath());
+        System.out.println("request.path=" + request.getServletPath());
+
+        request.getHeaderNames().asIterator().forEachRemaining(h -> {
+            System.out.println("header [" + h + "]="+request.getHeader(h));
+        });
 
         boolean isPublicRoute = Arrays.stream(Constants.PublicRoutes.ALL).anyMatch(r -> {
             return request.getServletPath().contains(r);

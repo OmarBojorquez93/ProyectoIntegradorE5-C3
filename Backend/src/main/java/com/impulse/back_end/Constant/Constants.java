@@ -7,11 +7,12 @@ public class Constants {
     }
 
     public static class PublicRoutes {
+        public static final String ERROR = "/error";
         public static final String REGISTRO = "/registro";
         public static final String LOGIN = "/login";
 
         public static final String[] ALL = {
-                REGISTRO, LOGIN
+                ERROR, REGISTRO, LOGIN
         };
     }
 
