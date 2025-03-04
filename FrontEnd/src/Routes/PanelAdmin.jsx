@@ -1,7 +1,7 @@
-import ListUsuario from "../Components/Panel-Admin/ListUsuario";
+import PanelAdministrador from "../Components/Panel-Admin/PanelAdmin";
 
 const PanelAdmin = () => {
-  return <ListUsuario />;
+  return <PanelAdministrador />;
 };
 
 export default PanelAdmin;

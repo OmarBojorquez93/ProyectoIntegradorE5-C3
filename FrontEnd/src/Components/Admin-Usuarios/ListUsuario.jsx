@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecipeState } from "../../Context/global.context";
 import { getUsers } from "../../core/users/get-users.actions";
+import TablaUsuarios from "./TablaUsuarios";
 
 const ListUsuario = () => {
   const { state } = useRecipeState();
@@ -11,8 +12,8 @@ const ListUsuario = () => {
     const fetchUsers = async () => {
       try {
         const data = await getUsers(session);
+
         setUsuarios(data); // Aquí sí seteamos la data correctamente
-        console.log("Usuarios obtenidos:", data);
       } catch (error) {
         console.error("Error al obtener usuarios:", error);
       }
@@ -21,9 +22,12 @@ const ListUsuario = () => {
     fetchUsers();
   }, [session]);
 
-  console.log(usuarios);
-
-  return <div>ListUsuario w</div>;
+  return (
+    <div>
+      <h3>Usuarios Registradso</h3>
+      <TablaUsuarios usuarios={usuarios} />
+    </div>
+  );
 };
 
 export default ListUsuario;

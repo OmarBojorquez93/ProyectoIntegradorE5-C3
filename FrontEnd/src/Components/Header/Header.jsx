@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import { Button } from "./Button";
 import { useRecipeState } from "../../Context/global.context";
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
 export const Header = () => {
   const { state, logout } = useRecipeState();
   const { status, user } = state;
+  const navigation = useNavigate();
 
   const handleLogout = () => {
     logout();
+    navigation("/");
   };
 
   return (
