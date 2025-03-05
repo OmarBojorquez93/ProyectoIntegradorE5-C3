@@ -1,0 +1,44 @@
+.subTitle{
+    text-align: left;
+    border-bottom: solid 2px; 
+}
+.containerGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.caracteristica{
+    display: flex;
+    align-items: center;
+    
+}
+h4{
+    padding-left: 8px;
+    font-size: 15px;
+}
+.alquilar{
+    background-color: #03adad;
+    color: white;
+    font-weight: bold ;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 50px;
+   
+}
+.button {
+    display: flex;
+    justify-content: flex-end; 
+    
+  }
+
+@media(max-width: 480px){
+    .containerGrid{
+        grid-template-columns: repeat(2, 1fr);
+        
+    }
+    .button{
+       justify-content: center;
+       margin-top: 20px;
+        
+    }
+
+}

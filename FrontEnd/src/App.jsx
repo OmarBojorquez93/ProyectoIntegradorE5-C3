@@ -9,7 +9,7 @@ import { Categoty } from "./Routes/Categoty";
 import { Toaster } from "react-hot-toast";
 import PanelAdmin from "./Routes/PanelAdmin";
 import PanelUsuarios from "./Routes/PanelUsuarios";
-import "semantic-ui-css/semantic.min.css";
+// import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
 function App() {

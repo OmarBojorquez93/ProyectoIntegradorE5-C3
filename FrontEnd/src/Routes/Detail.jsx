@@ -1,6 +1,8 @@
 import productos from "../Components/utils/Products.json";
 import { useParams } from "react-router-dom";
 import { ProductDetail } from "../Components/Product/ProductDetail";
+import { CaracteristicasProduc } from "../Components/CaracteristicasProduc/CaracteristicasProduc";
+
 export const Detail = () => {
   const params = useParams();
   //console.log(params)
@@ -9,10 +11,15 @@ export const Detail = () => {
   //console.log(product.img)
   const rutaBase = "/img";
   return (
-    <ProductDetail
+    <>
+      <ProductDetail
       titulo={product.title}
       imagen={`${rutaBase}${product.img}`}
       descripcion={product.descripcion}
-    />
+      />
+      <CaracteristicasProduc/>  
+    
+    </>
+    
   );
 };

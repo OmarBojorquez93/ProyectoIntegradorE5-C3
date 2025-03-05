@@ -18,16 +18,14 @@ export const ProductDetail = (producto) => {
           />
         </div>
         <div className="containerDetail">
-          <div>
+          <div className="containerImg">
             <img className="imgDetalle" src={imagen} alt="" />
           </div>
           <div className="containerText">
             <div>
               <p>{descripcion}</p>
             </div>
-            <div className="button">
-              <button className="alquilar">ALQUILAR</button>
-            </div>
+            
           </div>
         </div>
       </div>
