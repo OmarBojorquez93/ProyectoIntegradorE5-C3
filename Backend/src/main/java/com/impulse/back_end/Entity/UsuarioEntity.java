@@ -107,4 +107,16 @@ public class UsuarioEntity implements UserDetails {
         return Arrays.stream(getNombre().split(" ")).toList().stream().map(n -> n.charAt(0) + "").collect(Collectors.joining()) +
                 Arrays.stream(getApellido().split(" ")).toList().stream().map(n -> n.charAt(0) + "").collect(Collectors.joining());
     }
+    public void setUsuarioRole(UsuarioRole usuarioRole) {
+        this.usuarioRole = usuarioRole;
+    }
+
+    public void asignarAdmin() {
+        this.usuarioRole = UsuarioRole.ROLE_ADMIN;
+    }
+
+    public void removerAdmin() {
+        this.usuarioRole = UsuarioRole.ROLE_USER;
+    }
+
 }

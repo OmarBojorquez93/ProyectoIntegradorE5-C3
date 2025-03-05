@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService implements UserDetailsService {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -91,5 +93,51 @@ public class UsuarioService implements UserDetailsService {
                     u.isAdmin()
             );
         }).collect(Collectors.toList());
+    }
+
+    // ===========================
+    // 📌 NUEVA FUNCIÓN PARA OBTENER USUARIO POR EMAIL
+    // ===========================
+    public UsuarioEntity obtenerUsuarioPorEmail(String email) throws UsuarioException {
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new UsuarioException(HttpStatus.NOT_FOUND, "usuario_no_existe", "El usuario con email " + email + " no existe"));
+    }
+
+    // ===========================
+    // 📌 FUNCIONES PARA ASIGNAR Y REMOVER ADMINISTRADOR
+    // ===========================
+
+    @Transactional
+    public String asignarAdmin(Long id) throws UsuarioException {
+        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findById(id);
+        if (usuarioOpt.isEmpty()) {
+            throw new UsuarioException(HttpStatus.NOT_FOUND, "usuario_no_existe", "El usuario con id " + id + " no existe");
+        }
+
+        UsuarioEntity usuario = usuarioOpt.get();
+        if (usuario.getUsuarioRole() == UsuarioRole.ROLE_ADMIN) {
+            throw new UsuarioException(HttpStatus.BAD_REQUEST, "usuario_ya_admin", "El usuario ya es administrador");
+        }
+
+        usuario.setUsuarioRole(UsuarioRole.ROLE_ADMIN);
+        usuarioRepository.save(usuario);
+        return "El usuario ahora es administrador";
+    }
+
+    @Transactional
+    public String removerAdmin(Long id) throws UsuarioException {
+        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findById(id);
+        if (usuarioOpt.isEmpty()) {
+            throw new UsuarioException(HttpStatus.NOT_FOUND, "usuario_no_existe", "El usuario con id " + id + " no existe");
+        }
+
+        UsuarioEntity usuario = usuarioOpt.get();
+        if (usuario.getUsuarioRole() == UsuarioRole.ROLE_USER) {
+            throw new UsuarioException(HttpStatus.BAD_REQUEST, "usuario_no_admin", "El usuario no es administrador");
+        }
+
+        usuario.setUsuarioRole(UsuarioRole.ROLE_USER);
+        usuarioRepository.save(usuario);
+        return "El usuario ya no es administrador";
     }
 }
