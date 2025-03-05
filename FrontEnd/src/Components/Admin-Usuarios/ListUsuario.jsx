@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRecipeState } from "../../Context/global.context";
 import { getUsers } from "../../core/users/get-users.actions";
 import TablaUsuarios from "./TablaUsuarios";
@@ -8,24 +8,23 @@ const ListUsuario = () => {
   const { session } = state;
   const [usuarios, setUsuarios] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const data = await getUsers(session);
-
-        setUsuarios(data); // Aquí sí seteamos la data correctamente
-      } catch (error) {
-        console.error("Error al obtener usuarios:", error);
-      }
-    };
-
-    fetchUsers();
+  const fetchUsers = useCallback(async () => {
+    try {
+      const data = await getUsers(session);
+      setUsuarios(data);
+    } catch (error) {
+      console.error("Error al obtener usuarios:", error);
+    }
   }, [session]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   return (
     <div>
       <h3>Usuarios Registradso</h3>
-      <TablaUsuarios usuarios={usuarios} />
+      <TablaUsuarios usuarios={usuarios} refreshUsers={fetchUsers} />
     </div>
   );
 };

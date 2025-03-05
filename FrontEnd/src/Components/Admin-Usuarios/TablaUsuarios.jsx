@@ -1,12 +1,39 @@
 import { useRecipeState } from "../../Context/global.context";
+import { asignarAdmin } from "../../core/users/asig-admin.actions";
+import { removerAdmin } from "../../core/users/remov-admin.actions";
 import "./TablaUsuario.css";
 
-const TablaUsuarios = ({ usuarios }) => {
+const TablaUsuarios = ({ usuarios, refreshUsers }) => {
   const { state } = useRecipeState();
-  const { session } = state;
+  const { session, user } = state;
+  console.log(state.user);
 
-  const handleAdminToggle = async (id) => {
-    console.log(id);
+  const handlerAgregarAdmin = async (id) => {
+    if (!session) {
+      console.error("Error: No hay sessionID");
+      return;
+    }
+
+    try {
+      await asignarAdmin(id, session);
+      refreshUsers();
+    } catch (error) {
+      console.error("Error al eliminar admin:", error.message);
+    }
+  };
+
+  const handlerEliminarAdmin = async (id) => {
+    if (!session) {
+      console.error("Error: No hay sessionID");
+      return;
+    }
+
+    try {
+      await removerAdmin(id, session);
+      refreshUsers();
+    } catch (error) {
+      console.error("Error al eliminar admin:", error.message);
+    }
   };
 
   if (!Array.isArray(usuarios)) {
@@ -26,18 +53,23 @@ const TablaUsuarios = ({ usuarios }) => {
           </tr>
         </thead>
         <tbody>
-          {usuarios?.map((user, index) => (
-            <tr key={user.id}>
+          {usuarios?.map((users, index) => (
+            <tr key={users.id}>
               <td>{index + 1}</td>
-              <td>{user.nombre}</td>
-              <td>{user.apellido}</td>
-              <td>{user.email}</td>
-              <td>{user.admin ? "Si" : "No"}</td>
+              <td>{users.nombre}</td>
+              <td>{users.apellido}</td>
+              <td>{users.email}</td>
+              <td>{users.admin ? "Si" : "No"}</td>
               <td>
                 <input
+                  disabled={users.email == user.email}
                   type="checkbox"
-                  checked={user.admin}
-                  onChange={(e) => handleAdminToggle(user.id, e.target.checked)}
+                  checked={users.admin}
+                  onChange={(e) => {
+                    users.admin
+                      ? handlerEliminarAdmin(users.id, e.target.checked)
+                      : handlerAgregarAdmin(users.id, e.target.checked);
+                  }}
                 />
               </td>
             </tr>
