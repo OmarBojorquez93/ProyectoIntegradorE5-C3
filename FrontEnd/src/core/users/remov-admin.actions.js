@@ -1,10 +1,14 @@
 import { baseUrlApi } from "../api/urlApi";
 
-export const removerAdmin = async (id) => {
-  console.log({ id });
+export const removerAdmin = async (id, sessionId) => {
+  console.log({ id, sessionId });
 
   try {
-    const { data } = await baseUrlApi.put(`/api/usuario/${id}/remover-admin`);
+    const { data } = await baseUrlApi.put(`/usuario/${id}/remover-admin`, {
+      headers: {
+        "session-id": sessionId,
+      },
+    });
 
     console.log({ data });
     return data;

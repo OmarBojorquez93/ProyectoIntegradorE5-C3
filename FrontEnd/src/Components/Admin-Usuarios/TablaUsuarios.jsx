@@ -1,7 +1,11 @@
+import { useRecipeState } from "../../Context/global.context";
 import "./TablaUsuario.css";
 
 const TablaUsuarios = ({ usuarios }) => {
-  const handleAdminToggle = async (id, isAdmin) => {
+  const { state } = useRecipeState();
+  const { session } = state;
+
+  const handleAdminToggle = async (id) => {
     console.log(id);
   };
 

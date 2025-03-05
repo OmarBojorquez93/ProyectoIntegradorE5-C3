@@ -1,13 +1,14 @@
 import { baseUrlApi } from "../api/urlApi";
 
-export const asignarAdmin = async (id) => {
-  console.log({ id });
+export const asignarAdmin = async (id, sessionId) => {
+  console.log({ id, sessionId });
 
   try {
-    const { data } = await baseUrlApi.put(
-      `/api/usuario/${id}/asignar-admin`,
-      {}
-    );
+    const { data } = await baseUrlApi.put(`/usuario/${id}/asignar-admin`, {
+      headers: {
+        "session-id": sessionId,
+      },
+    });
 
     console.log({ data });
     return data;
