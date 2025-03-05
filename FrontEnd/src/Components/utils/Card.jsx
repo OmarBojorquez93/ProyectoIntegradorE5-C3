@@ -6,13 +6,14 @@ export const Card = (product) => {
   const hasCategory = !!product.products?.category;
 
   return (
+  
     <Link
       to={
         hasCategory
           ? `/${product.products?.category}`
           : `/detail/${product.product?.id}`
       }
-      className={`card ${hasCategory ? "category-card" : "default-card"}`}
+      className={`card ${hasCategory ? "category-card" : "default-card"}`} 
     >
       {hasCategory ? (
         <div className="category-header">
@@ -38,5 +39,6 @@ export const Card = (product) => {
         </div>
       )}
     </Link>
+    
   );
 };

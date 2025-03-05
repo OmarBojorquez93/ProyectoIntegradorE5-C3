@@ -7,7 +7,7 @@
   box-sizing: border-box;
   color-scheme: light dark;
   color: #242424;
-  background-color: #dfdfdf;
+  background-color: #F5F5F5;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -37,3 +37,4 @@ body {
   margin: 0 auto;
   padding: 2rem;
 }
+

@@ -37,7 +37,7 @@ input {
 .submit-button {
   width: 100%;
   padding: 10px;
-  background-color: #28a745;
+  background-color: #03ADAD;
   color: white;
   border: none;
   border-radius: 5px;
@@ -46,5 +46,5 @@ input {
 }
 
 .submit-button:hover {
-  background-color: #218838;
+  background-color: #19a1a1;
 }

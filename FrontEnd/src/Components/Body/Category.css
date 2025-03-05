@@ -1,8 +1,8 @@
 .card-container-category {
   display: grid;
   gap: 15px;
-  grid-template-columns: repeat(6, 1fr);
-  max-width: 1200px;
+  grid-template-columns: repeat(4, 1fr);
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 20px;
 }

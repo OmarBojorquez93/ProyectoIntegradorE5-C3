@@ -5,6 +5,7 @@ import { Search } from "../Components/Body/Search";
 export const Home = () => {
   return (
     <>
+      
       <Search />
       <Category />
       <Recomendation />

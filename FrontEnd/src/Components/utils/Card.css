@@ -145,14 +145,15 @@ h2 {
   text-align: center;
 } */
 
-.card {
+.card.default-card {
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   overflow: hidden;
+  width: auto;
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s, box-shadow 0.2s;
-  background-color: white;
+  
 }
 
 .card:hover {
@@ -160,9 +161,9 @@ h2 {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.card-image {
+.card-image.image-no-category {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
   border-bottom: 1px solid #e0e0e0;
 }
@@ -224,6 +225,7 @@ h2 {
 
 .category-card {
   background-color: #f9f9f9;
+  width: 20px;
 }
 
 .category-header {

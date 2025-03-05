@@ -9,8 +9,9 @@ const CardCategory = (product) => {
       <img
         src={` /img${product.product?.img}`}
         alt={product.category}
-        width={50}
-        height={50}
+        width={20}
+        height={20}
+        className="img-category"
       />
       <h2>{product.product?.category}</h2>
     </Link>
