@@ -1,20 +1,37 @@
-.container {
-  display: "flex";
-  justify-content: "center";
-  align-items: "center";
-  height: "100vh";
-}
 table {
-  width: "60%";
-  border-collapse: "collapse";
-  text-align: "center";
+  width: 100%;
+  border-collapse: collapse; /* Asegura que los bordes se fusionen */
+  background-color: white; /* Fondo blanco */
 }
-th {
-  background-color: "#f4f4f4";
-  padding: "10px";
-  border-bottom: "2px solid #000000";
-}
+
+th,
 td {
-  padding: "10px";
-  border-bottom: "1px solid #000000";
+  border: 2px solid black; /* Bordes negros */
+  padding: 10px; /* Espaciado interno */
+  text-align: center;
+  vertical-align: middle;
+}
+
+th {
+  background-color: #e0e0e0; /* Gris claro para el encabezado */
+  font-weight: bold;
+}
+
+td input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  appearance: none; /* Quitar el estilo por defecto */
+  background-color: #d3d3d3; /* Fondo gris */
+  border: 2px solid black; /* Bordes negros */
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin: auto; /* Centrar en la celda */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+/* Cambiar el fondo cuando está marcado */
+td input[type="checkbox"]:checked {
+  background-color: #ef437e; /* Cambiar a rojo cuando está activo */
+  border: 2px solid black;
 }

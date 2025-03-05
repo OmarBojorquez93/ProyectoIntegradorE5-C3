@@ -9,7 +9,7 @@ const TablaUsuarios = ({ usuarios }) => {
     return <p>No hay usuarios disponibles.</p>;
   }
   return (
-    <div className="container">
+    <div>
       <table>
         <thead>
           <tr>
