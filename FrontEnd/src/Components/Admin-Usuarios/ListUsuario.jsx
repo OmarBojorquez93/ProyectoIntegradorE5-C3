@@ -23,7 +23,7 @@ const ListUsuario = () => {
 
   return (
     <div>
-      <h3>Usuarios Registradso</h3>
+      <h3>Usuarios Registrados</h3>
       <TablaUsuarios usuarios={usuarios} refreshUsers={fetchUsers} />
     </div>
   );
