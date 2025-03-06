@@ -43,7 +43,7 @@ export const CaracteristicasProduc = () => {
             
 
         </div>
-        <div className="button">
+        <div className="buttonAlquilar">
               <button className="alquilar">ALQUILAR</button>
         </div>
 

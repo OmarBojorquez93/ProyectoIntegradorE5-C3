@@ -2,6 +2,10 @@
   text-align: center;
   padding-top: 25px;
 }
+.cont h4 {
+  font-size: 20px;
+
+}
 .search-container {
   display: flex;
   align-items: center;

@@ -4,7 +4,7 @@ import "./Search.css";
 export const Search = () => {
   return (
     <div className="cont">
-      <h2>Deporte sin límites, alquiler sin complicaciones!</h2>
+      <h1>Deporte sin límites, alquiler sin complicaciones!</h1>
       <h4>Miles de productos en un solo lugar...</h4>
       <div className="search-container">
       <input type="text" placeholder="Buscar..." className="search-input" />

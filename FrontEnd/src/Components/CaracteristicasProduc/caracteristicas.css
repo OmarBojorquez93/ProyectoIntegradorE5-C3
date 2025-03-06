@@ -24,7 +24,7 @@ h4{
     border-radius: 50px;
    
 }
-.button {
+.buttonAlquilar {
     display: flex;
     justify-content: flex-end; 
     
@@ -35,7 +35,7 @@ h4{
         grid-template-columns: repeat(2, 1fr);
         
     }
-    .button{
+    .buttonAlquilar{
        justify-content: center;
        margin-top: 20px;
         
