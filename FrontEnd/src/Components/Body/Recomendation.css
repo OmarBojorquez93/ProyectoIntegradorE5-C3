@@ -21,4 +21,8 @@
   .card-container {
     grid-template-columns: repeat(2, 1fr);
   }
+  .recomendation{
+    font-size: 26px;
+
+  }
 }

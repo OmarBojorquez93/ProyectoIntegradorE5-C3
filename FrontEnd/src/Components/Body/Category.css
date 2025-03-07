@@ -1,26 +1,33 @@
 .card-container-category {
   display: grid;
-  gap: 15px;
+  gap: 40px;
   grid-template-columns: repeat(4, 1fr);
   /* max-width: 1200px; */
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  margin-left: 80px;
+  margin-right: 80px;
   padding: 20px;
 }
 
 @media (max-width: 1024px) {
   .card-container-category {
     grid-template-columns: repeat(3, 1fr);
+    margin: 0;
+    gap:12px;
+    padding: 10px;
   }
 }
 
 @media (max-width: 768px) {
   .card-container-category {
     grid-template-columns: repeat(2, 1fr);
+    
   }
 }
 
 @media (max-width: 340px) {
   .card-container-category {
     padding: 0px;
+    
   }
 }

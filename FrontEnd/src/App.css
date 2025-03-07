@@ -5,16 +5,15 @@
 }
 
 /* Espaciado para que el footer se mantenga al fondo */
-.main-content {
-  flex-grow: 1;
-  width: 100%;
-  max-width: 1200px;
-  margin: 40px auto 0; /* Agregar margen superior igual a la altura del header */
+/* .main-content {
+  flex-grow: 1; 
+  width: 100%; 
+  max-width: 1200px; 
   padding: 2rem;
-}
+} */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .main-content {
     padding: auto;
   }
-}
+} */

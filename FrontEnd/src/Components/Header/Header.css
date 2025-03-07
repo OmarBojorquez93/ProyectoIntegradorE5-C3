@@ -1,27 +1,27 @@
-header {
-  background-color: #242424;
-  width: 100%;
-  height: 80px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
+
+.containerHeader{
+  padding: 15px 40px;
+  background-color: #242424; 
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  
 }
+.logoC{
+  align-items: center;
+}
+
+.logoNav{
+  width: 140px;
+}
+
 .navBar {
-  max-width: 1200px;
-  height: 80px; /* Ajustable según necesidades */
+ 
   background-color: #242424; /* Color de fondo oscuro */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px; /* Espaciado lateral opcional */
-  position: fixed; /* Fijar arriba si se desea */
-  top: 0;
-  left: 0;
-  right: 0;
-  margin-bottom: 30px;
-  margin: 0 auto;
+ 
 }
 
 .login {
@@ -41,13 +41,13 @@ button {
   background-color: #13b2b2;
   color: #fff;
   border-radius: 15px;
-  padding: 10px 20px;
+  padding: 10px 15px;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 150px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .user-info {
@@ -72,8 +72,19 @@ button {
   font-size: 20px;
 }
 
-@media (max-width: 768px) {
-  .button {
-    text-align: center;
+@media(min-width: 390px){
+  .navBar{
+    display: none;
   }
+}
+
+@media(min-width: 1000px){
+ 
+  #menu_hambur{
+      display: none;
+  }
+  .navBar{
+    display: flex;
+  }
+
 }
