@@ -9,8 +9,11 @@ import { Categoty } from "./Routes/Categoty";
 import { Toaster } from "react-hot-toast";
 import PanelAdmin from "./Routes/PanelAdmin";
 import PanelUsuarios from "./Routes/PanelUsuarios";
-// import "semantic-ui-css/semantic.min.css";
+
 import "./App.css";
+import CrearProducto from "./Routes/CrearProducto";
+import PanelProductos from "./Routes/PanelProductos";
+import EditarProducto from "./Routes/EditarProducto";
 
 function App() {
   return (
@@ -26,6 +29,15 @@ function App() {
           <Route path="/category/:category" element={<Categoty />} />
           <Route path="/panelAdmin" element={<PanelAdmin />} />
           <Route path="/panelAdmin/usuarios" element={<PanelUsuarios />} />
+          <Route
+            path="/panelAdmin/crear-producto"
+            element={<CrearProducto />}
+          />
+          <Route path="/panelAdmin/productos" element={<PanelProductos />} />
+          <Route
+            path="/panelAdmin/editar-producto/:id"
+            element={<EditarProducto />}
+          />
         </Routes>
       </div>
       <Footer />

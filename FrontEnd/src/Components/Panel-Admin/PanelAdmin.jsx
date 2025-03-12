@@ -9,7 +9,7 @@ const PanelAdministrador = () => {
         <FaCogs className="admin-icon" />
         <span>Administrar usuarios</span>
       </Link>
-      <Link className="admin-card">
+      <Link className="admin-card" to={"/panelAdmin/productos"}>
         <FaCogs className="admin-icon" />
         <span>Configurar productos</span>
       </Link>
