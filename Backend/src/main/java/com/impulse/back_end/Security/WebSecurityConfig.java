@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
@@ -32,7 +31,9 @@ public class WebSecurityConfig {
                                        antMatcher("/error"),
                                        antMatcher(Constants.PublicRoutes.REGISTRO + "/**"),
                                        antMatcher(Constants.PublicRoutes.LOGIN + "/**"),
-                                       antMatcher(Constants.AdminRoutes.USUARIO + "/**")
+                                       antMatcher(Constants.PublicRoutes.PRODUCTO + "/**"),
+                                       antMatcher(Constants.AdminRoutes.USUARIO + "/**"),
+                                       antMatcher(Constants.AdminRoutes.PRODUCTO + "/**")
                                ).permitAll()
                                .anyRequest().authenticated()
                 )

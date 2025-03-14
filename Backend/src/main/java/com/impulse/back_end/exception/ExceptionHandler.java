@@ -50,4 +50,13 @@ public class ExceptionHandler {
 
         return ResponseEntity.status(exception.getStatus()).body(error);
     }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler({ProductoException.class})
+    public ResponseEntity<ErrorDTO> handler(ProductoException exception) {
+        ErrorDTO error = new ErrorDTO();
+
+        error.setError(new ErrorDTO.InternalErrorDTO(exception.getCode(), exception.getMessage()));
+
+        return ResponseEntity.status(exception.getStatus()).body(error);
+    }
 }

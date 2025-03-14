@@ -10,17 +10,19 @@ public class Constants {
         public static final String ERROR = "/error";
         public static final String REGISTRO = "/registro";
         public static final String LOGIN = "/login";
+        public static final String PRODUCTO = "/public/producto";
 
         public static final String[] ALL = {
-                ERROR, REGISTRO, LOGIN
+                ERROR, REGISTRO, LOGIN, PRODUCTO
         };
     }
 
     public static class AdminRoutes {
         public static final String USUARIO = "/usuario";
+        public static final String PRODUCTO = "/admin/producto";
 
         public static final String[] ALL = {
-                USUARIO
+                USUARIO, PRODUCTO
         };
     }
 }
