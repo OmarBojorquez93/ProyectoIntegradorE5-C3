@@ -1,8 +1,8 @@
 import { baseUrlApi } from "../api/urlApi";
 
-export const getProductsById = async () => {
+export const getProductsById = async (id) => {
   try {
-    const { data } = await baseUrlApi.get("");
+    const { data } = await baseUrlApi.get(`/public/producto/${id}`);
     console.log({ data });
 
     return data;
