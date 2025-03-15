@@ -24,6 +24,10 @@ public class ProductoEntity {
     @Column(name = "precio_alquiler", nullable = false)
     private BigDecimal precioAlquiler;
 
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private CategoriaEntity categoria;
+
     @OneToMany(
             mappedBy = "producto",
             cascade = CascadeType.ALL,
@@ -38,10 +42,11 @@ public class ProductoEntity {
     )
     private List<CaracteristicaEntity> caracteristicas = new ArrayList<>();
 
-    public ProductoEntity(String nombre, String descripcion, BigDecimal precioAlquiler) {
+    public ProductoEntity(String nombre, String descripcion, BigDecimal precioAlquiler, CategoriaEntity categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioAlquiler = precioAlquiler;
+        this.categoria = categoria;
     }
 
     public ProductoEntity() {
@@ -101,5 +106,13 @@ public class ProductoEntity {
 
     public List<CaracteristicaEntity> getCaracteristicas() {
         return caracteristicas;
+    }
+
+    public CategoriaEntity getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaEntity categoria) {
+        this.categoria = categoria;
     }
 }

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.math.BigDecimal;
 import java.util.List;
 
-@JsonPropertyOrder(value = {"id", "nombre", "descripcion", "precioAlquiler", "caracteristicas", "imagenes"})
+@JsonPropertyOrder(value = {"id", "nombre", "descripcion", "precioAlquiler", "categoria", "caracteristicas", "imagenes"})
 public class ProductoRespuestaDTO {
 
     private Long id;
@@ -18,16 +18,19 @@ public class ProductoRespuestaDTO {
     @JsonProperty("precio_alquiler")
     private BigDecimal precioAlquiler;
 
+    private String categoria;
+
     private List<CaracteristicaRespuestaDTO> caracteristicas;
 
     private List<ImagenRespuestaDTO> imagenes;
 
 
-    public ProductoRespuestaDTO(Long id, String nombre, String descripcion, BigDecimal precioAlquiler, List<CaracteristicaRespuestaDTO> caracteristicas, List<ImagenRespuestaDTO> imagenes) {
+    public ProductoRespuestaDTO(Long id, String nombre, String descripcion, BigDecimal precioAlquiler, String categoria, List<CaracteristicaRespuestaDTO> caracteristicas, List<ImagenRespuestaDTO> imagenes) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioAlquiler = precioAlquiler;
+        this.categoria = categoria;
         this.caracteristicas = caracteristicas;
         this.imagenes = imagenes;
     }
@@ -81,5 +84,13 @@ public class ProductoRespuestaDTO {
 
     public void setCaracteristicas(List<CaracteristicaRespuestaDTO> caracteristicas) {
         this.caracteristicas = caracteristicas;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

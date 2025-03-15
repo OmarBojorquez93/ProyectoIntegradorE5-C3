@@ -21,6 +21,10 @@ public class ProductoPeticionDTO {
     @JsonProperty("precio_alquiler")
     private BigDecimal precioAlquiler;
 
+    @NotEmpty(message = "La categoria es requerida")
+    @Size(min = 1, max = 100, message = "La categoria no debe ser mayor a 100 caracteres")
+    private String categoria;
+
     @NotEmpty(message = "Se requiere especificar al menos una caracteristica del producto")
     @Valid
     private List<CaracteristicaPeticionDTO> caracteristicas;
@@ -55,5 +59,13 @@ public class ProductoPeticionDTO {
 
     public void setCaracteristicas(List<CaracteristicaPeticionDTO> caracteristicas) {
         this.caracteristicas = caracteristicas;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

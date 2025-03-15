@@ -1,18 +1,15 @@
 package com.impulse.back_end.Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.impulse.back_end.Constant.Constants;
-import com.impulse.back_end.Dto.ImagenRespuestaDTO;
-import com.impulse.back_end.Dto.ProductoPeticionDTO;
 import com.impulse.back_end.Dto.ProductoRespuestaDTO;
 import com.impulse.back_end.Service.ProductoAdminService;
 import com.impulse.back_end.exception.ProductoException;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -22,30 +19,25 @@ public class ProductoAdminController {
     @Autowired
     private ProductoAdminService productoAdminService;
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ProductoRespuestaDTO registrarProducto(
             @RequestHeader(Constants.Headers.SESSION_ID) String sessionId,
-            @RequestBody @Valid ProductoPeticionDTO productoPeticionDTO
-    ) throws ProductoException {
-        return productoAdminService.registrarProducto(
-                sessionId,
-                productoPeticionDTO
-        );
+            @RequestParam(value = "peticion", required = true) String peticion,
+            @RequestParam(value = "imagen", required = true) MultipartFile imagen
+    ) throws ProductoException, JsonProcessingException {
+        return productoAdminService.registrarProducto(sessionId, peticion, imagen);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path = "/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.OK)
     public ProductoRespuestaDTO modificarProductoPorId(
             @RequestHeader(Constants.Headers.SESSION_ID) String sessionId,
             @PathVariable("id") Long id,
-            @RequestBody @Valid ProductoPeticionDTO productoPeticionDTO
-    ) throws ProductoException {
-        return productoAdminService.modificarProductoPorId(
-                sessionId,
-                id,
-                productoPeticionDTO
-        );
+            @RequestParam(value = "peticion", required = true) String peticion,
+            @RequestParam(value = "imagen", required = false) MultipartFile imagen
+    ) throws ProductoException, JsonProcessingException {
+        return productoAdminService.modificarProductoPorId(sessionId, id, peticion, imagen);
     }
 
     @DeleteMapping("/{id}")
@@ -55,46 +47,6 @@ public class ProductoAdminController {
             @PathVariable("id") Long id
     ) throws ProductoException {
         productoAdminService.eliminarProductoPorId(
-                sessionId,
-                id
-        );
-    }
-
-    @PostMapping("/{id}/imagen")
-    @ResponseStatus(HttpStatus.CREATED)
-    public List<ImagenRespuestaDTO> subirImagen(
-            @RequestHeader(Constants.Headers.SESSION_ID) String sessionId,
-            @PathVariable("id") Long id,
-            @RequestParam("imagenes") List<MultipartFile> imagenes
-            ) throws ProductoException {
-        return productoAdminService.subirImagen(
-                sessionId,
-                id,
-                imagenes
-        );
-    }
-
-    @DeleteMapping("/{id}/imagen/{id_imagen}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void borrarImagen(
-            @RequestHeader(Constants.Headers.SESSION_ID) String sessionId,
-            @PathVariable("id") Long id,
-            @PathVariable("id_imagen") Long imagenId
-    ) throws ProductoException {
-        productoAdminService.borrarImagen(
-                sessionId,
-                id,
-                imagenId
-        );
-    }
-
-    @DeleteMapping("/{id}/imagen")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void borrarImagenes(
-            @RequestHeader(Constants.Headers.SESSION_ID) String sessionId,
-            @PathVariable("id") Long id
-    ) throws ProductoException {
-        productoAdminService.borrarImagenes(
                 sessionId,
                 id
         );

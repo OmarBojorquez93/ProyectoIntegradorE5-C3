@@ -1,15 +1,35 @@
 package com.impulse.back_end.exception;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ExceptionHandler {
+
+    @org.springframework.web.bind.annotation.ExceptionHandler({MissingServletRequestPartException.class})
+    public ResponseEntity<ErrorDTO> handler(MissingServletRequestPartException exception) {
+        ErrorDTO error = new ErrorDTO();
+
+        error.setError(new ErrorDTO.InternalErrorDTO("peticion_invalida", exception.getMessage()));
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler({JsonParseException.class})
+    public ResponseEntity<ErrorDTO> handler(JsonParseException exception) {
+        ErrorDTO error = new ErrorDTO();
+
+        error.setError(new ErrorDTO.InternalErrorDTO("peticion_invalida", exception.getMessage()));
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 
     @org.springframework.web.bind.annotation.ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<ErrorDTO> handler(MethodArgumentNotValidException exception) {

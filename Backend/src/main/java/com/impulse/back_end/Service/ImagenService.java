@@ -1,5 +1,6 @@
 package com.impulse.back_end.Service;
 
+import com.impulse.back_end.Entity.ImagenEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public class ImagenService {
 
     private final Logger logger = LoggerFactory.getLogger(ImagenService.class);
 
-    public String subirImagen(MultipartFile archivo) {
+    public ImagenEntity subirImagen(MultipartFile archivo) {
         try {
             if (archivo.isEmpty()) {
                 return null;
@@ -22,7 +23,7 @@ public class ImagenService {
             File uploadedFile = new File(System.getProperty("user.dir") + "/" + archivo.getOriginalFilename());
             archivo.transferTo(uploadedFile);
 
-            return uploadedFile.getAbsolutePath();
+            return new ImagenEntity(uploadedFile.getAbsolutePath());
         } catch (Exception e) {
             logger.error("Error al subir el archivo {}", archivo.getOriginalFilename(), e);
             return null;
