@@ -2,7 +2,7 @@ import { baseUrlApi } from "../api/urlApi";
 
 export const getProducts = async () => {
   try {
-    const { data } = await baseUrlApi.get("");
+    const { data } = await baseUrlApi.get("/public/producto");
     console.log({ data });
 
     return data;

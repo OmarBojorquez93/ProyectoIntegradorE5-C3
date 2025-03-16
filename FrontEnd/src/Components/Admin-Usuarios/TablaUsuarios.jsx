@@ -6,7 +6,7 @@ import "./TablaUsuario.css";
 const TablaUsuarios = ({ usuarios, refreshUsers }) => {
   const { state } = useRecipeState();
   const { session, user } = state;
-  console.log(state.user);
+  //console.log(state.user);
 
   const handlerAgregarAdmin = async (id) => {
     if (!session) {

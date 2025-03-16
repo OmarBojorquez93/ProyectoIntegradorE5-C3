@@ -1,7 +1,7 @@
 import RegistrarProducto from "../Components/RegistrarProducto/RegistrarProducto";
 
 const CrearProducto = () => {
-  return <RegistrarProducto />;
+  return <div>CrearProducto</div>;
 };
 
 export default CrearProducto;
