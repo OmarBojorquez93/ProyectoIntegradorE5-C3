@@ -16,8 +16,8 @@ const TablaProductos = () => {
       <tbody>
         <tr>
           <td>1</td>
+          <td>Imagen Producto 1</td>
           <td>Producto 1</td>
-          <td>apellido</td>
           <td>Si</td>
           <td>
             <Link to={"/panelAdmin/editar-producto/1"}>

@@ -11,7 +11,7 @@ import PanelAdmin from "./Routes/PanelAdmin";
 import PanelUsuarios from "./Routes/PanelUsuarios";
 
 import "./App.css";
-import CrearProducto from "./Routes/CrearProducto";
+import CrearProducto from "./Routes/CrearProducto"; 
 import PanelProductos from "./Routes/PanelProductos";
 import EditarProducto from "./Routes/EditarProducto";
 
