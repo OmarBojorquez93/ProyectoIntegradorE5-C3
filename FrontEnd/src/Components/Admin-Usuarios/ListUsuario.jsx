@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useRecipeState } from "../../Context/global.context";
 import { getUsers } from "../../core/users/get-users.actions";
 import TablaUsuarios from "./TablaUsuarios";
+import "./ListUsuario.css";
 
 const ListUsuario = () => {
   const { state } = useRecipeState();

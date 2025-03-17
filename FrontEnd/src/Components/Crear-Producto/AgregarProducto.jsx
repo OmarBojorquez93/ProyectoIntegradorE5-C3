@@ -1,12 +1,15 @@
 import { useState } from "react";
 import FormInput from "../utils/FormInput";
-import ImageUploader from "../utils/Imageuploader";
+import ImageUploader from "../utils/ImageUploader";
+import "./AgregarProducto.css";
 
 const AgregarProducto = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
-    <form>
+    <div className="nuevoProduc">
+      <h3>Nuevo Producto</h3>
+      <form className="formNuevoProducto">
       <FormInput
         label={"Titulo del producto"}
         type={"text"}
@@ -35,8 +38,11 @@ const AgregarProducto = () => {
         errors={""}
       />
 
-      <button>Crear producto</button>
+      <button className="buttonCrearPro">Crear producto</button>
     </form>
+
+    </div>
+    
   );
 };
 

@@ -55,12 +55,12 @@ const TablaUsuarios = ({ usuarios, refreshUsers }) => {
         <tbody>
           {usuarios?.map((users, index) => (
             <tr key={users.id}>
-              <td>{index + 1}</td>
-              <td>{users.nombre}</td>
-              <td>{users.apellido}</td>
-              <td>{users.email}</td>
-              <td>{users.admin ? "Si" : "No"}</td>
-              <td>
+              <td data-label ="#">{index + 1}</td>
+              <td data-label ="Nombre">{users.nombre}</td>
+              <td data-label ="Apellido">{users.apellido}</td>
+              <td data-label ="Email">{users.email}</td>
+              <td data-label ="Administrador">{users.admin ? "Si" : "No"}</td>
+              <td data-label ="Volver Admin">
                 <input
                   disabled={users.email == user.email}
                   type="checkbox"

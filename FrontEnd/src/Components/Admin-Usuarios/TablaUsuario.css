@@ -1,7 +1,7 @@
 table {
   width: 100%;
   border-collapse: collapse; /* Asegura que los bordes se fusionen */
-  background-color: white; /* Fondo blanco */
+  background-color: #f9f9f9; /* Fondo blanco */
 }
 
 th,
@@ -21,7 +21,7 @@ td input[type="checkbox"] {
   width: 20px;
   height: 20px;
   appearance: none; /* Quitar el estilo por defecto */
-  background-color: #d3d3d3; /* Fondo gris */
+  background-color: #f9f9f9; /* Fondo gris */
   border: 2px solid black; /* Bordes negros */
   border-radius: 4px;
   cursor: pointer;
@@ -32,6 +32,41 @@ td input[type="checkbox"] {
 
 /* Cambiar el fondo cuando está marcado */
 td input[type="checkbox"]:checked {
-  background-color: #ef437e; /* Cambiar a rojo cuando está activo */
+  background-color: #13b2b2; /* Cambiar a rojo cuando está activo */
   border: 2px solid black;
+}
+
+@media(max-width: 430px){
+  table, thead, tbody, th, td, tr{
+    display: block;
+    
+  }
+
+  thead {
+    display: none;
+  }
+  tr{
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 15px;
+  }
+  td{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border: 0;
+  }
+
+  td::before {
+    content: attr(data-label); 
+    font-weight: bold;
+    padding-right: 20px;
+  }
+  
+  td input[type="checkbox"] { 
+    margin: 0; 
+  }
+
+
+  
 }

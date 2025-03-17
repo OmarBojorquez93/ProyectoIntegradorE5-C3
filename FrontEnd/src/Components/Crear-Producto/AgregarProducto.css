@@ -1,0 +1,33 @@
+.nuevoProduc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.nuevoProduc h3{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 5px;
+}
+.formNuevoProducto  {
+    width: 500px;
+    background-color: #f9f9f9;
+    padding: 25px;
+    border: 1px solid #ccc;
+    align-self: center;
+}
+
+.buttonCrearPro{
+    border: 0;
+    justify-self: center;
+    margin-top: 30px;
+}
+.buttonCrearPro:hover {
+    transform: scale(1.05);
+}
+
+@media(max-width: 430px){
+    .formNuevoProducto {
+        width: 300px;
+    }
+}

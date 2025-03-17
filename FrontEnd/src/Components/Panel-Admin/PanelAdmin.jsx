@@ -6,11 +6,11 @@ const PanelAdministrador = () => {
   return (
     <div className="admin-container">
       <Link className="admin-card" to={"/panelAdmin/usuarios"}>
-        <FaCogs className="admin-icon" />
+        <FaCogs size={30} className="admin-icon" />
         <span>Administrar usuarios</span>
       </Link>
       <Link className="admin-card" to={"/panelAdmin/productos"}>
-        <FaCogs className="admin-icon" />
+        <FaCogs size={30} className="admin-icon" />
         <span>Configurar productos</span>
       </Link>
     </div>

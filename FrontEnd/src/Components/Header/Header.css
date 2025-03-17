@@ -1,11 +1,11 @@
 
 .containerHeader{
-  padding: 15px 40px;
-  background-color: #242424; 
+  padding: 0px 40px;
+  background-color: #242424;
   display:flex;
   justify-content: space-between;
   align-items: center;
-  
+  height: 80px;
 }
 .logoC{
   align-items: center;
@@ -16,14 +16,12 @@
 }
 
 .navBar {
- 
   background-color: #242424; /* Color de fondo oscuro */
   display: flex;
   justify-content: space-between;
   align-items: center;
- 
-}
 
+}
 .login {
   background-color: #13b2b2;
   border-radius: 15px;
@@ -71,20 +69,83 @@ button {
   color: white;
   font-size: 20px;
 }
-
-@media(min-width: 390px){
-  .navBar{
-    display: none;
-  }
+.menu_hambur{
+  display: none;
 }
 
-@media(min-width: 1000px){
- 
-  #menu_hambur{
-      display: none;
-  }
+
+@media(max-width: 430px){
+
   .navBar{
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top:80px;
+    right: 0;
+    background: #242424;
+    transition: 0.3s ease all;
+    transform: translateX(-100%);
+    align-items: flex-start;
+    padding-left: 15px;
+
+  }
+  .menu_hambur{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .buttons{
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0px 0px 15px 20px;
+  }
+  .button{
+    background-color:#242424;
+    align-items: flex-start;
+    justify-content: left;
+
+  }
+  .buttons :nth-child(1){
+    order: 3;
+   
+  }
+  .buttons :nth-child(2){
+    order: 1;
+   
+  }
+ .buttons :nth-child(3){
+    order: 3;
+   
+  }
+  .buttonClose{
+    border: 0; 
+    padding-left: 0;
+    
+  }
+  .menu_hambur span{
+    width: 25px;
+    height: 4px;
+    background-color: white;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    transform-origin: 5px 0px;
+    transition: all 0.2% linear;
+  }
+
+  .navBar.open{
+    transform: translateX(0) ;
+  }
+
+  .menu_hambur.open > span{
+    transform: rotate(45deg) translate(0px, 0px);
+  }
+  .menu_hambur.open > span:nth-child(2){
+   display: none;
+  }
+  .menu_hambur.open > span:nth-child(3){
+    transform: rotate(-45deg) translate(-3px, -0.5px);
   }
 
 }
+

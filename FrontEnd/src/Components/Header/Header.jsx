@@ -4,12 +4,16 @@ import { useRecipeState } from "../../Context/global.context";
 import { useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import "./Header.css";
-import { IoMenuSharp } from "react-icons/io5";
+import { useState } from "react";
 
 export const Header = () => {
   const { state, logout } = useRecipeState();
   const { status, user } = state;
   const navigation = useNavigate();
+  const [isOpen, setIsOpen]= useState(false);
+  // const closeMenu = ()=>{
+  //   setIsOpen(false);
+  // }
 
   const handleLogout = () => {
     logout();
@@ -25,15 +29,16 @@ export const Header = () => {
                 src={"/img/Logo.png"}
                 alt="Impulse Logo"
                 className="logoNav"
-    
+                onClick={()=>setIsOpen(false)}
               />
+              
             </Link>
         </div>
-        <nav className="navBar">
-          
+        <nav className={`navBar ${isOpen && "open"}`}>
+
 
           {status === "authenticated" ? (
-            <div className="buttons">
+            <div className="buttons" onClick={()=>setIsOpen(false)}>
               {user && user.admin && (
                 <Button
                   ruta={"/panelAdmin"}
@@ -41,7 +46,7 @@ export const Header = () => {
                   title={"Panel de Administrador"}
                 />
               )}
-              <button onClick={handleLogout} className="button">
+              <button onClick={handleLogout} className="button buttonClose">
                 Cerrar sesión
               </button>
               {user && (
@@ -56,22 +61,28 @@ export const Header = () => {
               )}
             </div>
           ) : (
-            <div className="buttons">
+            <div className="buttons" onClick={()=>setIsOpen(false)}>
               <Button
+
                 ruta={"/crearCuenta"}
                 className="button"
                 title={"Crear Cuenta"}
+
               />
               <Button
                 ruta={"/login"}
                 className="button"
                 title={"Iniciar sesión"}
+                // onClick={()=>setIsOpen(false)}
+
               />
             </div>
           )}
         </nav>
-        <div id="menu_hambur">
-          <IoMenuSharp size={30} color="white"/>
+        <div className={`menu_hambur ${isOpen && "open"}`} onClick={()=>setIsOpen(!isOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
     </header>
