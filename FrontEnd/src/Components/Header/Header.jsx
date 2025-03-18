@@ -5,16 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import "./Header.css";
 import { useState } from "react";
+import IconBack from "../utils/IconBack"
+
+
 
 export const Header = () => {
   const { state, logout } = useRecipeState();
   const { status, user } = state;
   const navigation = useNavigate();
   const [isOpen, setIsOpen]= useState(false);
-  // const closeMenu = ()=>{
-  //   setIsOpen(false);
-  // }
 
+  
   const handleLogout = () => {
     logout();
     navigation("/");
@@ -23,6 +24,9 @@ export const Header = () => {
   return (
     <header>
       <div className="containerHeader">
+        <div className="backIcon">
+          <IconBack/>
+        </div>
         <div className="logoC">
           <Link to="/">
               <img

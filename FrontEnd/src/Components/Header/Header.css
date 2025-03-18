@@ -7,6 +7,10 @@
   align-items: center;
   height: 80px;
 }
+
+.backIcon{
+  display: none;
+}
 .logoC{
   align-items: center;
 }
@@ -75,6 +79,9 @@ button {
 
 
 @media(max-width: 430px){
+  .backIcon{
+    display: flex;
+  }
 
   .navBar{
     display: flex;
