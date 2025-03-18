@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./RegistrarProducto.css";
 
-const CrearProducto = () => {
+const CrearProductos = () => {
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
@@ -50,8 +50,7 @@ const CrearProducto = () => {
     else if (formData.descripcion.length < 10)
       newErrors.descripcion = "Debe tener al menos 10 caracteres";
 
-    if (!formData.imagen)
-      newErrors.imagen = "Debes subir al menos una imagen";
+    if (!formData.imagen) newErrors.imagen = "Debes subir al menos una imagen";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -119,4 +118,4 @@ const CrearProducto = () => {
   );
 };
 
-export default CrearProducto;
+export default CrearProductos;

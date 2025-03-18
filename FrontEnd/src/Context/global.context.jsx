@@ -3,7 +3,7 @@ import { authLogin } from "../core/auth/auth-actions";
 
 export const ContextGlobal = createContext();
 
-const initialState = {
+const initialState = JSON.parse(localStorage.getItem("authState")) || {
   status: "unauthenticated",
   session: null,
   user: null,
@@ -12,12 +12,14 @@ const initialState = {
 const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      return {
-        ...state,
+      const newState = {
         status: "authenticated",
         session: action.payload.session,
         user: action.payload.user,
       };
+      localStorage.setItem("authState", JSON.stringify(newState));
+      return newState;
+
     case "LOGOUT":
       return {
         ...state,
