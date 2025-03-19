@@ -1,6 +1,8 @@
 import { baseUrlApi } from "../api/urlApi";
 
-export const createProduct = async (producto, imagen, sessionId) => {
+export const createProduct = async (producto, sessionId) => {
+  console.log("product: ", producto);
+  console.log("sessionID: ", sessionId);
   try {
     const formData = new FormData();
 
@@ -10,29 +12,39 @@ export const createProduct = async (producto, imagen, sessionId) => {
       JSON.stringify({
         nombre: producto.nombre,
         descripcion: producto.descripcion,
-        precio_alquiler: producto.precio_alquiler,
+        precio_alquiler: producto.precioAlquiler,
         categoria: producto.categoria,
-        caracteristicas: producto.caracteristicas,
+        caracteristicas: [
+          { nombre: "Caracteristica xxx", descripcion: "Descripcion xxx" },
+          { nombre: "Caracteristica yyy", descripcion: "Descripcion yyy" },
+        ],
       })
     );
 
     // Adjuntar la imagen
-    formData.append("imagen", imagen);
+    if (producto.imagen instanceof File) {
+      formData.append("imagen", producto.imagen);
+    } else {
+      console.error("El archivo de imagen no es válido");
+    }
 
     // Configurar los encabezados
     const headers = {
       "session-id": sessionId,
-      "Content-Type": "multipart/form-data",
     };
 
     // Realizar la petición POST
-    const { data } = await baseUrlApi.post(`/admin/producto`, formData, {
+    const { data } = await baseUrlApi.post("/admin/producto", formData, {
       headers,
     });
 
     return data;
   } catch (error) {
-    console.error("Error al crear el producto:", error);
+    if (error.response) {
+      console.error("Respuesta del servidor:", error.response.data);
+    } else {
+      console.error("Error de red:", error.message);
+    }
     throw new Error("Ocurrió un error al crear el producto");
   }
 };

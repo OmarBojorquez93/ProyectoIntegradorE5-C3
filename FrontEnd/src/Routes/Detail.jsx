@@ -1,33 +1,40 @@
-import productos from "../Components/utils/Products.json";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProductDetail } from "../Components/Product/ProductDetail";
 import { CaracteristicasProduc } from "../Components/CaracteristicasProduc/CaracteristicasProduc";
-import { useEffect, useState } from "react";
 import { getProductsById } from "../core/product/get-product-by-id.actions";
 
 export const Detail = () => {
-  const [product, setProduct] = useState("");
+  const [product, setProduct] = useState({});
   const params = useParams();
   const id = params.id;
+  console.log(id);
   //console.log(params)
   useEffect(() => {
     const fetchProduct = async () => {
       const data = await getProductsById(id);
+      console.log(data);
       setProduct(data);
     };
     fetchProduct();
   }, []);
-  //const product = productos.find((producto) => producto.id == id);
-  //console.log(product);
+
+  console.log({ product });
 
   return (
     <>
-      <ProductDetail
-        titulo={product.nombre}
-        imagen={product.imagenes.ruta}
-        descripcion={product.descripcion}
-      />
-      <CaracteristicasProduc />
+      <>
+        {product && product.imagenes ? (
+          <ProductDetail
+            titulo={product.nombre}
+            imagen={product.imagenes[0].ruta}
+            descripcion={product.descripcion}
+          />
+        ) : (
+          <p>Cargando producto...</p>
+        )}
+        <CaracteristicasProduc />
+      </>
     </>
   );
 };

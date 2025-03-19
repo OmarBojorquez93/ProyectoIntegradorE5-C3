@@ -4,14 +4,17 @@ import { createProduct } from "../../core/product/create-product.actions";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./RegistrarProducto.css";
+import { useRecipeState } from "../../Context/global.context";
 
 const CrearProductos = () => {
+  const { state } = useRecipeState();
+  const { session } = state;
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
     imagen: null,
     categoria: "",
-    precioAlquiler:""
+    precioAlquiler: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -55,9 +58,7 @@ const CrearProductos = () => {
     if (!formData.imagen) {
       newErrors.imagen = "Debes subir al menos una imagen";
       return false;
-    }
-
-    else if (!/^\d*$/.test(formData.precioAlquiler))
+    } else if (!/^\d*$/.test(formData.precioAlquiler))
       newErrors.precioAlquiler = "Debes ingresar solo caracteres numéricos";
 
     setErrors(newErrors);
@@ -67,22 +68,17 @@ const CrearProductos = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     setApiError("");
-  
+
     if (!validateForm()) return;
-  
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-  
+
     try {
-      const response = await createProduct(formDataToSend);
-  
+      const response = await createProduct(formData, session);
+
       if (response.status === 409) {
         setApiError("El nombre ya está en uso");
       } else {
         toast.success("Producto agregado con éxito!");
-        setTimeout(() => navigate("/productos"), 2000);
+        setTimeout(() => navigate("/panelAdmin/productos"), 2000);
       }
     } catch (error) {
       setApiError("Ocurrió un error inesperado, intenta nuevamente.");
@@ -119,7 +115,12 @@ const CrearProductos = () => {
           </div>
 
           <label htmlFor="opciones">Categoria:</label>
-          <select id="opciones" name="categoria" value={formData.categoria} onChange={handleChange}>
+          <select
+            id="opciones"
+            name="categoria"
+            value={formData.categoria}
+            onChange={handleChange}
+          >
             <option value="">-- Selecciona una opción --</option>
             <option value="opcion1">Deportes Acuaticos</option>
             <option value="opcion2">Camping</option>
