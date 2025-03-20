@@ -15,8 +15,15 @@ export const createProduct = async (producto, sessionId) => {
         precio_alquiler: producto.precioAlquiler,
         categoria: producto.categoria,
         caracteristicas: [
-          { nombre: "Caracteristica xxx", descripcion: "Descripcion xxx" },
-          { nombre: "Caracteristica yyy", descripcion: "Descripcion yyy" },
+          { nombre: "Marca", descripcion: producto.marca },
+          { nombre: "Peso", descripcion: producto.peso },
+          { nombre: "Capacidad", descripcion: producto.capacidad },
+          {
+            nombre: "Dimensiones",
+            descripcion: `${producto.alto}cm X ${producto.ancho}cm`,
+          },
+          { nombre: "Material", descripcion: producto.material },
+          { nombre: "Color", descripcion: producto.color },
         ],
       })
     );
@@ -33,6 +40,8 @@ export const createProduct = async (producto, sessionId) => {
       "session-id": sessionId,
     };
 
+    console.log(formData);
+
     // Realizar la petición POST
     const { data } = await baseUrlApi.post("/admin/producto", formData, {
       headers,
@@ -45,6 +54,6 @@ export const createProduct = async (producto, sessionId) => {
     } else {
       console.error("Error de red:", error.message);
     }
-    throw new Error("Ocurrió un error al crear el producto");
+    throw new Error(error);
   }
 };
