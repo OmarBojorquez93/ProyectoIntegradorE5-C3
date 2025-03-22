@@ -74,21 +74,28 @@ const CrearProductos = () => {
 
     if (!formData.imagen) {
       newErrors.imagen = "Debes subir al menos una imagen";
-      return false;
-    } else if (!/^\d*$/.test(formData.precioAlquiler))
+    }
+
+    if (!formData.precioAlquiler)
+      newErrors.precioAlquiler = "El precio de alquiler es requerido";
+    else if (!/^\d+$/.test(formData.precioAlquiler))
       newErrors.precioAlquiler = "Debes ingresar solo caracteres numéricos";
 
     if (!formData.marca) newErrors.marca = "El nombre es requerido";
     else if (formData.marca.length < 3)
       newErrors.marca = "Debe tener al menos 3 caracteres";
+
     if (!formData.color) newErrors.color = "El color es requerido";
     else if (formData.color.length < 3)
       newErrors.color = "Debe tener al menos 3 caracteres";
 
-    if (!/^\d*$/.test(formData.alto))
-      newErrors.precioAlquiler = "Debes ingresar solo caracteres numéricos";
-    if (!/^\d*$/.test(formData.ancho))
-      newErrors.precioAlquiler = "Debes ingresar solo caracteres numéricos";
+    if (!formData.alto) newErrors.alto = "El alto es requerido";
+    else if (!/^\d+$/.test(formData.alto))
+      newErrors.alto = "Debes ingresar solo caracteres numéricos";
+
+    if (!formData.ancho) newErrors.ancho = "El ancho es requerido";
+    else if (!/^\d+$/.test(formData.ancho))
+      newErrors.ancho = "Debes ingresar solo caracteres numéricos";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -130,7 +137,7 @@ const CrearProductos = () => {
 
           <FormInput
             label={"Descripción"}
-            type={"text"}
+            type={"textarea"}
             name={"descripcion"}
             value={formData.descripcion}
             onChange={handleChange}
@@ -160,7 +167,7 @@ const CrearProductos = () => {
 
           <FormInput
             label={"Precio de alquiler"}
-            type={"text"}
+            type={"number"}
             name={"precioAlquiler"}
             value={formData.precioAlquiler}
             onChange={handleChange}
@@ -168,7 +175,7 @@ const CrearProductos = () => {
           />
 
           <FormInput
-            label={"Marca:"}
+            label={"Marca"}
             type={"text"}
             name={"marca"}
             value={formData.marca}
@@ -176,7 +183,7 @@ const CrearProductos = () => {
             errors={errors?.marca}
           />
           <FormInput
-            label={"Peso:"}
+            label={"Peso (grs)"}
             type={"number"}
             name={"peso"}
             value={formData.peso}
@@ -201,16 +208,16 @@ const CrearProductos = () => {
           />
 
           <FormInput
-            label={"Alto"}
-            type={"text"}
+            label={"Alto (cm)"}
+            type={"number"}
             name={"alto"}
             value={formData.alto}
             onChange={handleChange}
             errors={errors?.alto}
           />
           <FormInput
-            label={"Ancho"}
-            type={"text"}
+            label={"Ancho (cm)"}
+            type={"number"}
             name={"ancho"}
             value={formData.ancho}
             onChange={handleChange}

@@ -8,18 +8,16 @@ export const Detail = () => {
   const [product, setProduct] = useState({});
   const params = useParams();
   const id = params.id;
-  console.log(id);
+
   //console.log(params)
   useEffect(() => {
     const fetchProduct = async () => {
       const data = await getProductsById(id);
-      console.log(data);
+
       setProduct(data);
     };
     fetchProduct();
   }, []);
-
-  console.log({ product });
 
   return (
     <>
@@ -33,7 +31,7 @@ export const Detail = () => {
         ) : (
           <p>Cargando producto...</p>
         )}
-        <CaracteristicasProduc />
+        <CaracteristicasProduc caracteristicas={product.caracteristicas} />
       </>
     </>
   );

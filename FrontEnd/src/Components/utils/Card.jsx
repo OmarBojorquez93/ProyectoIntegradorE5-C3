@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./Card.css";
 
 export const Card = (product) => {
+  console.log(product);
+
   return (
     <Link to={`/detail/${product.product?.id}`} className={`card default-card`}>
       <img

@@ -3,8 +3,10 @@ import "./Recomendation.css";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../core/product/get-products.actions";
 
-export const Recomendation = () => {
+export const Recomendation = ({ category }) => {
   const [product, setProduct] = useState([]);
+
+  console.log("category: ", category);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -14,12 +16,27 @@ export const Recomendation = () => {
     fetchProduct();
   }, []);
 
+  if (category === "") {
+    return (
+      <>
+        <h2 className="recomendation">Recomendaciones</h2>
+        <div className="card-container">
+          {product
+            .sort(() => Math.random() - 0.5)
+            .map((item) => (
+              <Card product={item} key={item.id} />
+            ))}
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
-      <h2 className="recomendation">Recomendaciones</h2>
+      <h2 className="recomendation">{category}</h2>
       <div className="card-container">
         {product
-          .sort(() => Math.random() - 0.5)
+          .filter((item) => item.categoria == category)
           .map((item) => (
             <Card product={item} key={item.id} />
           ))}
