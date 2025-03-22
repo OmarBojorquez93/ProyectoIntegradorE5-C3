@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormInput from "../utils/FormInput";
 import { createProduct } from "../../core/product/create-product.actions";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./RegistrarProducto.css";
 import { useRecipeState } from "../../Context/global.context";
+import { getCategory } from "../../core/category/get-category.actions";
 
 const CrearProductos = () => {
   const { state } = useRecipeState();
@@ -27,6 +28,15 @@ const CrearProductos = () => {
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState("");
   const navigate = useNavigate();
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      const data = await getCategory();
+      setCategorias(data);
+    };
+    fetchCategory();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -141,11 +151,21 @@ const CrearProductos = () => {
             onChange={handleChange}
           >
             <option value="">-- Selecciona una opción --</option>
-            <option value="opcion1">Deportes Acuaticos</option>
-            <option value="opcion2">Camping</option>
-            <option value="opcion3">Deportes de invierno</option>
-            <option value="opcion4">Escalar y otros</option>
+            {categorias.map((categoria) => (
+              <option key={categoria.id} value={categoria.nombre}>
+                {categoria.nombre}
+              </option>
+            ))}
           </select>
+
+          <FormInput
+            label={"Precio de alquiler"}
+            type={"text"}
+            name={"precioAlquiler"}
+            value={formData.precioAlquiler}
+            onChange={handleChange}
+            errors={errors?.precioAlquiler}
+          />
 
           <FormInput
             label={"Marca:"}
@@ -179,14 +199,7 @@ const CrearProductos = () => {
             onChange={handleChange}
             errors={errors?.material}
           />
-          <FormInput
-            label={"Color"}
-            type={"text"}
-            name={"color"}
-            value={formData.color}
-            onChange={handleChange}
-            errors={errors?.color}
-          />
+
           <FormInput
             label={"Alto"}
             type={"text"}
@@ -205,12 +218,12 @@ const CrearProductos = () => {
           />
 
           <FormInput
-            label={"Precio de alquiler"}
+            label={"Color"}
             type={"text"}
-            name={"precioAlquiler"}
-            value={formData.precioAlquiler}
+            name={"color"}
+            value={formData.color}
             onChange={handleChange}
-            errors={errors?.precioAlquiler}
+            errors={errors?.color}
           />
 
           <button type="submit" className="submit-button">

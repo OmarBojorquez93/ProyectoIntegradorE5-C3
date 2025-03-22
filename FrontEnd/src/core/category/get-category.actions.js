@@ -2,7 +2,7 @@ import { baseUrlApi } from "../api/urlApi";
 
 export const getCategory = async () => {
   try {
-    const { data } = await baseUrlApi.get("");
+    const { data } = await baseUrlApi.get("/public/categoria");
     console.log({ data });
 
     return data;

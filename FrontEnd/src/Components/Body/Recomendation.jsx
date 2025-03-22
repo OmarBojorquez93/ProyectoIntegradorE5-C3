@@ -1,4 +1,3 @@
-import Productos from "../utils/Products.json";
 import { Card } from "../utils/Card";
 import "./Recomendation.css";
 import { useEffect, useState } from "react";

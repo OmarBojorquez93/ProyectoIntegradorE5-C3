@@ -1,21 +1,28 @@
-import { Link } from "react-router-dom";
 import "./CardCategory.css";
-const CardCategory = (product) => {
+const CardCategory = ({ categoria, filtroPorCategoria }) => {
+  const { nombre } = categoria;
+
+  const imagen = (nombre) => {
+    if (nombre == "Deportes Acuaticos") return "/icono-surf.png";
+    if (nombre == "Camping") return "/icono-camping.png";
+    if (nombre == "Deportes de invierno") return "invierno.png";
+    else return "icono-senderismo.png";
+  };
+
   return (
-      <Link
-        to={`category/${product.product?.category}`}
-        className={`card-category`}
-        >
-        <img
-          src={` /img${product.product?.img}`}
-          alt={product.category}
-          width={20}
-          height={20}
-          className="img-category"
-        />
-        <h2>{product.product?.category}</h2>
-    </Link>
-    
+    <button
+      onClick={() => filtroPorCategoria(nombre)}
+      className="card-category"
+    >
+      <img
+        src={`/img/${imagen(nombre)}`}
+        alt={nombre}
+        width={20}
+        height={20}
+        className="img-category"
+      />
+      <h2>{nombre}</h2>
+    </button>
   );
 };
 
