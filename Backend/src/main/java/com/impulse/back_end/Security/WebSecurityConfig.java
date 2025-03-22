@@ -32,8 +32,10 @@ public class WebSecurityConfig {
                                        antMatcher(Constants.PublicRoutes.REGISTRO + "/**"),
                                        antMatcher(Constants.PublicRoutes.LOGIN + "/**"),
                                        antMatcher(Constants.PublicRoutes.PRODUCTO + "/**"),
+                                       antMatcher(Constants.PublicRoutes.CATEGORIA + "/**"),
                                        antMatcher(Constants.AdminRoutes.USUARIO + "/**"),
-                                       antMatcher(Constants.AdminRoutes.PRODUCTO + "/**")
+                                       antMatcher(Constants.AdminRoutes.PRODUCTO + "/**"),
+                                       antMatcher(Constants.AdminRoutes.CATEGORIA + "/**")
                                ).permitAll()
                                .anyRequest().authenticated()
                 )
