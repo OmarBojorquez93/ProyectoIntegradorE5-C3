@@ -123,17 +123,39 @@ const CrearProductos = () => {
 
   return (
     <div className="formulario-container">
+      <h2>Registrar Producto</h2>
       <div className="formulario-box">
-        <h2>Registrar Producto</h2>
         <form onSubmit={handleRegister}>
-          <FormInput
-            label={"Nombre"}
-            type={"text"}
-            name={"nombre"}
-            value={formData.nombre}
-            onChange={handleChange}
-            errors={errors?.nombre}
-          />
+          <div className="datos-basicos">
+             <h4>Datos Básicos</h4>
+             <div className="seccion">
+                <FormInput
+                label={"Nombre"}
+                type={"text"}
+                name={"nombre"}
+                value={formData.nombre}
+                onChange={handleChange}
+                errors={errors?.nombre}
+                />
+                <div className="selector">
+                <label htmlFor="opciones">Categoria:</label>
+                <select
+                  id="opciones"
+                  name="categoria"
+                  value={formData.categoria}
+                  onChange={handleChange}
+                >
+                  <option value="">-- Selecciona una opción --</option>
+                  {categorias.map((categoria) => (
+                    <option key={categoria.id} value={categoria.nombre}>
+                      {categoria.nombre}
+                    </option>
+                  ))}
+                </select>
+
+                </div>
+                
+              </div>
 
           <FormInput
             label={"Descripción"}
@@ -143,27 +165,14 @@ const CrearProductos = () => {
             onChange={handleChange}
             errors={errors?.descripcion}
           />
-
+          <div className="seccion">
           <div className="form-group">
             <label>Imagen del producto</label>
             <input type="file" accept="image/*" onChange={handleImageChange} />
             {errors.imagen && <p className="error">{errors.imagen}</p>}
           </div>
 
-          <label htmlFor="opciones">Categoria:</label>
-          <select
-            id="opciones"
-            name="categoria"
-            value={formData.categoria}
-            onChange={handleChange}
-          >
-            <option value="">-- Selecciona una opción --</option>
-            {categorias.map((categoria) => (
-              <option key={categoria.id} value={categoria.nombre}>
-                {categoria.nombre}
-              </option>
-            ))}
-          </select>
+          
 
           <FormInput
             label={"Precio de alquiler"}
@@ -173,65 +182,73 @@ const CrearProductos = () => {
             onChange={handleChange}
             errors={errors?.precioAlquiler}
           />
+            
+          </div>
+          
+           </div>
+           <div className="caracteristicas">
+            <h4>Características</h4>
+            <div className="seccionCaracteristicas">
+              <FormInput
+                label={"Marca"}
+                type={"text"}
+                name={"marca"}
+                value={formData.marca}
+                onChange={handleChange}
+                errors={errors?.marca}
+              />
+              <FormInput
+                label={"Peso (grs)"}
+                type={"number"}
+                name={"peso"}
+                value={formData.peso}
+                onChange={handleChange}
+                errors={errors?.peso}
+              />
+              <FormInput
+                label={"Capacidad"}
+                type={"number"}
+                name={"capacidad"}
+                value={formData.capacidad}
+                onChange={handleChange}
+                errors={errors?.capacidad}
+              />
+              <FormInput
+                label={"Material"}
+                type={"text"}
+                name={"material"}
+                value={formData.material}
+                onChange={handleChange}
+                errors={errors?.material}
+              />
 
-          <FormInput
-            label={"Marca"}
-            type={"text"}
-            name={"marca"}
-            value={formData.marca}
-            onChange={handleChange}
-            errors={errors?.marca}
-          />
-          <FormInput
-            label={"Peso (grs)"}
-            type={"number"}
-            name={"peso"}
-            value={formData.peso}
-            onChange={handleChange}
-            errors={errors?.peso}
-          />
-          <FormInput
-            label={"Capacidad"}
-            type={"number"}
-            name={"capacidad"}
-            value={formData.capacidad}
-            onChange={handleChange}
-            errors={errors?.capacidad}
-          />
-          <FormInput
-            label={"Material"}
-            type={"text"}
-            name={"material"}
-            value={formData.material}
-            onChange={handleChange}
-            errors={errors?.material}
-          />
+              <FormInput
+                label={"Alto (cm)"}
+                type={"number"}
+                name={"alto"}
+                value={formData.alto}
+                onChange={handleChange}
+                errors={errors?.alto}
+              />
+              <FormInput
+                label={"Ancho (cm)"}
+                type={"number"}
+                name={"ancho"}
+                value={formData.ancho}
+                onChange={handleChange}
+                errors={errors?.ncho}
+              />
 
-          <FormInput
-            label={"Alto (cm)"}
-            type={"number"}
-            name={"alto"}
-            value={formData.alto}
-            onChange={handleChange}
-            errors={errors?.alto}
-          />
-          <FormInput
-            label={"Ancho (cm)"}
-            type={"number"}
-            name={"ancho"}
-            value={formData.ancho}
-            onChange={handleChange}
-            errors={errors?.ncho}
-          />
-
-          <FormInput
-            label={"Color"}
-            type={"text"}
-            name={"color"}
-            value={formData.color}
-            onChange={handleChange}
-            errors={errors?.color}
-          />
+              <FormInput
+                label={"Color"}
+                type={"text"}
+                name={"color"}
+                value={formData.color}
+                onChange={handleChange}
+                errors={errors?.color}
+              />
+           </div>
+          </div>
 
           <button type="submit" className="submit-button">
             Registrar Producto
