@@ -1,5 +1,7 @@
+import EditarProductoPorId from "../Components/EditarProducto/EditarProductoPorId";
+
 const EditarProducto = () => {
-  return <div>EditarProducto</div>;
+  return <EditarProductoPorId />;
 };
 
 export default EditarProducto;
