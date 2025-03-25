@@ -21,6 +21,7 @@ const authReducer = (state, action) => {
       return newState;
 
     case "LOGOUT":
+      localStorage.removeItem("authState");
       return {
         ...state,
         status: "unauthenticated",
