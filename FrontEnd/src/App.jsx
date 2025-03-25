@@ -11,9 +11,11 @@ import PanelAdmin from "./Routes/PanelAdmin";
 import PanelUsuarios from "./Routes/PanelUsuarios";
 
 import "./App.css";
-import CrearProducto from "./Routes/CrearProducto"; 
+import CrearProducto from "./Routes/CrearProducto";
 import PanelProductos from "./Routes/PanelProductos";
 import EditarProducto from "./Routes/EditarProducto";
+import Reserva from "./Routes/Reserva";
+import ConfirmarReserva from "./Routes/ConfirmarReserva";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
             path="/panelAdmin/editar-producto/:id"
             element={<EditarProducto />}
           />
+          <Route path="/reserva/:id" element={<Reserva />} />
+          <Route path="/reserva-confirmada" element={<ConfirmarReserva />} />
         </Routes>
       </div>
       <Footer />

@@ -14,7 +14,7 @@ const iconos = {
   Color: <IoMdColorPalette size={20} />,
 };
 
-export const CaracteristicasProduc = ({ caracteristicas }) => {
+export const CaracteristicasProduc = ({ caracteristicas, isAlquilar }) => {
   return (
     <>
       <h2 className="subTitle">Características</h2>
@@ -30,7 +30,9 @@ export const CaracteristicasProduc = ({ caracteristicas }) => {
         ))}
       </div>
       <div className="buttonAlquilar">
-        <button className="alquilar">ALQUILAR</button>
+        <button className="alquilar" onClick={() => isAlquilar()}>
+          ALQUILAR
+        </button>
       </div>
     </>
   );

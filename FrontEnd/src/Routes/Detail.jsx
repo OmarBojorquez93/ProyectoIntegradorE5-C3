@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProductDetail } from "../Components/Product/ProductDetail";
 import { CaracteristicasProduc } from "../Components/CaracteristicasProduc/CaracteristicasProduc";
 import { getProductsById } from "../core/product/get-product-by-id.actions";
+import { useRecipeState } from "../Context/global.context";
+import { CalendarContainer } from "react-datepicker";
+import CalendarioParaReserva from "../Components/CalendarioReserva/CalendarioParaReserva";
 
 export const Detail = () => {
+  const { state } = useRecipeState();
+  const { user } = state;
   const [product, setProduct] = useState({});
   const params = useParams();
   const id = params.id;
+  const navigation = useNavigate();
+
+  const [alquilar, setAlquilar] = useState(false);
 
   //console.log(params)
   useEffect(() => {
@@ -19,6 +27,15 @@ export const Detail = () => {
     fetchProduct();
   }, []);
 
+  const isAlquilar = () => {
+    if (!user) {
+      navigation("/login");
+    } else {
+      setAlquilar(true);
+    }
+  };
+
+  console.log(alquilar);
   return (
     <>
       <>
@@ -31,7 +48,12 @@ export const Detail = () => {
         ) : (
           <p>Cargando producto...</p>
         )}
-        <CaracteristicasProduc caracteristicas={product.caracteristicas} />
+        <CaracteristicasProduc
+          caracteristicas={product.caracteristicas}
+          isAlquilar={isAlquilar}
+        />
+
+        {alquilar && <CalendarioParaReserva id={product.id} />}
       </>
     </>
   );
