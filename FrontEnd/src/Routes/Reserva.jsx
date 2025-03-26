@@ -23,7 +23,7 @@ const Reserva = () => {
   return (
     <div>
       <h2>Confirma tu reserva</h2>
-      <DetalleProductoReserva product={product} />
+      {product && <DetalleProductoReserva product={product} />}
       <DatosUsuarioReserva user={user} />
       <DetalleFechaReserva />
     </div>
