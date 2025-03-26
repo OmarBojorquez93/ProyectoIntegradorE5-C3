@@ -6,6 +6,7 @@ import { getCategory } from "../../core/category/get-category.actions";
 import { useRecipeState } from "../../Context/global.context";
 import { updateProduct } from "../../core/product/update-product.actions";
 import toast from "react-hot-toast";
+import "./EditarProducto.css";
 
 const EditarProductoPorId = () => {
   const { id } = useParams();
@@ -159,119 +160,123 @@ const EditarProductoPorId = () => {
   if (!product) return <p>Cargando producto...</p>;
 
   return (
-    <div>
+    <div className="container">
       <h2>Editar producto</h2>
-      <img src={product?.imagenes?.ruta} alt={product.nombre} />
+  
+        <form onSubmit={handleUpdateProduct}>
+          <div className="form">
+            <div className="seccionUno">
+              <div className="datosBasicos">
+                  <FormInput
+                    label={"Nombre"}
+                    type={"text"}
+                    name={"nombre"}
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    errors={errors?.nombre}
+                  />
+                  <FormInput
+                  label={"Descripción"}
+                  type={"textarea"}
+                  name={"descripcion"}
+                  value={formData.descripcion}
+                  onChange={handleChange}
+                  errors={errors?.descripcion}
+                  />
+                  <div className="selector">
+                    <label htmlFor="opciones">Categoria:</label>
+                    <select
+                      id="opciones"
+                      name="categoria"
+                      value={formData.categoria}
+                      onChange={handleChange}
+                    >
+                      <option value="">-- Selecciona una opción --</option>
+                      {categorias.map((categoria) => (
+                        <option key={categoria.id} value={categoria.nombre}>
+                          {categoria.nombre}
+                        </option>
+                      ))}
+                    </select>
 
-      <form onSubmit={handleUpdateProduct}>
-        <FormInput
-          label={"Nombre"}
-          type={"text"}
-          name={"nombre"}
-          value={formData.nombre}
-          onChange={handleChange}
-          errors={errors?.nombre}
-        />
+                    </div>
 
-        <FormInput
-          label={"Descripción"}
-          type={"textarea"}
-          name={"descripcion"}
-          value={formData.descripcion}
-          onChange={handleChange}
-          errors={errors?.descripcion}
-        />
+              </div>
+                <img src={product?.imagenes?.ruta} alt={product.nombre} />
+            </div>
+            <div className="seccionDos">
+            <FormInput
+              label={"Marca"}
+              type={"text"}
+              name={"marca"}
+              value={formData.marca}
+              onChange={handleChange}
+              errors={errors?.marca}
+            />
+            <FormInput
+              label={"Peso (grs)"}
+              type={"number"}
+              name={"peso"}
+              value={formData.peso}
+              onChange={handleChange}
+              errors={errors?.peso}
+            />
+            <FormInput
+              label={"Capacidad"}
+              type={"number"}
+              name={"capacidad"}
+              value={formData.capacidad}
+              onChange={handleChange}
+              errors={errors?.capacidad}
+            />
+            <FormInput
+              label={"Material"}
+              type={"text"}
+              name={"material"}
+              value={formData.material}
+              onChange={handleChange}
+              errors={errors?.material}
+            />
 
-        <label htmlFor="opciones">Categoria:</label>
-        <select
-          id="opciones"
-          name="categoria"
-          value={formData.categoria}
-          onChange={handleChange}
-        >
-          <option value="">-- Selecciona una opción --</option>
-          {categorias.map((categoria) => (
-            <option key={categoria.id} value={categoria.nombre}>
-              {categoria.nombre}
-            </option>
-          ))}
-        </select>
+            <FormInput
+              label={"Alto (cm)"}
+              type={"number"}
+              name={"alto"}
+              value={formData.alto}
+              onChange={handleChange}
+              errors={errors?.alto}
+            />
+            <FormInput
+              label={"Ancho (cm)"}
+              type={"number"}
+              name={"ancho"}
+              value={formData.ancho}
+              onChange={handleChange}
+              errors={errors?.ancho}
+            />
 
-        <FormInput
-          label={"Precio de alquiler"}
-          type={"number"}
-          name={"precioAlquiler"}
-          value={formData.precioAlquiler}
-          onChange={handleChange}
-          errors={errors?.precioAlquiler}
-        />
+            <FormInput
+              label={"Color"}
+              type={"text"}
+              name={"color"}
+              value={formData.color}
+              onChange={handleChange}
+              errors={errors?.color}
+            />
 
-        <FormInput
-          label={"Marca"}
-          type={"text"}
-          name={"marca"}
-          value={formData.marca}
-          onChange={handleChange}
-          errors={errors?.marca}
-        />
-        <FormInput
-          label={"Peso (grs)"}
-          type={"number"}
-          name={"peso"}
-          value={formData.peso}
-          onChange={handleChange}
-          errors={errors?.peso}
-        />
-        <FormInput
-          label={"Capacidad"}
-          type={"number"}
-          name={"capacidad"}
-          value={formData.capacidad}
-          onChange={handleChange}
-          errors={errors?.capacidad}
-        />
-        <FormInput
-          label={"Material"}
-          type={"text"}
-          name={"material"}
-          value={formData.material}
-          onChange={handleChange}
-          errors={errors?.material}
-        />
+            </div>
+        </div> 
+            
+            <button type="submit" className="submit-button">
+              Guardar Cambios
+            </button>
 
-        <FormInput
-          label={"Alto (cm)"}
-          type={"number"}
-          name={"alto"}
-          value={formData.alto}
-          onChange={handleChange}
-          errors={errors?.alto}
-        />
-        <FormInput
-          label={"Ancho (cm)"}
-          type={"number"}
-          name={"ancho"}
-          value={formData.ancho}
-          onChange={handleChange}
-          errors={errors?.ancho}
-        />
-
-        <FormInput
-          label={"Color"}
-          type={"text"}
-          name={"color"}
-          value={formData.color}
-          onChange={handleChange}
-          errors={errors?.color}
-        />
-
-        <button type="submit" className="submit-button">
-          Guardar Cambios
-        </button>
-
-        {apiError && <p className="error">{apiError}</p>}
+            {apiError && <p className="error">{apiError}</p>}
       </form>
+         
+        
     </div>
+    
   );
 };
 
