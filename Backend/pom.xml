@@ -47,11 +47,11 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> -->
 		<!-- Se agrega la dependencia de MySQL en vez de la BD H2 -->
 		<dependency>
 			<groupId>com.mysql</groupId>
