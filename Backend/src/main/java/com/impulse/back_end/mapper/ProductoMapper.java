@@ -25,19 +25,17 @@ public class ProductoMapper {
                 productoEntity.getDescripcion(),
                 productoEntity.getPrecioAlquiler(),
                 productoEntity.getCategoria().getNombre(),
-                productoEntity.getCaracteristicas().stream().map(caracteristicaEntity -> {
-                    return new CaracteristicaRespuestaDTO(
+                productoEntity.getCaracteristicas().stream().map(caracteristicaEntity ->
+                        new CaracteristicaRespuestaDTO(
                             caracteristicaEntity.getId(),
                             caracteristicaEntity.getNombre(),
                             caracteristicaEntity.getDescripcion()
-                    );
-                }).collect(Collectors.toList()),
-                productoEntity.getImagenes().stream().map(imagenEntity -> {
-                    return new ImagenRespuestaDTO(
+                    )).toList(),
+                productoEntity.getImagenes().stream().map(imagenEntity ->
+                        new ImagenRespuestaDTO(
                             imagenEntity.getId(),
                             imagenEntity.getRuta()
-                    );
-                }).collect(Collectors.toList())
+                    )).toList()
         );
     }
 

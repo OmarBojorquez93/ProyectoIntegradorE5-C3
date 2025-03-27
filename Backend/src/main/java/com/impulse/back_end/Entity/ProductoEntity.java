@@ -1,14 +1,27 @@
 package com.impulse.back_end.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "productos")
-public class ProductoEntity {
+public class ProductoEntity implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,42 +55,14 @@ public class ProductoEntity {
     )
     private List<CaracteristicaEntity> caracteristicas = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = ReservaEntity.class)
+    private List<ReservaEntity> reservas;
+
     public ProductoEntity(String nombre, String descripcion, BigDecimal precioAlquiler, CategoriaEntity categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioAlquiler = precioAlquiler;
         this.categoria = categoria;
-    }
-
-    public ProductoEntity() {
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setPrecioAlquiler(BigDecimal precioAlquiler) {
-        this.precioAlquiler = precioAlquiler;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public BigDecimal getPrecioAlquiler() {
-        return precioAlquiler;
     }
 
     public void addImagen(ImagenEntity imagen) {
@@ -90,10 +75,6 @@ public class ProductoEntity {
         imagen.setProducto(null);
     }
 
-    public List<ImagenEntity> getImagenes() {
-        return imagenes;
-    }
-
     public void addCaracteristica(CaracteristicaEntity caracteristica) {
         caracteristicas.add(caracteristica);
         caracteristica.setProducto(this);
@@ -102,17 +83,5 @@ public class ProductoEntity {
     public void removeCaracteristica(CaracteristicaEntity caracteristica) {
         caracteristicas.remove(caracteristica);
         caracteristica.setProducto(null);
-    }
-
-    public List<CaracteristicaEntity> getCaracteristicas() {
-        return caracteristicas;
-    }
-
-    public CategoriaEntity getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(CategoriaEntity categoria) {
-        this.categoria = categoria;
     }
 }
