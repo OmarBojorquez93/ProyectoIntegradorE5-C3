@@ -46,6 +46,7 @@ public class SessionService {
 
         UsuarioEntity usuarioEntity = usuarioRepository.findByEmail(sessionEntity.getEmail()).orElse(null);
 
-        return usuarioEntity != null && usuarioEntity.getUsuarioRole() == UsuarioRole.ROLE_ADMIN;
+        return usuarioEntity != null && UsuarioRole.fromValue(usuarioEntity.getUsuarioRole()) == UsuarioRole.ROLE_ADMIN;
+
     }
 }

@@ -44,7 +44,7 @@ public class UsuarioService implements UserDetailsService {
                         usuarioPeticionDTO.getApellido().trim(),
                         usuarioPeticionDTO.getEmail().trim(),
                         bCryptPasswordEncoder.encode(usuarioPeticionDTO.getPassword().trim()),
-                        usuarioPeticionDTO.getAdmin() ? UsuarioRole.ROLE_ADMIN : UsuarioRole.ROLE_USER
+                        usuarioPeticionDTO.getAdmin() ? 1 : 0
                 )
         );
 
@@ -76,11 +76,11 @@ public class UsuarioService implements UserDetailsService {
     public String asignarAdmin(Long id) throws UsuarioException {
         UsuarioEntity usuario = obtenerUsuarioPorId(id);
 
-        if (usuario.getUsuarioRole() == UsuarioRole.ROLE_ADMIN) {
+        if (UsuarioRole.fromValue(usuario.getUsuarioRole()) == UsuarioRole.ROLE_ADMIN) {
             throw new UsuarioException(HttpStatus.BAD_REQUEST, "usuario_ya_admin", "El usuario ya es administrador");
         }
 
-        usuario.setUsuarioRole(UsuarioRole.ROLE_ADMIN);
+        usuario.setUsuarioRole(UsuarioRole.ROLE_ADMIN.getValue());
         usuarioRepository.save(usuario);
         return "El usuario ahora es administrador";
     }
@@ -89,11 +89,11 @@ public class UsuarioService implements UserDetailsService {
     public String removerAdmin(Long id) throws UsuarioException {
         UsuarioEntity usuario = obtenerUsuarioPorId(id);
 
-        if (usuario.getUsuarioRole() == UsuarioRole.ROLE_USER) {
+        if (UsuarioRole.fromValue(usuario.getUsuarioRole()) == UsuarioRole.ROLE_USER) {
             throw new UsuarioException(HttpStatus.BAD_REQUEST, "usuario_no_admin", "El usuario no es administrador");
         }
 
-        usuario.setUsuarioRole(UsuarioRole.ROLE_USER);
+        usuario.setUsuarioRole(UsuarioRole.ROLE_USER.getValue());
         usuarioRepository.save(usuario);
         return "El usuario ya no es administrador";
     }
