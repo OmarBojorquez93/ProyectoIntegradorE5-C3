@@ -19,6 +19,7 @@ public class ProductoPublicController {
     @Autowired
     private ProductoPublicService productoPublicService;
 
+<<<<<<< Updated upstream
     @GetMapping("/buscar-texto")
     @ResponseStatus(HttpStatus.OK)
     public List<ProductoRespuestaDTO> buscarPorTexto(@RequestParam("texto") String texto) {
@@ -32,4 +33,14 @@ public class ProductoPublicController {
             @RequestParam("hasta") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate hasta) {
         return productoPublicService.buscarPorFecha(desde, hasta);
     }
+=======
+    @GetMapping("/buscar")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductoRespuestaDTO> buscarPorTextoYFecha(
+            @RequestParam("texto") String texto,
+            @RequestParam("desde") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate desde,
+            @RequestParam("hasta") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate hasta) {
+        return productoPublicService.buscarPorTextoYFecha(texto, desde, hasta);
+    }
+>>>>>>> Stashed changes
 }

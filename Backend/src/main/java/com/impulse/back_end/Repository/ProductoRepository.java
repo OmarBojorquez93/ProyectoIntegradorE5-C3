@@ -12,8 +12,15 @@ import java.util.List;
 @Repository
 public interface ProductoRepository extends JpaRepository<ProductoEntity, Long> {
 
+<<<<<<< Updated upstream
     List<ProductoEntity> findByNombreContainingIgnoreCaseOrDescripcionContainingIgnoreCase(String nombre, String descripcion);
 
     List<ProductoEntity> findByFechaDisponibleBetween(LocalDate desde, LocalDate hasta);
+=======
+    List<ProductoEntity> findByFechaDisponibleBetweenAndNombreContainingIgnoreCaseOrFechaDisponibleBetweenAndDescripcionContainingIgnoreCase(
+            LocalDate desde1, LocalDate hasta1, String nombre,
+            LocalDate desde2, LocalDate hasta2, String descripcion
+    );
+>>>>>>> Stashed changes
 }
 
