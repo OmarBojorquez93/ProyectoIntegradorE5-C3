@@ -40,7 +40,10 @@ export const createProduct = async (producto, sessionId) => {
       "session-id": sessionId,
     };
 
-    console.log(formData);
+   // Verificar lo que se está enviando
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
 
     // Realizar la petición POST
     const { data } = await baseUrlApi.post("/admin/producto", formData, {
@@ -48,12 +51,24 @@ export const createProduct = async (producto, sessionId) => {
     });
 
     return data;
-  } catch (error) {
-    if (error.response) {
-      console.error("Respuesta del servidor:", error.response.data);
+} catch (error) {
+  if (error.response) {
+    const status = error.response.status;
+
+    if (status === 409) {
+      alert("⚠️ Ya existe un producto con ese nombre. Por favor elige otro.");
+    } else if (status === 500) {
+      alert("Error interno del servidor. Revisa los datos enviados o intenta más tarde.");
     } else {
-      console.error("Error de red:", error.message);
+      alert("Error del servidor: " + (error.response.data?.message || "Intenta nuevamente."));
     }
-    throw new Error(error);
+
+    console.error("Respuesta del servidor:", error.response.data);
+  } else {
+    alert("Error de red: " + error.message);
+    console.error("Error de red:", error.message);
   }
+
+  throw new Error(error);
+}
 };
