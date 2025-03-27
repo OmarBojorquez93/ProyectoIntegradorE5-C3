@@ -4,6 +4,7 @@ import com.impulse.back_end.Constant.Constants;
 import com.impulse.back_end.Dto.LoginPeticionDTO;
 import com.impulse.back_end.Dto.LoginRespuestaDTO;
 import com.impulse.back_end.Entity.UsuarioEntity;
+import com.impulse.back_end.Entity.UsuarioRole;
 import com.impulse.back_end.Service.LoginService;
 import com.impulse.back_end.Service.UsuarioService;
 import com.impulse.back_end.exception.LoginException;
@@ -37,7 +38,7 @@ public class LoginController {
             UsuarioEntity usuario = usuarioService.obtenerUsuarioPorEmail(loginPeticionDTO.getEmail());
 
             // Determinar si el usuario es administrador
-            boolean esAdmin = usuario.getUsuarioRole() == com.impulse.back_end.Entity.UsuarioRole.ROLE_ADMIN;
+            boolean esAdmin = UsuarioRole.fromValue(usuario.getUsuarioRole()) == com.impulse.back_end.Entity.UsuarioRole.ROLE_ADMIN;
 
             // Agregar el valor de administrador a la respuesta
             respuesta.setEsAdmin(esAdmin);
