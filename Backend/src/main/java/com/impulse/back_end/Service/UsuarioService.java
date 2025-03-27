@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,23 +29,13 @@ public class UsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UsuarioEntity> usuario = usuarioRepository.findByEmail(username);
-        if (usuario.isPresent()) {
-            return usuario.get();
-        } else {
-            throw new UsernameNotFoundException("Usuario inexistente: " + username);
-        }
+        return usuarioRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario inexistente: " + username));
     }
 
     public UsuarioRespuestaDTO registrarUsuario(UsuarioPeticionDTO usuarioPeticionDTO) throws UsuarioException {
-        Optional<UsuarioEntity> usuario = usuarioRepository.findByEmail(usuarioPeticionDTO.getEmail());
-        if (usuario.isPresent()) {
-            throw new UsuarioException(HttpStatus.CONFLICT, "usuario_invalido", "El usuario con email " + usuarioPeticionDTO.getEmail() +" ya existe");
-        }
-
-        UsuarioRole role = UsuarioRole.ROLE_USER;
-        if (usuarioPeticionDTO.getAdmin()) {
-            role = UsuarioRole.ROLE_ADMIN;
+        if (usuarioRepository.existsByEmail(usuarioPeticionDTO.getEmail())) {
+            throw new UsuarioException(HttpStatus.CONFLICT, "usuario_invalido", "El usuario con email " + usuarioPeticionDTO.getEmail() + " ya existe");
         }
 
         UsuarioEntity usuarioEntity = usuarioRepository.save(
@@ -55,66 +44,38 @@ public class UsuarioService implements UserDetailsService {
                         usuarioPeticionDTO.getApellido().trim(),
                         usuarioPeticionDTO.getEmail().trim(),
                         bCryptPasswordEncoder.encode(usuarioPeticionDTO.getPassword().trim()),
-                        usuarioPeticionDTO.getRole()
+                        usuarioPeticionDTO.getAdmin() ? UsuarioRole.ROLE_ADMIN : UsuarioRole.ROLE_USER
                 )
         );
 
-        return new UsuarioRespuestaDTO(
-                usuarioEntity.getIdUsuario(),
-                usuarioEntity.getNombre(),
-                usuarioEntity.getApellido(),
-                usuarioEntity.getEmail(),
-                usuarioEntity.isAdmin()
-        );
+        return convertirAUsuarioRespuestaDTO(usuarioEntity);
     }
 
     public UsuarioRespuestaDTO consultarUsuarioPorId(Long id) throws UsuarioException {
-        Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(id);
-        if (!usuarioEntity.isPresent()) {
-            throw new UsuarioException(HttpStatus.NOT_FOUND, "usuario_no_existe", "El usuario con id " + id +" no existe");
-        }
+        UsuarioEntity usuarioEntity = obtenerUsuarioPorId(id);
+        return convertirAUsuarioRespuestaDTO(usuarioEntity);
+    }
 
-        return new UsuarioRespuestaDTO(
-                usuarioEntity.get().getIdUsuario(),
-                usuarioEntity.get().getNombre(),
-                usuarioEntity.get().getApellido(),
-                usuarioEntity.get().getEmail(),
-                usuarioEntity.get().isAdmin()
-        );
+    public boolean existeUsuarioPorEmail(String email) {
+        return usuarioRepository.existsByEmail(email);
     }
 
     public List<UsuarioRespuestaDTO> consultarUsuarios() {
-        return usuarioRepository.findAll().stream().map( (u) -> {
-            return new UsuarioRespuestaDTO(
-                    u.getIdUsuario(),
-                    u.getNombre(),
-                    u.getApellido(),
-                    u.getEmail(),
-                    u.isAdmin()
-            );
-        }).collect(Collectors.toList());
+        return usuarioRepository.findAll()
+                .stream()
+                .map(this::convertirAUsuarioRespuestaDTO)
+                .collect(Collectors.toList());
     }
 
-    // ===========================
-    // 📌 NUEVA FUNCIÓN PARA OBTENER USUARIO POR EMAIL
-    // ===========================
     public UsuarioEntity obtenerUsuarioPorEmail(String email) throws UsuarioException {
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new UsuarioException(HttpStatus.NOT_FOUND, "usuario_no_existe", "El usuario con email " + email + " no existe"));
     }
 
-    // ===========================
-    // 📌 FUNCIONES PARA ASIGNAR Y REMOVER ADMINISTRADOR
-    // ===========================
-
     @Transactional
     public String asignarAdmin(Long id) throws UsuarioException {
-        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findById(id);
-        if (usuarioOpt.isEmpty()) {
-            throw new UsuarioException(HttpStatus.NOT_FOUND, "usuario_no_existe", "El usuario con id " + id + " no existe");
-        }
+        UsuarioEntity usuario = obtenerUsuarioPorId(id);
 
-        UsuarioEntity usuario = usuarioOpt.get();
         if (usuario.getUsuarioRole() == UsuarioRole.ROLE_ADMIN) {
             throw new UsuarioException(HttpStatus.BAD_REQUEST, "usuario_ya_admin", "El usuario ya es administrador");
         }
@@ -126,12 +87,8 @@ public class UsuarioService implements UserDetailsService {
 
     @Transactional
     public String removerAdmin(Long id) throws UsuarioException {
-        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findById(id);
-        if (usuarioOpt.isEmpty()) {
-            throw new UsuarioException(HttpStatus.NOT_FOUND, "usuario_no_existe", "El usuario con id " + id + " no existe");
-        }
+        UsuarioEntity usuario = obtenerUsuarioPorId(id);
 
-        UsuarioEntity usuario = usuarioOpt.get();
         if (usuario.getUsuarioRole() == UsuarioRole.ROLE_USER) {
             throw new UsuarioException(HttpStatus.BAD_REQUEST, "usuario_no_admin", "El usuario no es administrador");
         }
@@ -139,5 +96,22 @@ public class UsuarioService implements UserDetailsService {
         usuario.setUsuarioRole(UsuarioRole.ROLE_USER);
         usuarioRepository.save(usuario);
         return "El usuario ya no es administrador";
+    }
+
+    // 🔹 Método privado para reutilizar la lógica de obtención de usuario por ID
+    private UsuarioEntity obtenerUsuarioPorId(Long id) throws UsuarioException {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new UsuarioException(HttpStatus.NOT_FOUND, "usuario_no_existe", "El usuario con id " + id + " no existe"));
+    }
+
+    // 🔹 Método privado para convertir UsuarioEntity a UsuarioRespuestaDTO
+    private UsuarioRespuestaDTO convertirAUsuarioRespuestaDTO(UsuarioEntity usuario) {
+        return new UsuarioRespuestaDTO(
+                usuario.getIdUsuario(),
+                usuario.getNombre(),
+                usuario.getApellido(),
+                usuario.getEmail(),
+                usuario.isAdmin()
+        );
     }
 }
