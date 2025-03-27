@@ -3,7 +3,7 @@ package com.impulse.back_end.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "categorias")
+@Table(name = "categoria")
 public class CategoriaEntity {
 
     @Id

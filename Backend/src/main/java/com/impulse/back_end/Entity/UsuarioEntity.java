@@ -11,11 +11,11 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuario")
 public class UsuarioEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_usuario;
     @Column
     private String nombre;
 
@@ -79,8 +79,8 @@ public class UsuarioEntity implements UserDetails {
         return true;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdUsuario() {
+        return id_usuario;
     }
 
     public String getNombre() {

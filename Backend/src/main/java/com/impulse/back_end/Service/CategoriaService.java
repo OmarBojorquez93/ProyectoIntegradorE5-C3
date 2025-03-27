@@ -18,8 +18,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.impulse.back_end.mapper.ProductoMapper.mapProductoRespuestaDTO;
-
 @Service
 public class CategoriaService {
 

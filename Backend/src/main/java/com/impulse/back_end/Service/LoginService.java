@@ -47,7 +47,7 @@ public class LoginService {
 
         return new LoginRespuestaDTO(
                 session,
-                usuarioEntity.getId(),
+                usuarioEntity.getIdUsuario(),
                 usuarioEntity.getNombre(),
                 usuarioEntity.getApellido(),
                 usuarioEntity.getEmail(),

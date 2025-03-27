@@ -60,7 +60,7 @@ public class UsuarioService implements UserDetailsService {
         );
 
         return new UsuarioRespuestaDTO(
-                usuarioEntity.getId(),
+                usuarioEntity.getIdUsuario(),
                 usuarioEntity.getNombre(),
                 usuarioEntity.getApellido(),
                 usuarioEntity.getEmail(),
@@ -75,7 +75,7 @@ public class UsuarioService implements UserDetailsService {
         }
 
         return new UsuarioRespuestaDTO(
-                usuarioEntity.get().getId(),
+                usuarioEntity.get().getIdUsuario(),
                 usuarioEntity.get().getNombre(),
                 usuarioEntity.get().getApellido(),
                 usuarioEntity.get().getEmail(),
@@ -86,7 +86,7 @@ public class UsuarioService implements UserDetailsService {
     public List<UsuarioRespuestaDTO> consultarUsuarios() {
         return usuarioRepository.findAll().stream().map( (u) -> {
             return new UsuarioRespuestaDTO(
-                    u.getId(),
+                    u.getIdUsuario(),
                     u.getNombre(),
                     u.getApellido(),
                     u.getEmail(),
