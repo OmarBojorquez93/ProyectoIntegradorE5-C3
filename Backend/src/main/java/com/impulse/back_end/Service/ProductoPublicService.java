@@ -1,33 +1,38 @@
 package com.impulse.back_end.Service;
 
 import com.impulse.back_end.Dto.ProductoRespuestaDTO;
+import com.impulse.back_end.Dto.ReservaDisponibleRespuestaDTO;
 import com.impulse.back_end.Entity.ProductoEntity;
+import com.impulse.back_end.Entity.ReservaEntity;
 import com.impulse.back_end.Repository.ProductoRepository;
+import com.impulse.back_end.Repository.ReservaRepository;
 import com.impulse.back_end.exception.ProductoException;
 import com.impulse.back_end.mapper.ProductoMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.impulse.back_end.mapper.ProductoMapper.mapProductoRespuestaDTO;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class ProductoPublicService {
 
-    @Autowired
-    private ProductoRepository productoRepository;
+    private final ProductoRepository productoRepository;
 
-    private final Logger logger = LoggerFactory.getLogger(ProductoPublicService.class);
+    private final ReservaRepository reservaRepository;
 
-    public ProductoRespuestaDTO consultarProductoPorId(
-            Long id
-    ) throws ProductoException {
+    public ProductoRespuestaDTO consultarProductoPorId(Long id) throws ProductoException {
         Optional<ProductoEntity> productoOptional = productoRepository.findById(id);
 
         if (productoOptional.isEmpty())
@@ -36,8 +41,25 @@ public class ProductoPublicService {
         return mapProductoRespuestaDTO(productoOptional.get());
     }
 
-    public List<ProductoRespuestaDTO> consultarProductos(
-    ) throws ProductoException {
+    public List<ProductoRespuestaDTO> consultarProductos() throws ProductoException {
         return productoRepository.findAll().stream().map(ProductoMapper::mapProductoRespuestaDTO).collect(Collectors.toList());
+    }
+
+    public List<ProductoRespuestaDTO> buscarProductoPorTextoYFechas(final String palabraClave, final LocalDate fechaDesde, final LocalDate fechaHasta) {
+        final List<ProductoEntity> productosReservados = this.reservaRepository.findAllByDesdeAfterAndHastaBefore(fechaDesde, fechaHasta).stream().distinct().map(ReservaEntity::getProducto).toList();
+        return this.productoRepository.findAll().stream()
+                .filter(producto -> !productosReservados.contains(producto))
+                .filter(producto -> producto.getNombre().contains(palabraClave) || producto.getDescripcion().contains(palabraClave))
+                .map(ProductoMapper::mapProductoRespuestaDTO)
+                .toList();
+    }
+
+    public ReservaDisponibleRespuestaDTO productoDisponibleParaReserva(final Long idProducto, final LocalDate fechaDesde, final LocalDate fechaHasta) throws ProductoException {
+        return productoRepository.findById(idProducto)
+                .map(producto -> {
+                    final Optional<ReservaEntity> reserva = this.reservaRepository.findOneByProductoAndDesdeAfterAndHastaBefore(producto, fechaDesde, fechaHasta);
+                    return ReservaDisponibleRespuestaDTO.builder().nombreProducto(producto.getNombre()).descripcionProducto(producto.getDescripcion()).disponible(reserva.isEmpty()).build();
+                })
+                .orElseThrow(() -> new ProductoException(HttpStatus.NOT_FOUND, "producto_no_encontrado", "Producto no encontrado"));
     }
 }
