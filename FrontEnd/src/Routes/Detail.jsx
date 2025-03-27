@@ -51,6 +51,7 @@ export const Detail = () => {
         <CaracteristicasProduc
           caracteristicas={product.caracteristicas}
           isAlquilar={isAlquilar}
+          alquilar={alquilar}
         />
 
         {alquilar && <CalendarioParaReserva id={product.id} />}
