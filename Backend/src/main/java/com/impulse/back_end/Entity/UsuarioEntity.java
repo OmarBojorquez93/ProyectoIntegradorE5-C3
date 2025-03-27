@@ -16,6 +16,7 @@ public class UsuarioEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_usuario;
+    
     @Column
     private String nombre;
 
@@ -28,11 +29,10 @@ public class UsuarioEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private UsuarioRole usuarioRole;
+    @Column(name = "usuario_role") // Asegúrate de que el nombre de la columna en la BD sea el correcto
+    private int usuarioRole;  // Cambiar a int en lugar de UsuarioRole
 
-
-    public UsuarioEntity(String nombre, String apellido, String email, String password, UsuarioRole usuarioRole) {
+    public UsuarioEntity(String nombre, String apellido, String email, String password, int usuarioRole) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -45,7 +45,8 @@ public class UsuarioEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority simpleGrantedAuthority= new SimpleGrantedAuthority(usuarioRole.name());
+        // Convertir el valor entero de usuarioRole al enum
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(UsuarioRole.fromValue(usuarioRole).name());
         return Collections.singletonList(simpleGrantedAuthority);
     }
 
@@ -95,28 +96,28 @@ public class UsuarioEntity implements UserDetails {
         return email;
     }
 
-    public UsuarioRole getUsuarioRole() {
+    public int getUsuarioRole() {
         return usuarioRole;
     }
 
     public Boolean isAdmin() {
-        return getUsuarioRole().name().equals(UsuarioRole.ROLE_ADMIN.name());
+        return UsuarioRole.fromValue(usuarioRole) == UsuarioRole.ROLE_ADMIN;
     }
 
     public String getAvatar() {
         return Arrays.stream(getNombre().split(" ")).toList().stream().map(n -> n.charAt(0) + "").collect(Collectors.joining()) +
                 Arrays.stream(getApellido().split(" ")).toList().stream().map(n -> n.charAt(0) + "").collect(Collectors.joining());
     }
-    public void setUsuarioRole(UsuarioRole usuarioRole) {
+
+    public void setUsuarioRole(int usuarioRole) {
         this.usuarioRole = usuarioRole;
     }
 
     public void asignarAdmin() {
-        this.usuarioRole = UsuarioRole.ROLE_ADMIN;
+        this.usuarioRole = UsuarioRole.ROLE_ADMIN.getValue();
     }
 
     public void removerAdmin() {
-        this.usuarioRole = UsuarioRole.ROLE_USER;
+        this.usuarioRole = UsuarioRole.ROLE_USER.getValue();
     }
-
 }
