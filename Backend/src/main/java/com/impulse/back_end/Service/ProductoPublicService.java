@@ -17,9 +17,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.impulse.back_end.mapper.ProductoMapper.mapProductoRespuestaDTO;
 
@@ -61,5 +65,17 @@ public class ProductoPublicService {
                     return ReservaDisponibleRespuestaDTO.builder().nombreProducto(producto.getNombre()).descripcionProducto(producto.getDescripcion()).disponible(reserva.isEmpty()).build();
                 })
                 .orElseThrow(() -> new ProductoException(HttpStatus.NOT_FOUND, "producto_no_encontrado", "Producto no encontrado"));
+    }
+
+    public List<LocalDate> fechasNoDisponiblesPorProducto(final Long idProducto) throws ProductoException {
+        final List<LocalDate> fechasNoDisponibles = new ArrayList<>();
+        final ProductoEntity producto = this.productoRepository.findById(idProducto).orElseThrow(() -> new ProductoException(HttpStatus.NOT_FOUND, "producto_no_encontrado", "Producto no encontrado"));
+
+        this.reservaRepository.findAllByProductoAndDesdeAfter(producto, LocalDate.now()).forEach(reserva -> fechasNoDisponibles.addAll(obtenerFechasEntreRango(reserva.getDesde(), reserva.getHasta())));
+        return fechasNoDisponibles;
+    }
+
+    private Set<LocalDate> obtenerFechasEntreRango(final LocalDate desde, final LocalDate hasta) {
+        return Stream.iterate(desde, fecha -> fecha.plusDays(1)).limit(ChronoUnit.DAYS.between(desde, hasta)).collect(Collectors.toSet());
     }
 }

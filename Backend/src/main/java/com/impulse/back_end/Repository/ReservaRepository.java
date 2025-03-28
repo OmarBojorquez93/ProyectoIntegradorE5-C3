@@ -15,4 +15,6 @@ public interface ReservaRepository extends JpaRepository<ReservaEntity, Long> {
     List<ReservaEntity> findAllByDesdeAfterAndHastaBefore(final LocalDate desde, final LocalDate hasta);
 
     Optional<ReservaEntity> findOneByProductoAndDesdeAfterAndHastaBefore(final ProductoEntity producto, final LocalDate desde, final LocalDate hasta);
+
+    List<ReservaEntity> findAllByProductoAndDesdeAfter(final ProductoEntity producto, final LocalDate desde);
 }
