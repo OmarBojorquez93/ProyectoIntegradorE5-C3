@@ -10,7 +10,7 @@
 .calendar{
   margin-top: 10px;
   display:flex;
-  justify-content: space-between;
+  gap: 200px;
 
 }
 
@@ -38,7 +38,7 @@
   max-height: 30px;
   border-radius: 20px;
   padding: 8px 35px;
-  align-self: flex-end;
+  align-self: center;
   
 }
 a{
@@ -54,6 +54,7 @@ a{
     display:flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
   
   }
   .reserva{

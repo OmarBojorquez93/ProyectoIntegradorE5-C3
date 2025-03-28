@@ -5,7 +5,7 @@ import DetalleProductoReserva from "../Components/Reserva/DetalleProductoReserva
 import { useRecipeState } from "../Context/global.context";
 import { useLocation, useParams } from "react-router-dom";
 import { getProductsById } from "../core/product/get-product-by-id.actions";
-
+import "../App.css"
 const Reserva = () => {
   const { state } = useRecipeState();
   const { user } = state;
@@ -37,11 +37,14 @@ const Reserva = () => {
     <div>
       <h2>Confirma tu reserva</h2>
       {product && <DetalleProductoReserva product={product} />}
-      <DatosUsuarioReserva user={user} />
-      <DetalleFechaReserva
-        startDate={selectedDates.start}
-        endDate={selectedDates.end}
-      />
+      <div className="usuario-reserva">
+        <DatosUsuarioReserva user={user} />
+        <DetalleFechaReserva
+          startDate={selectedDates.start}
+          endDate={selectedDates.end}
+        />
+      </div>
+      
     </div>
   );
 };

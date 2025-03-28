@@ -25,4 +25,18 @@
 }
 p{
     margin: 5px;
+    
 }
+
+@media (max-width: 480px) {
+   .info{
+    flex-direction: column;
+    gap: 20px;
+   }
+   .itemCaract{
+    display:flex;
+    flex-direction: column;
+    
+}
+    
+    }

@@ -1,7 +1,9 @@
+import "./datosReserva.css"
+
 const DatosUsuarioReserva = ({ user }) => {
   const { nombre, apellido, email } = user;
   return (
-    <div>
+    <div className="contReserva">
       <h4>Datos de usuario</h4>
       <div>
         <p>

@@ -35,8 +35,8 @@ const DetalleProductoReserva = ({ product }) => {
         <img
           src={product?.imagenes?.ruta}
           alt={product.nombre}
-          width={250}
-          height={250}
+          width={220}
+          height={220}
         />
 
       </div>

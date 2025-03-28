@@ -1,6 +1,7 @@
+import "./datosReserva.css"
 const DetalleFechaReserva = ({ startDate, endDate }) => {
   return (
-    <div>
+    <div className="contReserva">
       <h4>Detalle de reserva</h4>
       <p>
         <strong>Fecha inicial:</strong>{" "}
