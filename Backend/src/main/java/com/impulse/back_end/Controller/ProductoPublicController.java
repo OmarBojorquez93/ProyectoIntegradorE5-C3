@@ -51,4 +51,9 @@ public class ProductoPublicController {
         return ResponseEntity.ok(this.productoPublicService.productoDisponibleParaReserva(idProducto, fechaDesde, fechaHasta));
     }
 
+    @GetMapping("/fechas-no-disponibles")
+    public ResponseEntity<List<LocalDate>> obtenerFechasNoDisponibles(@RequestParam("idProducto") final Long idProducto) throws ProductoException {
+        return ResponseEntity.ok(this.productoPublicService.fechasNoDisponiblesPorProducto(idProducto));
+    }
+
 }
