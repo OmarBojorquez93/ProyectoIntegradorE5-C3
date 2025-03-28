@@ -27,7 +27,7 @@ export const CaracteristicasProduc = ({
           <div key={id} className="caracteristica">
             {iconos[nombre] || <IoMdPricetags size={20} />}
 
-            <h4>
+            <h4 className="ItemC">
               {nombre}: {descripcion}
             </h4>
           </div>

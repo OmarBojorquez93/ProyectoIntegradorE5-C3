@@ -58,6 +58,7 @@ input:focus {
   padding: 10px;
   background-color: #03ADAD;
   border: none;
+  margin-top: 20px;
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;

@@ -1,0 +1,28 @@
+.detalleProduct{
+    background-color: #f9f9f9;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    padding: 20px;
+}
+.info{
+    display: flex;
+    gap: 50px;
+}
+.datos{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.itemCaract{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    
+}
+.imagenP{
+    justify-self: center;
+
+}
+p{
+    margin: 5px;
+}

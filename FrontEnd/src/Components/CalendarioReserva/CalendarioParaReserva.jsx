@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { useState } from "react";
+import "../CalendarioReserva/calendarStyles.css";
 
 const CalendarioParaReserva = ({ id }) => {
   const [dateRange, setDateRange] = useState([null, null]);
@@ -17,25 +18,29 @@ const CalendarioParaReserva = ({ id }) => {
 
   return (
     <div className="calendar-container">
-      <h5>Fechas disponibles</h5>
-      <DatePicker
-        selected={startDate}
-        onChange={(update) => setDateRange(update)}
-        startDate={startDate}
-        endDate={endDate}
-        selectsRange
-        inline
-        monthsShown={2} // Mostrar dos meses
-        minDate={new Date()} // No permitir seleccionar fechas pasadas
-        filterDate={(date) => !isDisabled(date)} // Deshabilitar fechas no disponibles
-      />
-      <div>
-        <Link
-          to={`/reserva/${id}?start=${startDate?.toISOString()}&end=${endDate?.toISOString()}`}
-        >
-          Reservar
-        </Link>
+      <h2 className="fechasDisponibles">Fechas disponibles</h2>
+      <div className="calendar">
+        <DatePicker
+          selected={startDate}
+          onChange={(update) => setDateRange(update)}
+          startDate={startDate}
+          endDate={endDate}
+          selectsRange
+          inline
+          monthsShown={2} // Mostrar dos meses
+          minDate={new Date()} // No permitir seleccionar fechas pasadas
+          filterDate={(date) => !isDisabled(date)} // Deshabilitar fechas no disponibles
+        />
+        <div className="reserva">
+          <Link
+            to={`/reserva/${id}?start=${startDate?.toISOString()}&end=${endDate?.toISOString()}`}
+          >
+            RESERVAR
+          </Link>
+        </div>
+
       </div>
+     
     </div>
   );
 };
