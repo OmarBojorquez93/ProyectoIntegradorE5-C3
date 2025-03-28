@@ -18,10 +18,15 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 =======
 >>>>>>> 62c2aca ([feat]: Work in progress HUs 29-30-31)
+=======
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+>>>>>>> 01c7524 ([feat]: Se agrega endpoint que retorna todas las fechas que NO estan disponibles por producto para bloquear la seleccion de esas fechas en el frontend)
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
