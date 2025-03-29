@@ -5,7 +5,7 @@ import DetalleProductoReserva from "../Components/Reserva/DetalleProductoReserva
 import { useRecipeState } from "../Context/global.context";
 import { useLocation, useParams } from "react-router-dom";
 import { getProductsById } from "../core/product/get-product-by-id.actions";
-import "../App.css"
+import "../App.css";
 const Reserva = () => {
   const { state } = useRecipeState();
   const { user } = state;
@@ -33,6 +33,18 @@ const Reserva = () => {
     fetchProduct();
   }, [id, location.search]);
 
+  console.log(product);
+
+  const clacularDias = (start, end) => {
+    if (!start || !end) return 0;
+    const diffMs = end.getTime() - start.getTime();
+    return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+  };
+
+  const totalDias = clacularDias(selectedDates.start, selectedDates.end);
+
+  console.log(totalDias);
+
   return (
     <div>
       <h2>Confirma tu reserva</h2>
@@ -42,9 +54,10 @@ const Reserva = () => {
         <DetalleFechaReserva
           startDate={selectedDates.start}
           endDate={selectedDates.end}
+          totalDias={totalDias}
+          valorTotal={totalDias * product.precio_alquiler}
         />
       </div>
-      
     </div>
   );
 };

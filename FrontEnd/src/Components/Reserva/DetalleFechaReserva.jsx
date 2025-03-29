@@ -1,5 +1,5 @@
-import "./datosReserva.css"
-const DetalleFechaReserva = ({ startDate, endDate }) => {
+import "./datosReserva.css";
+const DetalleFechaReserva = ({ startDate, endDate, valorTotal, totalDias }) => {
   return (
     <div className="contReserva">
       <h4>Detalle de reserva</h4>
@@ -12,7 +12,12 @@ const DetalleFechaReserva = ({ startDate, endDate }) => {
         {endDate ? endDate.toLocaleDateString() : "No seleccionada"}
       </p>
       <p>
-        <strong>Valor total:</strong>
+        <strong>Total dias alquilados:</strong>{" "}
+        {totalDias ? totalDias : "No seleccionada"}
+      </p>
+      <p>
+        <strong>Valor total:</strong> ${" "}
+        {valorTotal ? valorTotal : "No seleccionado"}
       </p>
     </div>
   );
