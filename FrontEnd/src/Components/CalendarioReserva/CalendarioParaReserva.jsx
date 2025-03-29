@@ -1,19 +1,65 @@
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../CalendarioReserva/calendarStyles.css";
+import { reservasPorId } from "../../core/reservas/ver-reservas-por-id";
 
 const CalendarioParaReserva = ({ id }) => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
+  const [isInvalidRange, setIsInvalidRange] = useState(false);
+  const [fechasDisponibles, setFechasDisponibles] = useState([]);
+
+  useEffect(() => {
+    const fetchReservas = async () => {
+      const data = await reservasPorId(id);
+      setFechasDisponibles(data);
+    };
+    fetchReservas();
+  }, []);
+
+  console.log(fechasDisponibles);
 
   // Fechas no disponibles
-  const unavailableStart = new Date(2025, 3, 8); // 8 de abril de 2025
-  const unavailableEnd = new Date(2025, 3, 15); // 15 de abril de 2025
+  const fechasNoDisponiblesParsed = fechasDisponibles.map(
+    (fecha) => new Date(fecha)
+  );
 
   // Función para deshabilitar fechas en el rango
   const isDisabled = (date) => {
-    return date >= unavailableStart && date <= unavailableEnd;
+    return fechasNoDisponiblesParsed.some(
+      (disabledDate) =>
+        date.getFullYear() === disabledDate.getFullYear() &&
+        date.getMonth() === disabledDate.getMonth() &&
+        date.getDate() === disabledDate.getDate()
+    );
+  };
+
+  const validateDateRange = (start, end) => {
+    if (!start || !end) {
+      setIsInvalidRange(false);
+      return;
+    }
+
+    // Generamos todas las fechas dentro del rango seleccionado
+    let currentDate = new Date(start);
+    let isRangeInvalid = false;
+
+    while (currentDate <= end) {
+      if (isDisabled(currentDate)) {
+        isRangeInvalid = true;
+        break;
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    if (isRangeInvalid) {
+      alert(
+        "El rango seleccionado no es posible, ya que hay fechas no disponibles en el medio."
+      );
+    }
+
+    setIsInvalidRange(isRangeInvalid);
   };
 
   return (
@@ -22,7 +68,10 @@ const CalendarioParaReserva = ({ id }) => {
       <div className="calendar">
         <DatePicker
           selected={startDate}
-          onChange={(update) => setDateRange(update)}
+          onChange={(update) => {
+            setDateRange(update);
+            validateDateRange(update[0], update[1]);
+          }}
           startDate={startDate}
           endDate={endDate}
           selectsRange
@@ -33,14 +82,20 @@ const CalendarioParaReserva = ({ id }) => {
         />
         <div className="reserva">
           <Link
-            to={`/reserva/${id}?start=${startDate?.toISOString()}&end=${endDate?.toISOString()}`}
+            to={
+              isInvalidRange
+                ? "#"
+                : `/reserva/${id}?start=${startDate?.toISOString()}&end=${endDate?.toISOString()}`
+            }
+            style={{
+              pointerEvents: isInvalidRange ? "none" : "auto",
+              opacity: isInvalidRange ? 0.5 : 1,
+            }}
           >
             RESERVAR
           </Link>
         </div>
-
       </div>
-     
     </div>
   );
 };

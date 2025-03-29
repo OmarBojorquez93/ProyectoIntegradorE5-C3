@@ -43,8 +43,6 @@ const Reserva = () => {
 
   const totalDias = clacularDias(selectedDates.start, selectedDates.end);
 
-  console.log(totalDias);
-
   return (
     <div>
       <h2>Confirma tu reserva</h2>
