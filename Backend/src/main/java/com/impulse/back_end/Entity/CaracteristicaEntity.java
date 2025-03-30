@@ -15,7 +15,7 @@ public class CaracteristicaEntity {
     @Column(name = "nombre", nullable = false, length = 150)
     private String nombre;
 
-    @Column(name = "descripcion", nullable = false, length = 100)
+    @Column(name = "descripcion", nullable = false, length = 1000)
     private String descripcion;
 
     @ManyToOne(fetch = FetchType.LAZY)
