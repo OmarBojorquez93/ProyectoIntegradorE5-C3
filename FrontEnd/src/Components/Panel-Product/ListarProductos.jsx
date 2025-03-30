@@ -25,7 +25,7 @@ const ListarProductos = () => {
         </Link>
       </div>
 
-      <table>
+      <table className="tablaProductos">
         <thead>
           <tr>
             <th>#</th>

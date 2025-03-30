@@ -6,9 +6,9 @@
   /* Estilos del input */
   .w-full {
     width: 100%;
-    padding: 10px;
+    padding: 10px 0px 10px 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px 0px 0px 20px;
     box-sizing: border-box; /* Evita que el padding afecte el tamaño */
   }
   

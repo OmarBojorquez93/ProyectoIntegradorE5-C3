@@ -18,3 +18,8 @@
 .crear:hover {
     transform: scale(1.05);
   }
+
+.tablaProductos{
+    table-layout: auto;
+
+}
