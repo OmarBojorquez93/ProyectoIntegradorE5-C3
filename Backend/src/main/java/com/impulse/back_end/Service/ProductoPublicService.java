@@ -77,13 +77,13 @@ public class ProductoPublicService {
 
     public List<LocalDate> fechasNoDisponiblesPorProducto(final Long idProducto) throws ProductoException {
         final List<LocalDate> fechasNoDisponibles = new ArrayList<>();
-        final ProductoEntity producto = this.productoRepository.findById(idProducto).orElseThrow(() -> new ProductoException(HttpStatus.NOT_FOUND, "producto_no_encontrado", "Producto no encontrado"));
+        this.productoRepository.findById(idProducto).orElseThrow(() -> new ProductoException(HttpStatus.NOT_FOUND, "producto_no_encontrado", "Producto no encontrado"));
 
-        this.reservaRepository.findAllByProductoAndDesdeAfter(producto, LocalDate.now()).forEach(reserva -> fechasNoDisponibles.addAll(obtenerFechasEntreRango(reserva.getDesde(), reserva.getHasta())));
+        this.reservaRepository.findAllByProductoAndDesdeGreaterThanEqual(idProducto, LocalDate.now()).forEach(reserva -> fechasNoDisponibles.addAll(obtenerFechasEntreRango(reserva.getDesde(), reserva.getHasta())));
         return fechasNoDisponibles;
     }
 
     private Set<LocalDate> obtenerFechasEntreRango(final LocalDate desde, final LocalDate hasta) {
-        return Stream.iterate(desde, fecha -> fecha.plusDays(1)).limit(ChronoUnit.DAYS.between(desde, hasta)).collect(Collectors.toSet());
+        return Stream.iterate(desde, fecha -> fecha.plusDays(1)).limit(ChronoUnit.DAYS.between(desde, hasta) + 1).collect(Collectors.toSet());
     }
 }
