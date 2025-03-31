@@ -2,6 +2,7 @@ package com.impulse.back_end.Controller;
 
 import com.impulse.back_end.Constant.Constants;
 import com.impulse.back_end.Dto.ReservaPeticionDTO;
+import com.impulse.back_end.Dto.ReservaRespuestaDTO;
 import com.impulse.back_end.Entity.ReservaEntity;
 import com.impulse.back_end.Service.ReservaService;
 import com.impulse.back_end.exception.ProductoException;
@@ -21,8 +22,8 @@ public class ReservaController {
     private final ReservaService reservaService;
 
     @PostMapping
-    public ResponseEntity<ReservaEntity> guardarReserva(@RequestHeader(Constants.Headers.SESSION_ID) String sessionId, @RequestBody ReservaPeticionDTO reserva) throws ProductoException {
-        final ReservaEntity saved = this.reservaService.guardarReserva(sessionId, reserva.getIdProducto(), reserva.getFechaDesde(), reserva.getFechaHasta())    ;
+    public ResponseEntity<ReservaRespuestaDTO> guardarReserva(@RequestHeader(Constants.Headers.SESSION_ID) String sessionId, @RequestBody ReservaPeticionDTO reserva) throws ProductoException {
+        final ReservaRespuestaDTO saved = this.reservaService.guardarReserva(sessionId, reserva.getIdProducto(), reserva.getFechaDesde(), reserva.getFechaHasta());
         return ResponseEntity.ok().body(saved);
     }
 }
