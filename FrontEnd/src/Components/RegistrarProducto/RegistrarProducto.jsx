@@ -85,6 +85,10 @@ const CrearProductos = () => {
     else if (formData.marca.length < 3)
       newErrors.marca = "Debe tener al menos 3 caracteres";
 
+    if (!formData.material) newErrors.material = "El material es requerido";
+    else if (formData.material.length < 3)
+      newErrors.material = "Debe tener al menos 3 caracteres";
+
     if (!formData.color) newErrors.color = "El color es requerido";
     else if (formData.color.length < 3)
       newErrors.color = "Debe tener al menos 3 caracteres";
@@ -96,6 +100,16 @@ const CrearProductos = () => {
     if (!formData.ancho) newErrors.ancho = "El ancho es requerido";
     else if (!/^\d+$/.test(formData.ancho))
       newErrors.ancho = "Debes ingresar solo caracteres numéricos";
+
+    if (!formData.peso) newErrors.peso = "El peso es requerido";
+    else if (!/^\d+$/.test(formData.peso))
+      newErrors.peso = "Debes ingresar solo caracteres numéricos";
+
+    if (!formData.capacidad) newErrors.capacidad = "La capacidad es requerido";
+    else if (!/^\d+$/.test(formData.capacidad))
+      newErrors.capacidad = "Debes ingresar solo caracteres numéricos";
+
+    if (!formData.categoria) newErrors.categoria = "La tegoria es requerido";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -127,17 +141,17 @@ const CrearProductos = () => {
       <div className="formulario-box">
         <form onSubmit={handleRegister}>
           <div className="datos-basicos">
-             <h4>Datos Básicos</h4>
-             <div className="seccion">
-                <FormInput
+            <h4>Datos Básicos</h4>
+            <div className="seccion">
+              <FormInput
                 label={"Nombre"}
                 type={"text"}
                 name={"nombre"}
                 value={formData.nombre}
                 onChange={handleChange}
                 errors={errors?.nombre}
-                />
-                <div className="selector">
+              />
+              <div className="selector">
                 <label htmlFor="opciones">Categoria:</label>
                 <select
                   id="opciones"
@@ -152,41 +166,42 @@ const CrearProductos = () => {
                     </option>
                   ))}
                 </select>
+                {errors.categoria && (
+                  <p className="error">{errors.categoria}</p>
+                )}
+              </div>
+            </div>
 
-                </div>
-                
+            <FormInput
+              label={"Descripción"}
+              type={"textarea"}
+              name={"descripcion"}
+              value={formData.descripcion}
+              onChange={handleChange}
+              errors={errors?.descripcion}
+            />
+            <div className="seccion">
+              <div className="form-group">
+                <label>Imagen del producto</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+                {errors.imagen && <p className="error">{errors.imagen}</p>}
               </div>
 
-          <FormInput
-            label={"Descripción"}
-            type={"textarea"}
-            name={"descripcion"}
-            value={formData.descripcion}
-            onChange={handleChange}
-            errors={errors?.descripcion}
-          />
-          <div className="seccion">
-          <div className="form-group">
-            <label>Imagen del producto</label>
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-            {errors.imagen && <p className="error">{errors.imagen}</p>}
+              <FormInput
+                label={"Precio de alquiler"}
+                type={"number"}
+                name={"precioAlquiler"}
+                value={formData.precioAlquiler}
+                onChange={handleChange}
+                errors={errors?.precioAlquiler}
+              />
+            </div>
           </div>
-
-          
-
-          <FormInput
-            label={"Precio de alquiler"}
-            type={"number"}
-            name={"precioAlquiler"}
-            value={formData.precioAlquiler}
-            onChange={handleChange}
-            errors={errors?.precioAlquiler}
-          />
-            
-          </div>
-          
-           </div>
-           <div className="caracteristicas">
+          <div className="caracteristicas">
             <h4>Características</h4>
             <div className="seccionCaracteristicas">
               <FormInput
@@ -236,7 +251,7 @@ const CrearProductos = () => {
                 name={"ancho"}
                 value={formData.ancho}
                 onChange={handleChange}
-                errors={errors?.ncho}
+                errors={errors?.ancho}
               />
 
               <FormInput
@@ -247,7 +262,7 @@ const CrearProductos = () => {
                 onChange={handleChange}
                 errors={errors?.color}
               />
-           </div>
+            </div>
           </div>
 
           <button type="submit" className="submit-button">
