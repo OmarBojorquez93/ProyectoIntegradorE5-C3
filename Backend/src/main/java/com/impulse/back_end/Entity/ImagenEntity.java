@@ -15,8 +15,7 @@ public class ImagenEntity {
     @Column(name = "ruta", nullable = false, length = 350)
     private String ruta;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto")
+    @OneToOne(mappedBy = "imagen", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ProductoEntity producto;
 
     public ImagenEntity(String ruta) {

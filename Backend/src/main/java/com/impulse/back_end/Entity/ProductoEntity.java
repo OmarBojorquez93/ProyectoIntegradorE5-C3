@@ -1,7 +1,6 @@
 package com.impulse.back_end.Entity;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,19 +27,12 @@ public class ProductoEntity {
     @JoinColumn(name = "id_categoria")
     private CategoriaEntity categoria;
 
-    @OneToMany(
-            mappedBy = "producto",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<ImagenEntity> imagenes = new ArrayList<>();
-
-    @OneToMany(
-            mappedBy = "producto",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CaracteristicaEntity> caracteristicas = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "imagen", referencedColumnName = "imagen")
+    private ImagenEntity imagen;
 
     public ProductoEntity(String nombre, String descripcion, BigDecimal precioAlquiler, CategoriaEntity categoria) {
         this.nombre = nombre;
@@ -49,20 +41,7 @@ public class ProductoEntity {
         this.categoria = categoria;
     }
 
-    public ProductoEntity() {
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setPrecioAlquiler(BigDecimal precioAlquiler) {
-        this.precioAlquiler = precioAlquiler;
-    }
+    public ProductoEntity() {}
 
     public Long getId() {
         return id;
@@ -72,40 +51,24 @@ public class ProductoEntity {
         return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public BigDecimal getPrecioAlquiler() {
         return precioAlquiler;
     }
 
-    public void addImagen(ImagenEntity imagen) {
-        imagenes.add(imagen);
-        imagen.setProducto(this);
-    }
-
-    public void removeImagen(ImagenEntity imagen) {
-        imagenes.remove(imagen);
-        imagen.setProducto(null);
-    }
-
-    public List<ImagenEntity> getImagenes() {
-        return imagenes;
-    }
-
-    public void addCaracteristica(CaracteristicaEntity caracteristica) {
-        caracteristicas.add(caracteristica);
-        caracteristica.setProducto(this);
-    }
-
-    public void removeCaracteristica(CaracteristicaEntity caracteristica) {
-        caracteristicas.remove(caracteristica);
-        caracteristica.setProducto(null);
-    }
-
-    public List<CaracteristicaEntity> getCaracteristicas() {
-        return caracteristicas;
+    public void setPrecioAlquiler(BigDecimal precioAlquiler) {
+        this.precioAlquiler = precioAlquiler;
     }
 
     public CategoriaEntity getCategoria() {
@@ -114,5 +77,30 @@ public class ProductoEntity {
 
     public void setCategoria(CategoriaEntity categoria) {
         this.categoria = categoria;
+    }
+
+    public ImagenEntity getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(ImagenEntity imagen) {
+        this.imagen = imagen;
+        if (imagen != null) {
+            imagen.setProducto(this);
+        }
+    }
+
+    public List<CaracteristicaEntity> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void addCaracteristica(CaracteristicaEntity caracteristica) {
+        this.caracteristicas.add(caracteristica);
+        caracteristica.setProducto(this);
+    }
+
+    public void removeCaracteristica(CaracteristicaEntity caracteristica) {
+        this.caracteristicas.remove(caracteristica);
+        caracteristica.setProducto(null);
     }
 }
