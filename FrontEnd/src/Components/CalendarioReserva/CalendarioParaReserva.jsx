@@ -21,9 +21,10 @@ const CalendarioParaReserva = ({ id }) => {
   console.log(fechasDisponibles);
 
   // Fechas no disponibles
-  const fechasNoDisponiblesParsed = fechasDisponibles.map(
-    (fecha) => new Date(fecha)
-  );
+  const fechasNoDisponiblesParsed = fechasDisponibles.map((fecha) => {
+    const [year, month, day] = fecha.split("-"); // Extrae el año, mes y día
+    return new Date(year, month - 1, day); // `month - 1` porque los meses en JS son 0-indexed
+  });
 
   // Función para deshabilitar fechas en el rango
   const isDisabled = (date) => {

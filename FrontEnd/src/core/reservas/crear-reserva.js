@@ -6,9 +6,11 @@ export const crearReserva = async (
   fechaHasta,
   sessionId
 ) => {
+  console.log({ idProducto, fechaDesde, fechaHasta, sessionId });
   try {
     const headers = {
       "session-id": sessionId,
+      "Content-Type": "application/json",
     };
     const body = {
       idProducto: idProducto,
