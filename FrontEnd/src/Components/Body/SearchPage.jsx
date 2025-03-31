@@ -10,6 +10,7 @@ const SearchPage = () => {
   const [searchResults, setSearchResults] = useState(null);
 
   const handleSearch = (params) => {
+ 
     baseUrlApi
       .get("/public/producto/buscar", { params })
       .then((response) => {

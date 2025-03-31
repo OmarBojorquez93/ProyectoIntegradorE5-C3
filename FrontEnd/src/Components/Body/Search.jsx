@@ -74,6 +74,7 @@ const Search = ({ onSearch }) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="input-buscar"
+          onBlur={() => setTimeout(() => setFilteredSuggestions([]), 200)}
         />
         {filteredSuggestions.length > 0 && (
           <ul className="suggestions">
