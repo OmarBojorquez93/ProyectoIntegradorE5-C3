@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
@@ -33,6 +34,7 @@ public class ImagenService {
         this.productoRepository = productoRepository;
     }
 
+    @Transactional
     public ImagenEntity subirImagen(MultipartFile archivo, Long productoId) {
         try {
             logger.info("Iniciando subida de imagen para el producto ID: {}", productoId);
@@ -49,8 +51,7 @@ public class ImagenService {
                 return null;
             }
             
-            ProductoEntity producto = productoRepository.findById(productoId)
-            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+            ProductoEntity producto = productoOpt.get();
             logger.info("Producto encontrado: {} - {}", producto.getId(), producto.getNombre());
 
             // Si el producto ya tiene una imagen, eliminar la anterior
@@ -58,6 +59,7 @@ public class ImagenService {
                 logger.info("Producto ya tiene una imagen, se procederá a eliminarla.");
                 borrarImagen(producto.getImagen().getRuta());
                 imagenRepository.delete(producto.getImagen());
+                producto.setImagen(null);
             }
             
             // Generar un nombre único para el archivo
@@ -85,7 +87,7 @@ public class ImagenService {
             nuevaImagen.setRuta(fileUrl);
             nuevaImagen.setProducto(producto);
 
-            nuevaImagen = imagenRepository.save(nuevaImagen);
+            imagenRepository.save(nuevaImagen);
             logger.info("Imagen guardada en la base de datos.");
             
             // Asociar la imagen al producto y guardar el producto

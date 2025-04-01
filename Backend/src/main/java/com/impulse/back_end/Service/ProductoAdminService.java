@@ -17,9 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -45,6 +45,7 @@ public class ProductoAdminService {
 
     private final Logger logger = LoggerFactory.getLogger(ProductoAdminService.class);
 
+    @Transactional
     public ProductoRespuestaDTO registrarProducto(
             String sessionId,
             String peticion,
@@ -59,20 +60,13 @@ public class ProductoAdminService {
         validarSession(sessionId, "Usuario no autorizado para registrar productos");
         validarProductoPorNombre(productoPeticionDTO.getNombre());
 
-        ImagenEntity imagenEntity = new ImagenEntity();
-        imagenEntity.setRuta(imagen.getOriginalFilename());
-
-        // Guardar la imagen antes
-        imagenEntity = imagenRepository.save(imagenEntity); 
-        System.out.println("ID de la imagen guardada: " + imagenEntity.getId());
-
         ProductoEntity producto = mapNewProductoEntity(
                 productoPeticionDTO,
-                imagenEntity,
+                null, 
                 categoriaService.consultarOCrear(productoPeticionDTO.getCategoria())
         );
 
-        producto = productoRepository.save(producto);
+        producto = productoRepository.save(producto); // Guardar primero el producto
         logger.info("Producto guardado con ID: {}", producto.getId());
 
         if (imagen == null || imagen.isEmpty()) {
@@ -81,18 +75,21 @@ public class ProductoAdminService {
         }
 
         logger.info("Subiendo imagen para el producto ID: {}", producto.getId());
-        imagenEntity = imagenService.subirImagen(imagen, producto.getId());
+        ImagenEntity imagenEntity = imagenService.subirImagen(imagen, producto.getId());
 
         if (imagenEntity == null) {
             logger.error("Error al subir la imagen para el producto ID: {}", producto.getId());
             throw new ProductoException(HttpStatus.CONFLICT, "imagen_no_subida", "Ocurrió un error al subir la imagen");
         }
+
+        imagenEntity.setProducto(producto);
+        imagenRepository.save(imagenEntity); // Guardar la imagen correctamente vinculada al producto
         producto.setImagen(imagenEntity);
-        logger.info("Imagen subida correctamente: {}", imagenEntity.getRuta());
 
         return mapProductoRespuestaDTO(productoRepository.save(producto));
     }
 
+    @Transactional
     public ProductoRespuestaDTO modificarProductoPorId(
             String sessionId,
             Long id,
@@ -107,11 +104,8 @@ public class ProductoAdminService {
         validarExtension(imagen);
         validarSession(sessionId, "Usuario no autorizado para modificar productos");
 
-        ProductoEntity productoEntity = consultarProductoPorId(id);
-        ProductoEntity productoPorNombre = consultarProductoPorNombre(productoPeticionDTO.getNombre());
-        if (productoPorNombre != null && !Objects.equals(productoPorNombre.getId(), id)) {
-            throw new ProductoException(HttpStatus.CONFLICT, "producto_invalido", "El producto con el nombre especificado ya existe");
-        }
+        ProductoEntity productoEntity = productoRepository.findById(id)
+                .orElseThrow(() -> new ProductoException(HttpStatus.NOT_FOUND, "producto_no_encontrado", "Producto no encontrado"));
 
         if (imagen != null) {
             imagenService.borrarImagen(productoEntity.getImagen().getRuta());
@@ -119,6 +113,8 @@ public class ProductoAdminService {
             if (nuevaImagen == null) {
                 throw new ProductoException(HttpStatus.CONFLICT, "imagen_no_subida", "Ocurrió un error al subir la nueva imagen");
             }
+            nuevaImagen.setProducto(productoEntity);
+            imagenRepository.save(nuevaImagen);
             productoEntity.setImagen(nuevaImagen);
         }
 
