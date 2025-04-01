@@ -64,6 +64,8 @@ public class ProductoAdminService {
 
         imagenEntity = imagenRepository.save(imagenEntity); // Guardar la imagen antes
 
+        System.out.println("ID de la imagen guardada: " + imagenEntity.getId());
+
         ProductoEntity producto = mapNewProductoEntity(
                 productoPeticionDTO,
                 imagenEntity,
