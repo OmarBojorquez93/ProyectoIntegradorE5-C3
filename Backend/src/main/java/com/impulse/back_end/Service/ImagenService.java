@@ -49,7 +49,8 @@ public class ImagenService {
                 return null;
             }
             
-            ProductoEntity producto = productoOpt.get();
+            ProductoEntity producto = productoRepository.findById(productoId)
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
             logger.info("Producto encontrado: {} - {}", producto.getId(), producto.getNombre());
 
             // Si el producto ya tiene una imagen, eliminar la anterior
@@ -81,8 +82,10 @@ public class ImagenService {
 
             // Guardar la nueva imagen en la BD
             ImagenEntity nuevaImagen = new ImagenEntity(fileUrl);
+            nuevaImagen.setRuta(fileUrl);
             nuevaImagen.setProducto(producto);
-            imagenRepository.save(nuevaImagen);
+
+            nuevaImagen = imagenRepository.save(nuevaImagen);
             logger.info("Imagen guardada en la base de datos.");
             
             // Asociar la imagen al producto y guardar el producto
