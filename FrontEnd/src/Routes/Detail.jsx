@@ -17,7 +17,6 @@ export const Detail = () => {
 
   const [alquilar, setAlquilar] = useState(false);
 
-  //console.log(params)
   useEffect(() => {
     const fetchProduct = async () => {
       const data = await getProductsById(id);
@@ -35,7 +34,6 @@ export const Detail = () => {
     }
   };
 
-  console.log(alquilar);
   return (
     <>
       <>

@@ -18,8 +18,6 @@ const CalendarioParaReserva = ({ id }) => {
     fetchReservas();
   }, []);
 
-  console.log(fechasDisponibles);
-
   // Fechas no disponibles
   const fechasNoDisponiblesParsed = fechasDisponibles.map((fecha) => {
     const [year, month, day] = fecha.split("-"); // Extrae el año, mes y día

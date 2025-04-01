@@ -6,8 +6,6 @@ import { useWindowSize } from "../../hooks/useWindowSize";
 const PanelAdministrador = () => {
   const { width } = useWindowSize();
 
-  console.log(width);
-
   if (width < 1024) {
     return (
       <>
