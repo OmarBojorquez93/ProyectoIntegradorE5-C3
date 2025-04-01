@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./Search.css";
 import { FaSearch } from "react-icons/fa";
 // import axios from "axios";
-import {baseUrlApi} from "../../core/api/urlApi"
+import { baseUrlApi } from "../../core/api/urlApi";
 
 const Search = ({ onSearch }) => {
   const [query, setQuery] = useState("");
@@ -12,7 +12,6 @@ const Search = ({ onSearch }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-
 
   useEffect(() => {
     baseUrlApi
@@ -25,7 +24,6 @@ const Search = ({ onSearch }) => {
       });
   }, []);
 
- 
   useEffect(() => {
     if (query.length > 1) {
       const queryLower = query.toLowerCase();
@@ -38,13 +36,11 @@ const Search = ({ onSearch }) => {
     }
   }, [query, suggestions]);
 
-
   const handleSuggestionClick = (nombre) => {
     setQuery(nombre);
-    setTimeout(()=> setFilteredSuggestions([]),100); 
+    setTimeout(() => setFilteredSuggestions([]), 100);
   };
 
- 
   const handleSearch = () => {
     if (!query.trim()) {
       alert("Escribe un producto para buscar.");
@@ -57,7 +53,11 @@ const Search = ({ onSearch }) => {
     }
 
     const params = {
-      texto: query,
+      texto: query
+        .toLowerCase()
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
       fechaDesde: startDate.toISOString().split("T")[0],
       fechaHasta: endDate.toISOString().split("T")[0],
     };
@@ -78,7 +78,10 @@ const Search = ({ onSearch }) => {
         {filteredSuggestions.length > 0 && (
           <ul className="suggestions">
             {filteredSuggestions.map((item) => (
-              <li key={item.id} onClick={() => handleSuggestionClick(item.nombre)}>
+              <li
+                key={item.id}
+                onClick={() => handleSuggestionClick(item.nombre)}
+              >
                 {item.nombre}
               </li>
             ))}
@@ -103,7 +106,7 @@ const Search = ({ onSearch }) => {
         selectsEnd
         startDate={startDate}
         endDate={endDate}
-        minDate={startDate} 
+        minDate={startDate}
         dateFormat="yyyy-MM-dd"
         placeholderText="Fin"
       />
