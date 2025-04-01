@@ -35,10 +35,14 @@ public class ImagenService {
 
     public ImagenEntity subirImagen(MultipartFile archivo, Long productoId) {
         try {
+            logger.info("Iniciando subida de imagen para el producto ID: {}", productoId);
+
             if (archivo.isEmpty()) {
+                logger.error("El archivo está vacío.");
                 return null;
             }
             
+            logger.info("Buscando producto en la base de datos...");
             Optional<ProductoEntity> productoOpt = productoRepository.findById(productoId);
             if (productoOpt.isEmpty()) {
                 logger.error("Producto con ID {} no encontrado", productoId);
@@ -46,32 +50,44 @@ public class ImagenService {
             }
             
             ProductoEntity producto = productoOpt.get();
-            
+            logger.info("Producto encontrado: {} - {}", producto.getId(), producto.getNombre());
+
             // Si el producto ya tiene una imagen, eliminar la anterior
             if (producto.getImagen() != null) {
+                logger.info("Producto ya tiene una imagen, se procederá a eliminarla.");
                 borrarImagen(producto.getImagen().getRuta());
                 imagenRepository.delete(producto.getImagen());
             }
             
             // Generar un nombre único para el archivo
             String fileName = UUID.randomUUID().toString() + "-" + archivo.getOriginalFilename();
+            logger.info("Nombre de archivo generado: {}", fileName);
+
             InputStream inputStream = archivo.getInputStream();
+            logger.info("InputStream obtenido con éxito.");
+
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentLength(archivo.getSize());
-            
+            logger.info("Metadata de la imagen creada. Tamaño: {}", archivo.getSize());
+
             // Subir archivo a S3
+            logger.info("Subiendo imagen a S3 en el bucket: {}", bucketName);
             s3Client.putObject(bucketName, fileName, inputStream, metadata);
-            
+            logger.info("Imagen subida correctamente.");
+
             // Obtener URL pública del archivo
             String fileUrl = s3Client.getUrl(bucketName, fileName).toString();
-            logger.info("FileUrl {}", fileUrl);
+            logger.info("Imagen subida con éxito. URL: {}", fileUrl);
+
             // Guardar la nueva imagen en la BD
             ImagenEntity nuevaImagen = new ImagenEntity(fileUrl);
             nuevaImagen.setProducto(producto);
             imagenRepository.save(nuevaImagen);
+            logger.info("Imagen guardada en la base de datos.");
             
             // Asociar la imagen al producto y guardar el producto
             producto.setImagen(nuevaImagen);
+            logger.info("Asociando imagen a producto {} con URL: {}", producto.getId(), fileUrl);
             productoRepository.save(producto);
 
             return nuevaImagen;
