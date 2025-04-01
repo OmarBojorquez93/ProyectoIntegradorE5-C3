@@ -36,7 +36,7 @@ export const CaracteristicasProduc = ({
       <div className="buttonAlquilar">
         {!alquilar && (
           <button className="alquilar" onClick={() => isAlquilar()}>
-            VER FECHAS DISPONIBLES
+            Ver fechas disponibles
           </button>
         )}
       </div>

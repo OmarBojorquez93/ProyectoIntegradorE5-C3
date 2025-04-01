@@ -79,8 +79,10 @@ const Reserva = () => {
           valorTotal={totalDias * product.precio_alquiler}
         />
       </div>
-
-      <button onClick={handleReserva}>Reservar</button>
+      <div className="bConfirmar">
+        <button className="BconfirmarReserva" onClick={handleReserva}>Confirmar</button>
+      </div>
+      
     </div>
   );
 };

@@ -23,11 +23,61 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
 }
+.bConfirmar{
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+  
+}
+.BconfirmarReserva{
+  border: none;
+}
+.confirmacionContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.volver{
+  background-color: #03ADAD;
+  padding: 8px 20px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
 @media (max-width: 480px) {
   .usuario-reserva{
     display: flex;
     flex-direction: column;
     gap: 0px;
+  }
+  .bConfirmar{
+    justify-content: center;
+  }
+
+  .confirmacionContainer{
+    width: 280px;
+  }
+  .confirmacionContainer h2{
+    font-size: 18px;
+  }
+  .confirmacionContainer h3{
+    font-size: 15px;
+  }
+
+  .volver{
+   font-size: 12px;
   }
   
   }

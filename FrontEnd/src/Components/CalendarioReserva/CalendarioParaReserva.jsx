@@ -93,7 +93,7 @@ const CalendarioParaReserva = ({ id }) => {
               opacity: isInvalidRange ? 0.5 : 1,
             }}
           >
-            RESERVAR
+            Reservar
           </Link>
         </div>
       </div>
