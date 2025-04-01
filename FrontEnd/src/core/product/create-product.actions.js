@@ -10,7 +10,11 @@ export const createProduct = async (producto, sessionId) => {
     formData.append(
       "peticion",
       JSON.stringify({
-        nombre: producto.nombre,
+        nombre: producto.nombre
+          .toLowerCase()
+          .split(" ")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" "),
         descripcion: producto.descripcion,
         precio_alquiler: producto.precioAlquiler,
         categoria: producto.categoria,
@@ -53,6 +57,7 @@ export const createProduct = async (producto, sessionId) => {
     return data;
   } catch (error) {
     if (error.response) {
+      console.log(error);
       const status = error.response.status;
 
       if (status === 409) {
