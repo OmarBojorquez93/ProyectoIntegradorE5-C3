@@ -31,7 +31,7 @@ public class ProductoEntity {
     private List<CaracteristicaEntity> caracteristicas = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "imagen", referencedColumnName = "imagen")
+    @JoinColumn(name = "id_imagen", referencedColumnName = "id_imagen")
     private ImagenEntity imagen;
 
     public ProductoEntity(String nombre, String descripcion, BigDecimal precioAlquiler, CategoriaEntity categoria) {
