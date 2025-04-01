@@ -30,8 +30,8 @@ public class ProductoEntity {
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CaracteristicaEntity> caracteristicas = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "imagen", referencedColumnName = "imagen")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_imagen", referencedColumnName = "id_imagen")
     private ImagenEntity imagen;
 
     public ProductoEntity(String nombre, String descripcion, BigDecimal precioAlquiler, CategoriaEntity categoria) {

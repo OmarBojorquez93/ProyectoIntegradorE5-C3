@@ -16,6 +16,7 @@ public class ImagenEntity {
     private String ruta;
 
     @OneToOne(mappedBy = "imagen", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto")
     private ProductoEntity producto;
 
     public ImagenEntity(String ruta) {
@@ -27,6 +28,10 @@ public class ImagenEntity {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getRuta() {
