@@ -7,6 +7,7 @@ import com.impulse.back_end.Dto.ProductoRespuestaDTO;
 import com.impulse.back_end.Entity.CaracteristicaEntity;
 import com.impulse.back_end.Entity.ImagenEntity;
 import com.impulse.back_end.Entity.ProductoEntity;
+import com.impulse.back_end.Repository.ImagenRepository;
 import com.impulse.back_end.Repository.ProductoRepository;
 import com.impulse.back_end.exception.ProductoException;
 import jakarta.validation.ConstraintViolation;
@@ -29,6 +30,9 @@ public class ProductoAdminService {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    private ImagenRepository imagenRepository;
 
     @Autowired
     private SessionService sessionService;
@@ -55,11 +59,17 @@ public class ProductoAdminService {
         validarSession(sessionId, "Usuario no autorizado para registrar productos");
         validarProductoPorNombre(productoPeticionDTO.getNombre());
 
+        ImagenEntity imagenEntity = new ImagenEntity();
+        imagenEntity.setRuta(imagen.getOriginalFilename());
+
+        imagenEntity = imagenRepository.save(imagenEntity); // Guardar la imagen antes
+
         ProductoEntity producto = mapNewProductoEntity(
                 productoPeticionDTO,
-                null,
+                imagenEntity,
                 categoriaService.consultarOCrear(productoPeticionDTO.getCategoria())
         );
+
         producto = productoRepository.save(producto);
         logger.info("Producto guardado con ID: {}", producto.getId());
 
@@ -69,7 +79,7 @@ public class ProductoAdminService {
         }
 
         logger.info("Subiendo imagen para el producto ID: {}", producto.getId());
-        ImagenEntity imagenEntity = imagenService.subirImagen(imagen, producto.getId());
+        imagenEntity = imagenService.subirImagen(imagen, producto.getId());
 
         if (imagenEntity == null) {
             logger.error("Error al subir la imagen para el producto ID: {}", producto.getId());
