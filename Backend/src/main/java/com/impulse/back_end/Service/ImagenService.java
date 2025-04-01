@@ -39,7 +39,7 @@ public class ImagenService {
                 return null;
             }
             
-            Optional<ProductoEntity> productoOpt = productoRepository.findById(productoId);
+            /*Optional<ProductoEntity> productoOpt = productoRepository.findById(productoId);
             if (productoOpt.isEmpty()) {
                 logger.error("Producto con ID {} no encontrado", productoId);
                 return null;
@@ -51,7 +51,7 @@ public class ImagenService {
             if (producto.getImagen() != null) {
                 borrarImagen(producto.getImagen().getRuta());
                 imagenRepository.delete(producto.getImagen());
-            }
+            }*/
             
             // Generar un nombre único para el archivo
             String fileName = UUID.randomUUID().toString() + "-" + archivo.getOriginalFilename();
@@ -67,13 +67,13 @@ public class ImagenService {
             
             // Guardar la nueva imagen en la BD
             ImagenEntity nuevaImagen = new ImagenEntity(fileUrl);
-            nuevaImagen.setProducto(producto);
+            /*nuevaImagen.setProducto(producto);
             imagenRepository.save(nuevaImagen);
             
             // Asociar la imagen al producto y guardar el producto
             producto.setImagen(nuevaImagen);
             productoRepository.save(producto);
-            
+            */
             return nuevaImagen;
         } catch (Exception e) {
             logger.error("Error al subir la imagen para el producto con ID {}", productoId, e);
