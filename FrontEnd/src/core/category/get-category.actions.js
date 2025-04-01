@@ -4,7 +4,6 @@ export const getCategory = async () => {
   try {
     const { data } = await baseUrlApi.get("/public/categoria");
     console.log({ data });
-    console.log("Sale esto");
 
     return data;
   } catch (error) {
