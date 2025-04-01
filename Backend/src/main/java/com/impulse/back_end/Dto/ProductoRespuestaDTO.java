@@ -6,33 +6,29 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.math.BigDecimal;
 import java.util.List;
 
-@JsonPropertyOrder(value = {"id", "nombre", "descripcion", "precioAlquiler", "categoria", "caracteristicas", "imagenes"})
+@JsonPropertyOrder(value = {"id", "nombre", "descripcion", "precioAlquiler", "categoria", "caracteristicas", "imagen"})
 public class ProductoRespuestaDTO {
 
     private Long id;
-
     private String nombre;
-
     private String descripcion;
 
     @JsonProperty("precio_alquiler")
     private BigDecimal precioAlquiler;
 
     private String categoria;
-
     private List<CaracteristicaRespuestaDTO> caracteristicas;
 
-    private List<ImagenRespuestaDTO> imagenes;
+    private ImagenRespuestaDTO imagen;  // ⚠ Cambiado de List<ImagenRespuestaDTO> a ImagenRespuestaDTO
 
-
-    public ProductoRespuestaDTO(Long id, String nombre, String descripcion, BigDecimal precioAlquiler, String categoria, List<CaracteristicaRespuestaDTO> caracteristicas, List<ImagenRespuestaDTO> imagenes) {
+    public ProductoRespuestaDTO(Long id, String nombre, String descripcion, BigDecimal precioAlquiler, String categoria, List<CaracteristicaRespuestaDTO> caracteristicas, ImagenRespuestaDTO imagen) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioAlquiler = precioAlquiler;
         this.categoria = categoria;
         this.caracteristicas = caracteristicas;
-        this.imagenes = imagenes;
+        this.imagen = imagen;
     }
 
     public ProductoRespuestaDTO() {
@@ -70,12 +66,12 @@ public class ProductoRespuestaDTO {
         this.precioAlquiler = precioAlquiler;
     }
 
-    public List<ImagenRespuestaDTO> getImagenes() {
-        return imagenes;
+    public ImagenRespuestaDTO getImagen() {  // ⚠ Nuevo getter para una sola imagen
+        return imagen;
     }
 
-    public void setImagenes(List<ImagenRespuestaDTO> imagenes) {
-        this.imagenes = imagenes;
+    public void setImagen(ImagenRespuestaDTO imagen) {  // ⚠ Nuevo setter para una sola imagen
+        this.imagen = imagen;
     }
 
     public List<CaracteristicaRespuestaDTO> getCaracteristicas() {

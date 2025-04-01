@@ -8,7 +8,6 @@ import com.impulse.back_end.Entity.CategoriaEntity;
 import com.impulse.back_end.Entity.ImagenEntity;
 import com.impulse.back_end.Entity.ProductoEntity;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductoMapper {
@@ -35,11 +34,10 @@ public class ProductoMapper {
                 }).collect(Collectors.toList()),
                 // Envolver en lista para cumplir con el tipo esperado
                 productoEntity.getImagen() != null ? 
-                List.of(new ImagenRespuestaDTO(
+                new ImagenRespuestaDTO(
                     productoEntity.getImagen().getId(),
                     productoEntity.getImagen().getRuta()
-                )) : 
-                List.of() // Retorna una lista vacía si no hay imagen
+                ) : null
         );
     }
 

@@ -46,7 +46,7 @@ public class ProductoAdminService {
             String peticion,
             MultipartFile imagen
     ) throws ProductoException, JsonProcessingException {
-        logger.info("registrarProducto --Session:[{}] --Peticion:[{}] --Imagen:[{}]", sessionId, peticion, imagen.getOriginalFilename());
+        logger.info("Iniciando registro de producto... --Session:[{}] --Peticion:[{}] --Imagen:[{}]", sessionId, peticion, (imagen != null ? imagen.getOriginalFilename() : "Ninguna"));
 
         ProductoPeticionDTO productoPeticionDTO = mapProductoPeticionDTO(peticion);
 
@@ -61,12 +61,22 @@ public class ProductoAdminService {
                 categoriaService.consultarOCrear(productoPeticionDTO.getCategoria())
         );
         producto = productoRepository.save(producto);
+        logger.info("Producto guardado con ID: {}", producto.getId());
 
+        if (imagen == null || imagen.isEmpty()) {
+            logger.error("No se recibió ninguna imagen en la petición.");
+            throw new ProductoException(HttpStatus.BAD_REQUEST, "imagen_no_proporcionada", "Debe proporcionar una imagen para el producto");
+        }
+
+        logger.info("Subiendo imagen para el producto ID: {}", producto.getId());
         ImagenEntity imagenEntity = imagenService.subirImagen(imagen, producto.getId());
+
         if (imagenEntity == null) {
+            logger.error("Error al subir la imagen para el producto ID: {}", producto.getId());
             throw new ProductoException(HttpStatus.CONFLICT, "imagen_no_subida", "Ocurrió un error al subir la imagen");
         }
         producto.setImagen(imagenEntity);
+        logger.info("Imagen subida correctamente: {}", imagenEntity.getRuta());
 
         return mapProductoRespuestaDTO(productoRepository.save(producto));
     }
