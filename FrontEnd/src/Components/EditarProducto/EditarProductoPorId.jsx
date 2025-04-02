@@ -161,7 +161,8 @@ const EditarProductoPorId = () => {
   return (
     <div>
       <h2>Editar producto</h2>
-      <img src={product?.imagenes?.ruta} alt={product.nombre} />
+      <img src={product.product?.imagen?.ruta} 
+      alt={product.product?.nombre} />
 
       <form onSubmit={handleUpdateProduct}>
         <FormInput

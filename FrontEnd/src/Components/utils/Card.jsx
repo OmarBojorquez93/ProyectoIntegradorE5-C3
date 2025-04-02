@@ -8,8 +8,8 @@ export const Card = (product) => {
   return (
     <Link to={`/detail/${product.product?.id}`} className={`card default-card`}>
       <img
-        src={`/img${product.products?.imagenes.ruta}`}
-        alt={product.product?.name}
+        src={product.product?.imagen?.ruta} 
+        alt={product.product?.nombre}
         className={"card-image image-no-category"}
       />
 
