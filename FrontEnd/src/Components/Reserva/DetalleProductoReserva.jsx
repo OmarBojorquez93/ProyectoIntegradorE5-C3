@@ -30,7 +30,7 @@ const DetalleProductoReserva = ({ product }) => {
         </div>
         <div className="imagenP">
           <img
-            src={product?.imagenes?.ruta}
+            src={product?.imagen?.ruta}
             alt={product.nombre}
             width={220}
             height={220}

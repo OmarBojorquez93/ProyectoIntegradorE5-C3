@@ -146,7 +146,7 @@ const EditarProductoPorId = () => {
     try {
       const productoActualizado = {
         ...formData,
-        imagen: product?.imagenes?.ruta, // Mantener imagen actual si no hay nueva
+        imagen: product?.imagen?.ruta, // Mantener imagen actual si no hay nueva
       };
       const response = await updateProduct(id, session, productoActualizado);
 
@@ -162,49 +162,47 @@ const EditarProductoPorId = () => {
   return (
     <div className="container">
       <h2>Editar producto</h2>
-  
-        <form onSubmit={handleUpdateProduct}>
-          <div className="form">
-            <div className="seccionUno">
-              <div className="datosBasicos">
-                  <FormInput
-                    label={"Nombre"}
-                    type={"text"}
-                    name={"nombre"}
-                    value={formData.nombre}
-                    onChange={handleChange}
-                    errors={errors?.nombre}
-                  />
-                  <FormInput
-                  label={"Descripción"}
-                  type={"textarea"}
-                  name={"descripcion"}
-                  value={formData.descripcion}
+
+      <form onSubmit={handleUpdateProduct}>
+        <div className="form">
+          <div className="seccionUno">
+            <div className="datosBasicos">
+              <FormInput
+                label={"Nombre"}
+                type={"text"}
+                name={"nombre"}
+                value={formData.nombre}
+                onChange={handleChange}
+                errors={errors?.nombre}
+              />
+              <FormInput
+                label={"Descripción"}
+                type={"textarea"}
+                name={"descripcion"}
+                value={formData.descripcion}
+                onChange={handleChange}
+                errors={errors?.descripcion}
+              />
+              <div className="selector">
+                <label htmlFor="opciones">Categoria:</label>
+                <select
+                  id="opciones"
+                  name="categoria"
+                  value={formData.categoria}
                   onChange={handleChange}
-                  errors={errors?.descripcion}
-                  />
-                  <div className="selector">
-                    <label htmlFor="opciones">Categoria:</label>
-                    <select
-                      id="opciones"
-                      name="categoria"
-                      value={formData.categoria}
-                      onChange={handleChange}
-                    >
-                      <option value="">-- Selecciona una opción --</option>
-                      {categorias.map((categoria) => (
-                        <option key={categoria.id} value={categoria.nombre}>
-                          {categoria.nombre}
-                        </option>
-                      ))}
-                    </select>
-
-                    </div>
-
+                >
+                  <option value="">-- Selecciona una opción --</option>
+                  {categorias.map((categoria) => (
+                    <option key={categoria.id} value={categoria.nombre}>
+                      {categoria.nombre}
+                    </option>
+                  ))}
+                </select>
               </div>
-                <img src={product?.imagenes?.ruta} alt={product.nombre} />
             </div>
-            <div className="seccionDos">
+            <img src={product?.imagen?.ruta} alt={product.nombre} />
+          </div>
+          <div className="seccionDos">
             <FormInput
               label={"Marca"}
               type={"text"}
@@ -263,20 +261,16 @@ const EditarProductoPorId = () => {
               onChange={handleChange}
               errors={errors?.color}
             />
+          </div>
+        </div>
 
-            </div>
-        </div> 
-            
-            <button type="submit" className="submit-button">
-              Guardar Cambios
-            </button>
+        <button type="submit" className="submit-button">
+          Guardar Cambios
+        </button>
 
-            {apiError && <p className="error">{apiError}</p>}
+        {apiError && <p className="error">{apiError}</p>}
       </form>
-         
-        
     </div>
-    
   );
 };
 
