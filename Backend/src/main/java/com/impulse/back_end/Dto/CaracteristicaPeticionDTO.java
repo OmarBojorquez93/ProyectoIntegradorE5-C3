@@ -10,7 +10,7 @@ public class CaracteristicaPeticionDTO {
     private String nombre;
 
     @NotEmpty(message = "La descripcion es requerida")
-    @Size(min = 1, max = 100, message = "La descripcion no debe ser mayor a 100 caracteres")
+    @Size(min = 1, max = 1000, message = "La descripcion no debe ser mayor a 1000 caracteres")
     private String descripcion;
 
     public String getNombre() {

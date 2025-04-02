@@ -14,7 +14,11 @@ const iconos = {
   Color: <IoMdColorPalette size={20} />,
 };
 
-export const CaracteristicasProduc = ({ caracteristicas, isAlquilar }) => {
+export const CaracteristicasProduc = ({
+  caracteristicas,
+  isAlquilar,
+  alquilar,
+}) => {
   return (
     <>
       <h2 className="subTitle">Características</h2>
@@ -23,16 +27,18 @@ export const CaracteristicasProduc = ({ caracteristicas, isAlquilar }) => {
           <div key={id} className="caracteristica">
             {iconos[nombre] || <IoMdPricetags size={20} />}
 
-            <h4>
+            <h4 className="ItemC">
               {nombre}: {descripcion}
             </h4>
           </div>
         ))}
       </div>
       <div className="buttonAlquilar">
-        <button className="alquilar" onClick={() => isAlquilar()}>
-          ALQUILAR
-        </button>
+        {!alquilar && (
+          <button className="alquilar" onClick={() => isAlquilar()}>
+            Ver fechas disponibles
+          </button>
+        )}
       </div>
     </>
   );

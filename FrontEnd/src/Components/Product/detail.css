@@ -4,7 +4,8 @@
 }
 .containerDetail{
     display: flex;
-    gap: 30px;
+    margin-top: 30px;
+    gap: 50px;
    
 }
 .imgDetalle{
@@ -23,6 +24,9 @@
 .containerText p {
     padding-bottom: 50px;
     text-align: justify;
+}
+h1{
+    margin: 0;
 }
  
 

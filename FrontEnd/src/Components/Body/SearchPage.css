@@ -1,0 +1,19 @@
+h1{
+    text-align: center;
+}
+
+.subtitleHome{
+    text-align: center;
+    margin-top: 25px;
+    font-size: 22px;
+}
+
+@media (max-width: 430px) {
+    h1 {
+      font-size: 26px;
+    }
+
+    h4 {
+      font-size: 16px;
+    }
+}

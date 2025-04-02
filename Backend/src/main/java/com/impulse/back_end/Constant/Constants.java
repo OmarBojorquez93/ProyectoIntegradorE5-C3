@@ -10,6 +10,7 @@ public class Constants {
         public static final String ERROR = "/error";
         public static final String REGISTRO = "/registro";
         public static final String LOGIN = "/login";
+        public static final String RESERVA = "/reserva";
         public static final String PRODUCTO = "/public/producto";
         public static final String CATEGORIA = "/public/categoria";
 
