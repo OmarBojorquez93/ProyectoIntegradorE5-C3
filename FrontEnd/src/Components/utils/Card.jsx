@@ -5,10 +5,13 @@ import "./Card.css";
 export const Card = (product) => {
   console.log(product);
 
+  function truncateText(text, maxLength) {
+    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+  }
   return (
     <Link to={`/detail/${product.product?.id}`} className={`card default-card`}>
       <img
-        src={product.product?.imagen?.ruta} 
+        src={product.product?.imagen?.ruta}
         alt={product.product?.nombre}
         className={"card-image image-no-category"}
       />
@@ -16,7 +19,9 @@ export const Card = (product) => {
       <div className="card-content">
         <h3 className="card-title">{product.product?.nombre}</h3>
         {product.product?.descripcion && (
-          <p className="card-description">{product.product?.descripcion}</p>
+          <p className="card-description">
+            {truncateText(product.product?.descripcion, 50)}
+          </p>
         )}
       </div>
     </Link>
