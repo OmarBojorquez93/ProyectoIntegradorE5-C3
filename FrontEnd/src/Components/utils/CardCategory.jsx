@@ -3,8 +3,8 @@ const CardCategory = ({ categoria, filtroPorCategoria }) => {
   const { nombre } = categoria;
 
   const imagen = (nombre) => {
-    if (nombre == "Deportes Acuaticos") return "/icono-surf.png";
-    if (nombre == "Camping") return "/icono-camping.png";
+    if (nombre == "Deportes Acuaticos") return "icono-surf.png";
+    if (nombre == "Camping") return "icono-camping.png";
     if (nombre == "Deportes de invierno") return "invierno.png";
     else return "icono-senderismo.png";
   };
