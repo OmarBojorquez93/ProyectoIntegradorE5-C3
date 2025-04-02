@@ -20,7 +20,7 @@ export const Card = (product) => {
         <h3 className="card-title">{product.product?.nombre}</h3>
         {product.product?.descripcion && (
           <p className="card-description">
-            {truncateText(product.product?.descripcion, 50)}
+            {truncateText(product.product?.descripcion, 100)}
           </p>
         )}
       </div>
