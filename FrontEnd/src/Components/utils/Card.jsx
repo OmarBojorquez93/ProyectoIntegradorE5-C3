@@ -8,7 +8,7 @@ export const Card = (product) => {
   return (
     <Link to={`/detail/${product.product?.id}`} className={`card default-card`}>
       <img
-        src={`/img${product.products?.imagenes.ruta}`}
+        src={`/img${product.products?.imagen.ruta}`}
         alt={product.product?.name}
         className={"card-image image-no-category"}
       />
