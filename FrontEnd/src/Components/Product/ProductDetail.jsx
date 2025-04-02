@@ -6,6 +6,8 @@ export const ProductDetail = (producto) => {
   const { titulo, imagen, descripcion } = producto;
   const navigate = useNavigate();
 
+  console.log({ imagen });
+
   return (
     <div>
       <div>
