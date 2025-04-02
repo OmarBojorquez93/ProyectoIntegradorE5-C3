@@ -19,8 +19,7 @@ export const ProductDetail = (producto) => {
         </div>
         <div className="containerDetail">
           <div className="containerImg">
-            <img className="imgDetalle" src={producto.product?.imagen?.ruta} 
-            alt={producto.product?.nombre} />
+            <img className="imgDetalle" src={imagen} alt={titulo} />
           </div>
           <div className="containerText">
             <div>
