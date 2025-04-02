@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Category } from "../Components/Body/Category";
 import { Recomendation } from "../Components/Body/Recomendation";
-import { Search } from "../Components/Body/Search";
+import SearchPage from "../Components/Body/SearchPage"
 
 export const Home = () => {
   const [category, setCategory] = useState("");
@@ -12,7 +12,7 @@ export const Home = () => {
 
   return (
     <>
-      <Search />
+      <SearchPage/>
       <Category filtroPorCategoria={filtroPorCategoria} />
       <Recomendation category={category} />
     </>

@@ -10,7 +10,11 @@ export const createProduct = async (producto, sessionId) => {
     formData.append(
       "peticion",
       JSON.stringify({
-        nombre: producto.nombre,
+        nombre: producto.nombre
+          .toLowerCase()
+          .split(" ")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" "),
         descripcion: producto.descripcion,
         precio_alquiler: producto.precioAlquiler,
         categoria: producto.categoria,
@@ -40,7 +44,10 @@ export const createProduct = async (producto, sessionId) => {
       "session-id": sessionId,
     };
 
-    console.log(formData);
+    // Verificar lo que se está enviando
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
 
     // Realizar la petición POST
     const { data } = await baseUrlApi.post("/admin/producto", formData, {
@@ -50,10 +57,35 @@ export const createProduct = async (producto, sessionId) => {
     return data;
   } catch (error) {
     if (error.response) {
+      console.log(error);
+      const status = error.response.status;
+
+      if (status === 409) {
+        alert("⚠️ Ya existe un producto con ese nombre. Por favor elige otro.");
+        error.message =
+          "⚠️ Ya existe un producto con ese nombre. Por favor elige otro.";
+      } else if (status === 500) {
+        alert(
+          "Error interno del servidor. Revisa los datos enviados o intenta más tarde."
+        );
+        error.message =
+          "Error interno del servidor. Revisa los datos enviados o intenta más tarde.";
+      } else {
+        alert(
+          "Error del servidor: " +
+            (error.response.data?.message || "Intenta nuevamente.")
+        );
+        error.message =
+          "Error del servidor: " +
+          (error.response.data?.message || "Intenta nuevamente.");
+      }
+
       console.error("Respuesta del servidor:", error.response.data);
     } else {
+      alert("Error de red: " + error.message);
       console.error("Error de red:", error.message);
     }
+
     throw new Error(error);
   }
 };

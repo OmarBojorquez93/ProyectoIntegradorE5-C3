@@ -1,11 +1,12 @@
+import "../App.css";
 import { Link } from "react-router-dom";
 
 const ConfirmarReserva = () => {
   return (
-    <div>
+    <div className="confirmacionContainer">
       <h2>Gracias por su referirnos!!!!</h2>
       <h3>Tu reserva se ha realizado con éxito</h3>
-      <Link to={"/"}>SEGUIR ALQUILANDO</Link>
+      <Link className="volver" to={"/"}>Seguir alquilando</Link>
     </div>
   );
 };

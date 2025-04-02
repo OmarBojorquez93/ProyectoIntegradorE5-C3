@@ -267,7 +267,7 @@ h2 {
   flex-grow: 1; /* Ocupa el espacio restante */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Distribuye el espacio */
+  
 }
 
 .card-title {

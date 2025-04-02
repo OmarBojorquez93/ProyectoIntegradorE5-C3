@@ -4,7 +4,6 @@ import { ProductDetail } from "../Components/Product/ProductDetail";
 import { CaracteristicasProduc } from "../Components/CaracteristicasProduc/CaracteristicasProduc";
 import { getProductsById } from "../core/product/get-product-by-id.actions";
 import { useRecipeState } from "../Context/global.context";
-import { CalendarContainer } from "react-datepicker";
 import CalendarioParaReserva from "../Components/CalendarioReserva/CalendarioParaReserva";
 
 export const Detail = () => {
@@ -17,7 +16,6 @@ export const Detail = () => {
 
   const [alquilar, setAlquilar] = useState(false);
 
-  //console.log(params)
   useEffect(() => {
     const fetchProduct = async () => {
       const data = await getProductsById(id);
@@ -35,25 +33,27 @@ export const Detail = () => {
     }
   };
 
-  console.log(alquilar);
   return (
     <>
       <>
-        {product && product.imagenes ? (
-          <ProductDetail
-            titulo={product.nombre}
-            imagen={product.imagenes[0].ruta}
-            descripcion={product.descripcion}
-          />
+        {product && product.imagen ? (
+          <>
+            <ProductDetail
+              titulo={product.nombre}
+              imagen={product.imagen.ruta}
+              descripcion={product.descripcion}
+            />
+            <CaracteristicasProduc
+              caracteristicas={product.caracteristicas}
+              isAlquilar={isAlquilar}
+              alquilar={alquilar}
+            />
+
+            {alquilar && <CalendarioParaReserva id={product.id} />}
+          </>
         ) : (
           <p>Cargando producto...</p>
         )}
-        <CaracteristicasProduc
-          caracteristicas={product.caracteristicas}
-          isAlquilar={isAlquilar}
-        />
-
-        {alquilar && <CalendarioParaReserva id={product.id} />}
       </>
     </>
   );

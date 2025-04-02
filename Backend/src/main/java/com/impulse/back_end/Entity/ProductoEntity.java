@@ -1,10 +1,19 @@
 package com.impulse.back_end.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "producto")
 public class ProductoEntity {
@@ -33,6 +42,9 @@ public class ProductoEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_imagen", referencedColumnName = "id_imagen")
     private ImagenEntity imagen;
+    
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = ReservaEntity.class)
+    private List<ReservaEntity> reservas;
 
     public ProductoEntity(String nombre, String descripcion, BigDecimal precioAlquiler, CategoriaEntity categoria) {
         this.nombre = nombre;
@@ -40,8 +52,6 @@ public class ProductoEntity {
         this.precioAlquiler = precioAlquiler;
         this.categoria = categoria;
     }
-
-    public ProductoEntity() {}
 
     public Long getId() {
         return id;
@@ -95,7 +105,7 @@ public class ProductoEntity {
     }
 
     public void addCaracteristica(CaracteristicaEntity caracteristica) {
-        this.caracteristicas.add(caracteristica);
+        caracteristicas.add(caracteristica);
         caracteristica.setProducto(this);
     }
 

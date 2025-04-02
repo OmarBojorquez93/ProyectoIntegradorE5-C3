@@ -26,7 +26,7 @@ public class ProductoMapper {
                 productoEntity.getPrecioAlquiler(),
                 productoEntity.getCategoria().getNombre(),
                 productoEntity.getCaracteristicas().stream().map(caracteristicaEntity -> {
-                    return new CaracteristicaRespuestaDTO(
+                        return new CaracteristicaRespuestaDTO(
                             caracteristicaEntity.getId(),
                             caracteristicaEntity.getNombre(),
                             caracteristicaEntity.getDescripcion()

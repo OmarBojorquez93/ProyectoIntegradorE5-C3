@@ -1,12 +1,5 @@
-.cont{
-  text-align: center;
-  padding-top: 5px;
-}
-.cont h4 {
-  font-size: 20px;
 
-}
-.search-container {
+.search-bar {
   display: flex;
   align-items:center;
   margin: 50px auto;
@@ -16,17 +9,17 @@
   border-radius: 25px;
   box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
 }
-.search-container input{
+.search-bar input{
   border-bottom: 0;
   border-top: 0;
   border-left: 0;
   background-color: #f9f9f9;
 }
-.inputBuscar{
-  border-radius: 20px 0px 0px 20px;
-  padding-left: 20px;
-  background-color: red;
+.input-buscar{
+ border-radius:20px 0px 0px 20px ;
+ padding-left: 20px;
 }
+
 
 .buscador{
   border: 0;
@@ -39,24 +32,62 @@
 }
 /* Estilo del icono */
 .search-icon {
-  color: #000000;
+  color: #f6f6f6;
   background-color: #03ADAD;
   width: 20px;
   
 }
+.suggestions {
+  position: absolute;
+  width: 600px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 8px;
+  border-radius: 10PX;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.suggestions li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background: #daf2f2;
+}
+
+.react-datepicker__day--disabled {
+  background-color: #ccc!important;
+  color: rgb(255, 255, 255) !important;
+  pointer-events: none;
+}
+
+.react-datepicker__day--in-range {
+  background-color: #03adad!important;
+}
+.reserva{
+  background-color: #03adad;
+  max-width: 200px;
+  max-height: 30px;
+  border-radius: 20px;
+  padding: 8px 35px;
+  align-self: center;
+  
+}
 
 @media (max-width: 430px) {
-  .cont h1 {
-    font-size: 26px;
-
-  }
-  .cont h4 {
-    font-size: 16px;
-  }
-  .search-container {
+ 
+  .search-bar {
     width: 320px;
     height: 35px;
   
+  }
+  .suggestions {
+    width: 320px;
   }
   
 }

@@ -6,7 +6,6 @@ import "./TablaUsuario.css";
 const TablaUsuarios = ({ usuarios, refreshUsers }) => {
   const { state } = useRecipeState();
   const { session, user } = state;
-  //console.log(state.user);
 
   const handlerAgregarAdmin = async (id) => {
     if (!session) {
@@ -55,12 +54,12 @@ const TablaUsuarios = ({ usuarios, refreshUsers }) => {
         <tbody>
           {usuarios?.map((users, index) => (
             <tr key={users.id}>
-              <td data-label ="#">{index + 1}</td>
-              <td data-label ="Nombre">{users.nombre}</td>
-              <td data-label ="Apellido">{users.apellido}</td>
-              <td data-label ="Email">{users.email}</td>
-              <td data-label ="Administrador">{users.admin ? "Si" : "No"}</td>
-              <td data-label ="Volver Admin">
+              <td data-label="#">{index + 1}</td>
+              <td data-label="Nombre">{users.nombre}</td>
+              <td data-label="Apellido">{users.apellido}</td>
+              <td data-label="Email">{users.email}</td>
+              <td data-label="Administrador">{users.admin ? "Si" : "No"}</td>
+              <td data-label="Volver Admin">
                 <input
                   disabled={users.email == user.email}
                   type="checkbox"

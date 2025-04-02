@@ -1,32 +1,94 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import "./Search.css";
-import SearchInput from "../utils/searchInput"
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./Search.css";
+import { FaSearch } from "react-icons/fa";
+// import axios from "axios";
+import { baseUrlApi } from "../../core/api/urlApi";
 
-export const Search = () => {
+const Search = ({ onSearch }) => {
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  // const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    baseUrlApi
+      .get("/public/producto")
+      .then((response) => {
+        setSuggestions(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener sugerencias:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (query.length > 1) {
+      const queryLower = query.toLowerCase();
+      const filtered = suggestions.filter((item) =>
+        item.nombre.toLowerCase().includes(queryLower)
+      );
+      setFilteredSuggestions(filtered);
+    } else {
+      setFilteredSuggestions([]);
+    }
+  }, [query, suggestions]);
+
+  const handleSuggestionClick = (nombre) => {
+    setQuery(nombre);
+    setTimeout(() => setFilteredSuggestions([]), 100);
+  };
+
+  const handleSearch = () => {
+    if (!query.trim()) {
+      alert("Escribe un producto para buscar.");
+      return;
+    }
+
+    if (!startDate || !endDate) {
+      alert("Debes seleccionar una fecha inicial y una fecha final.");
+      return;
+    }
+
+    const params = {
+      texto: query
+        .toLowerCase()
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
+      fechaDesde: startDate.toISOString().split("T")[0],
+      fechaHasta: endDate.toISOString().split("T")[0],
+    };
+
+    onSearch(params);
+  };
 
   return (
-    <div className="cont">
-      <h1>Deporte sin límites, alquiler sin complicaciones!</h1>
-      <h4>Miles de productos en un solo lugar...</h4>
-      <div className="search-container">
-      
-      {/* <input 
-        type="text" 
-        placeholder="Buscar..." 
-        value={searchTerm} 
-        onChange={(e) => setSearchTerm(e.target.value)} 
-        className="inputBuscar"
-        
-      /> */}
-      <SearchInput />
+    <div className="search-bar">
+      <div className="search-field">
+        <input
+          type="text"
+          placeholder="Buscar producto..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="input-buscar"
+          onBlur={() => setTimeout(() => setFilteredSuggestions([]), 200)}
+        />
+        {filteredSuggestions.length > 0 && (
+          <ul className="suggestions">
+            {filteredSuggestions.map((item) => (
+              <li
+                key={item.id}
+                onClick={() => handleSuggestionClick(item.nombre)}
+              >
+                {item.nombre}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       <DatePicker
         selected={startDate}
@@ -45,14 +107,16 @@ export const Search = () => {
         selectsEnd
         startDate={startDate}
         endDate={endDate}
-        minDate={startDate} 
+        minDate={startDate}
         dateFormat="yyyy-MM-dd"
         placeholderText="Fin"
       />
-      <button className="buscador"><FontAwesomeIcon icon={faSearch} className="search-icon" /></button>
-    </div>
 
+      <button onClick={handleSearch} className="buscador">
+        <FaSearch className="search-icon" />
+      </button>
     </div>
-    
   );
 };
+
+export default Search;
