@@ -48,6 +48,11 @@ a{
  
   
 }
+@media (max-width: 1024px) {
+  react-datepicker {
+    width: 240px;
+  }
+}
 @media(max-width: 480px){
   .calendar{
     margin-top: 10px;
