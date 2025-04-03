@@ -104,7 +104,7 @@ const RegistrarUsuario = () => {
   };
 
   return (
-    <div className="registrar-usuario-container">
+    <div className="registrar-usuario-container2">
       <h2>Regístrate</h2>
       <form onSubmit={handlerRegister}>
         <FormInput
