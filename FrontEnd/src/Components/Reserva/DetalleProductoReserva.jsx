@@ -14,7 +14,7 @@ const DetalleProductoReserva = ({ product }) => {
             <p>
               <strong>Descripcion:</strong>
             </p>
-            <p>{product?.descripcion}</p>
+            <p className="pDes">{product?.descripcion}</p>
           </div>
           <div className="dCaracteristicas">
             {product && product.caracteristicas ? (

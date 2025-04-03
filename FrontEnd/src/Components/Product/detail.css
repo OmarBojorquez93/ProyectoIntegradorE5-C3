@@ -8,6 +8,10 @@
     gap: 50px;
    
 }
+.containerImg{
+    display: flex;
+    align-items: center;
+}
 .imgDetalle{
    max-width: 230px;
    /* padding-right: 40px; */
