@@ -23,6 +23,7 @@ export const Recomendation = ({ category }) => {
         <div className="card-container">
           {product
             .sort(() => Math.random() - 0.5)
+            .slice(0, 8)
             .map((item) => (
               <Card product={item} key={item.id} />
             ))}
