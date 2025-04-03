@@ -53,7 +53,7 @@ a{
     width: 240px;
   }
 }
-@media(max-width: 480px){
+@media(max-width: 630px){
   .calendar{
     margin-top: 10px;
     display:flex;
