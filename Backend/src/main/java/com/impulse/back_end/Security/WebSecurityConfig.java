@@ -40,6 +40,7 @@ public class WebSecurityConfig {
                         antMatcher(Constants.PublicRoutes.LOGIN + "/**"),
                         antMatcher(Constants.PublicRoutes.PRODUCTO + "/**"),
                         antMatcher(Constants.PublicRoutes.CATEGORIA + "/**"),
+                        antMatcher(Constants.PublicRoutes.RESERVA + "/**"),
                         antMatcher(Constants.AdminRoutes.USUARIO + "/**"),
                         antMatcher(Constants.AdminRoutes.PRODUCTO + "/**"),
                         antMatcher(Constants.AdminRoutes.CATEGORIA + "/**")
