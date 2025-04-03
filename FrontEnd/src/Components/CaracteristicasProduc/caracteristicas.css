@@ -1,6 +1,7 @@
 .subTitle{
     text-align: left;
     border-bottom: solid 2px;  
+    margin-top: 20px;
 }
 .containerGrid{
     display: grid;

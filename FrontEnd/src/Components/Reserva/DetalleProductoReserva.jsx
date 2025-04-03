@@ -20,7 +20,7 @@ const DetalleProductoReserva = ({ product }) => {
             {product && product.caracteristicas ? (
               <div className="itemCaract">
                 {product?.caracteristicas.map(({ id, nombre, descripcion }) => (
-                  <p key={id}>
+                  <p className="pDes" key={id}>
                     <strong>{nombre}:</strong> {descripcion}
                   </p>
                 ))}
@@ -32,12 +32,12 @@ const DetalleProductoReserva = ({ product }) => {
           <img
             src={product?.imagen?.ruta}
             alt={product.nombre}
-            width={220}
-            height={220}
+            width={250}
+            height={250}
           />
         </div>
       </div>
-      <p>
+      <p className="pDes">
         Puede pasar a retirar el producto Calle Falsa 123, CABA, Buenos Aires.
       </p>
     </div>

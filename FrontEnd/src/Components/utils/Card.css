@@ -245,6 +245,7 @@ h2 {
   transition: transform 0.2s, box-shadow 0.2s;
   background-color: white;
   width: 300px; /* Ancho fijo */
+  min-height: 370px;
   display: flex;
   flex-direction: column;
 }

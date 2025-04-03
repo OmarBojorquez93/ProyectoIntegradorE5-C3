@@ -37,6 +37,10 @@ p{
     display:flex;
     flex-direction: column;
     
-}
+    }
+    .pDes{
+    width: 300px;
+    
+    }
     
     }
