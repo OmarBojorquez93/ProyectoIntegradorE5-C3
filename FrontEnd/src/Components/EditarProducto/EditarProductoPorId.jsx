@@ -200,7 +200,7 @@ const EditarProductoPorId = () => {
                 </select>
               </div>
             </div>
-            <img src={product?.imagen?.ruta} alt={product.nombre} />
+            <img className="imgEditar" src={product?.imagen?.ruta} alt={product.nombre} />
           </div>
           <div className="seccionDos">
             <FormInput
