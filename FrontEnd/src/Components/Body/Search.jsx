@@ -61,7 +61,7 @@ const Search = ({ onSearch }) => {
       fechaDesde: startDate.toISOString().split("T")[0],
       fechaHasta: endDate.toISOString().split("T")[0],
     };
-
+    console.log("Parámetros para búsqueda:", params);
     onSearch(params);
   };
 

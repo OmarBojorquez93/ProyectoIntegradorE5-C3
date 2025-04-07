@@ -237,7 +237,7 @@ h2 {
 
 /* -- estrellas--- */
 .card {
-  border: 1px solid #e0e0e0;
+  border: 1px solid #ccc;
   border-radius: 12px;
   overflow: hidden;
   text-decoration: none;
@@ -245,9 +245,10 @@ h2 {
   transition: transform 0.2s, box-shadow 0.2s;
   background-color: white;
   width: 300px; /* Ancho fijo */
-  min-height: 370px;
+  height: 370px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 8px #0000001a;
 }
 
 .card:hover {
@@ -267,6 +268,7 @@ h2 {
   flex-grow: 1; /* Ocupa el espacio restante */
   display: flex;
   flex-direction: column;
+  background-color: #f9f9f9;
   
 }
 
@@ -328,4 +330,12 @@ h2 {
 
 .sold-out {
   color: #ff385c; /* Color rojo para agotado */
+}
+
+@media (max-width: 768px) {
+  .card-title{
+    font-size: 0.9 rem;
+
+  }
+ 
 }

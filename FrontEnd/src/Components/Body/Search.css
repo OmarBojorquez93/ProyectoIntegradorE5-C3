@@ -5,7 +5,7 @@
   margin: 50px auto;
   background-color: #f9f9f9;
   width: 600px;
-  height: 40px;
+  height: 50px;
   border-radius: 25px;
   box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
 }
@@ -17,24 +17,24 @@
 }
 .input-buscar{
  border-radius:20px 0px 0px 20px ;
- padding-left: 20px;
+ padding-left: 10px;
+ margin-left: 8px;
 }
-
 
 .buscador{
   border: 0;
   cursor: pointer;
-  border-radius: 0px 20px 20px 0px;
+  border-radius: 0px 25px 25px 0px;
   background-color: #13b2b2;
   min-width: 30px;
-  height: 40px;
+  height: 50px;
  
 }
 /* Estilo del icono */
 .search-icon {
   color: #f6f6f6;
   background-color: #03ADAD;
-  width: 20px;
+  width: 30px;
   
 }
 .suggestions {
@@ -79,7 +79,27 @@
   
 }
 
+
+
 @media (max-width: 700px) {
+ 
+  .search-bar {
+    width: 400px;
+    height: 35px;
+  
+  }
+  .buscador{
+    height: 35px;
+  }
+  .suggestions {
+    width: 400px;
+  }
+  .input-buscar{
+    margin-left: 0px;
+   }
+  
+}
+@media (max-width: 480px) {
  
   .search-bar {
     width: 320px;
@@ -89,5 +109,6 @@
   .suggestions {
     width: 320px;
   }
+
   
 }
